@@ -1,0 +1,56 @@
+#!/bin/bash
+
+function get_brightness_value {
+  ddc_output=$(ddcutil getvcp 10)
+  
+  current_value=$(echo "$ddc_output" | grep -oP "current value =\s+\K\d+")
+
+  val=$((current_value))
+
+  if [ $val = 10 ]; then
+    echo ""
+  fi
+
+  if [ $val = 50 ]; then
+    echo ""
+  fi
+
+  if [ $val = 100 ]; then
+    echo ""
+  fi
+}
+
+function update_brightness_value {
+  ddc_output=$(ddcutil getvcp 10)
+
+  current_value=$(echo "$ddc_output" | grep -oP "current value =\s+\K\d+")
+
+  val=$(($current_value))
+  echo $val
+  new_val=10
+
+  if [ $val -ge 10 ]; then
+    new_val=50
+  fi
+
+  if [ $val -ge 50 ]; then
+    new_val=100  
+  fi
+
+  if [ $val = 100 ]; then
+    new_val=10
+  fi
+
+  echo $new_val
+
+  ddcutil setvcp 10 $new_val
+}
+
+if [ "$1" = "get" ]; then
+  brightness_value=$(get_brightness_value)
+  echo "$brightness_value"
+fi
+
+if [ "$1" = "set" ]; then
+  update_brightness_value 
+fi
