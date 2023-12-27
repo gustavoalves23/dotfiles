@@ -18,11 +18,14 @@ vim.api.nvim_set_keymap('i', '{;<CR>', '{<CR>};<ESC>O', { noremap = true, silent
 vim.g.copilot_no_tab_map = true
 vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
+--file explorer
 --nerdtree
-vim.keymap.set('n', '<leader>n', ':NERDTreeFocus<CR>', { noremap = true })
-vim.keymap.set('n', '<C-n>', ':NERDTree<CR>', { noremap = true })
-vim.keymap.set('n', '<C-t>', ':NERDTreeToggle<CR>', { noremap = true })
-vim.keymap.set('n', '<C-f>', ':NERDTreeFind<CR>', { noremap = true })
+-- vim.keymap.set('n', '<leader>n', ':NERDTreeFocus<CR>', { noremap = true })
+-- vim.keymap.set('n', '<C-n>', ':NERDTree<CR>', { noremap = true })
+-- vim.keymap.set('n', '<C-t>', ':NERDTreeToggle<CR>', { noremap = true })
+-- vim.keymap.set('n', '<C-f>', ':NERDTreeFind<CR>', { noremap = true })
+
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 --auto-resize
 vim.api.nvim_command('autocmd VimResized * wincmd =')
