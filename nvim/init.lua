@@ -399,7 +399,6 @@ require('mason-lspconfig').setup()
 local servers = {
   rust_analyzer = {},
   tsserver = {},
-  eslint = {},
   tailwindcss = {},
   html = { filetypes = { 'html', 'twig', 'hbs' } },
   csharp_ls = {},
