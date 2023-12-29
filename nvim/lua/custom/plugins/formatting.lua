@@ -1,22 +1,13 @@
 return {
-  "stevearc/conform.nvim",
-  event = {
-    "BufReadPre",
-    "BufNewFile"
-  },
-  opts = {
-    formatters_by_ft = {
-      javascript = { "eslint_ls" },
-      typescript = { "eslint_ls" },
-      typescriptreact = { "eslint_ls" },
-      javascriptreact = { "eslint_ls" },
-      css = { "eslint_ls" },
-      html = { "eslint_ls" }
-    },
-    format_on_save = {
-      lsp_fallback = true,
-      async = false,
-      timeout_ms = 500
-    }
-  },
+  "nvimtools/none-ls.nvim",
+  config = function()
+    local null_ls = require("null-ls")
+
+    null_ls.setup({
+      sources = {
+        null_ls.builtins.diagnostics.eslint_d,
+        null_ls.builtins.formatting.eslint_d,
+      },
+    })
+  end
 }
