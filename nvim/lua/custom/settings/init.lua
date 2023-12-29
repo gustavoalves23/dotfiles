@@ -44,3 +44,7 @@ vim.opt.guicursor = 'n-v-c:block-Cursor,i:block-iCursor'
 
 --disable auto comment on newline
 vim.cmd('autocmd BufEnter * set formatoptions-=o')
+
+--copy and paste to star register
+vim.api.nvim_set_keymap('v', '<leader>y', '"+y', { noremap = true, silent = true, desc = "[Y]ank from * register" })
+vim.api.nvim_set_keymap('n', '<leader>p', '"+p', { noremap = true, silent = true, desc = "[P]aste to * register" })
