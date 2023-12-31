@@ -6,26 +6,11 @@ vim.opt.expandtab = true
 vim.wo.number = true
 vim.wo.relativenumber = true
 
--- autoclosing tags
-vim.api.nvim_set_keymap('i', '"', '""<left>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', "'", "''<left>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '(', '()<left>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '[', '[]<left>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '{', '{}<left>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '{<CR>', '{<CR>}<ESC>O', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '{;<CR>', '{<CR>};<ESC>O', { noremap = true, silent = true })
-
 -- copilot
 vim.g.copilot_no_tab_map = true
 vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
 --file explorer
---nerdtree
--- vim.keymap.set('n', '<leader>n', ':NERDTreeFocus<CR>', { noremap = true })
--- vim.keymap.set('n', '<C-n>', ':NERDTree<CR>', { noremap = true })
--- vim.keymap.set('n', '<C-t>', ':NERDTreeToggle<CR>', { noremap = true })
--- vim.keymap.set('n', '<C-f>', ':NERDTreeFind<CR>', { noremap = true })
-
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 --auto-resize
@@ -45,6 +30,9 @@ vim.opt.guicursor = 'n-v-c:block-Cursor,i:block-iCursor'
 --disable auto comment on newline
 vim.cmd('autocmd BufEnter * set formatoptions-=o')
 
---copy and paste to star register
+--copy and paste to and from the star register
 vim.api.nvim_set_keymap('v', '<leader>y', '"+y', { noremap = true, silent = true, desc = "[Y]ank from * register" })
 vim.api.nvim_set_keymap('n', '<leader>p', '"+p', { noremap = true, silent = true, desc = "[P]aste to * register" })
+
+--enable cursorline
+vim.opt.cursorline = true
