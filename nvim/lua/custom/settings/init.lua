@@ -12,6 +12,10 @@ vim.cmd.highlight 'Normal guibg=none'
 vim.api.nvim_set_hl(0, 'Cursor', { foreground = '#ffffff', background = '#ffffff' })
 vim.api.nvim_set_hl(0, 'iCursor', { foreground = '#ffffff', background = '#CD0058' })
 vim.opt.guicursor = 'n-v-c:block-Cursor,i:block-iCursor'
+vim.api.nvim_set_hl(0, 'CursorLine', { background = '#0f0f0f' })
+vim.api.nvim_set_hl(0, "IlluminatedWordText", { link = "Visual" })
+vim.api.nvim_set_hl(0, "IlluminatedWordRead", { link = "Visual" })
+vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { link = "Visual" })
 
 --file explorer
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })

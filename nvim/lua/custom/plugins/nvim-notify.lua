@@ -11,7 +11,7 @@ return {
     end,
     on_open = function(win)
       vim.api.nvim_win_set_config(win, { zindex = 100 })
-    end
+    end,
+    background_colour = "#000000"
   },
-  background_colour = "#000000"
 }
