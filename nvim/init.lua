@@ -1,3 +1,4 @@
+print(vim.fn.stdpath("data"))
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -24,19 +25,6 @@ require('lazy').setup({
       -- Automatically install LSPs to stdpath for neovim
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-
-      -- Useful status updates for LSP
-      {
-        'j-hui/fidget.nvim',
-        opts = {
-          notification = {
-            window = {
-              winblend = 0
-            }
-          }
-        },
-      },
-
       'folke/neodev.nvim',
     },
   },
@@ -96,16 +84,10 @@ require('lazy').setup({
       end,
     },
   },
-
   {
     'dracula/vim',
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'dracula'
-      vim.cmd.highlight 'Normal guibg=none'
-    end,
   },
-
   {
     'nvim-lualine/lualine.nvim',
     opts = {
@@ -129,11 +111,9 @@ require('lazy').setup({
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
-    opts = {
-      defaults = { file_ignore_patterns = { "node_modules" } }
-    },
     dependencies = {
       'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope-dap.nvim',
       {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'make',
@@ -161,6 +141,8 @@ vim.o.hlsearch = false
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
+vim.o.clipboard = 'unnamedplus'
+
 vim.o.breakindent = true
 
 -- Save undo history
@@ -180,7 +162,6 @@ vim.o.timeoutlen = 300
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
--- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
@@ -219,6 +200,7 @@ require('telescope').setup {
 }
 
 pcall(require('telescope').load_extension, 'fzf')
+pcall(require('telescope').load_extension, 'dap')
 
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
@@ -400,6 +382,7 @@ require('mason-lspconfig').setup()
 local servers = {
   rust_analyzer = {},
   tsserver = {},
+  eslint = {},
   tailwindcss = {},
   html = { filetypes = { 'html', 'twig', 'hbs' } },
   csharp_ls = {},
@@ -487,6 +470,10 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
+  window = {
+    -- completion = cmp.config.window.bordered(),
+    -- documentation = cmp.config.window.bordered()
+  }
 }
 
 require "custom.settings"
