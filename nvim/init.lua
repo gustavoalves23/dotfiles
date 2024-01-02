@@ -102,6 +102,9 @@ require('lazy').setup({
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
+    opts = {
+      defaults = { file_ignore_patterns = { "node_modules" } }
+    },
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-telescope/telescope-dap.nvim',
@@ -373,7 +376,6 @@ require('mason-lspconfig').setup()
 local servers = {
   rust_analyzer = {},
   tsserver = {},
-  eslint = {},
   tailwindcss = {},
   html = { filetypes = { 'html', 'twig', 'hbs' } },
   csharp_ls = {},
@@ -460,10 +462,6 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-  },
-  window = {
-    -- completion = cmp.config.window.bordered(),
-    -- documentation = cmp.config.window.bordered()
   }
 }
 
