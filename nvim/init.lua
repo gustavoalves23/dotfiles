@@ -1,4 +1,3 @@
-print(vim.fn.stdpath("data"))
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
