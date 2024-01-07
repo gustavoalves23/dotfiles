@@ -89,7 +89,7 @@ require('lazy').setup({
   },
   {
     'folke/tokyonight.nvim',
-    priority = 1000
+    priority = 1000,
   },
   {
     'nvim-lualine/lualine.nvim',
@@ -97,13 +97,13 @@ require('lazy').setup({
       options = {
         icons_enabled = true,
         theme = 'tokyonight',
-        component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
+        component_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
       },
       sections = {
         lualine_a = { 'mode' },
         lualine_b = { 'branch', 'diagnostics' },
-        lualine_c = {}
+        lualine_c = {},
       },
     },
   },
@@ -112,7 +112,7 @@ require('lazy').setup({
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
     opts = {
-      defaults = { file_ignore_patterns = { "node_modules", "%.min.js" } }
+      defaults = { file_ignore_patterns = { 'node_modules', '%.min.js' } },
     },
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -213,17 +213,17 @@ local function find_git_root()
   local current_dir
   local cwd = vim.fn.getcwd()
   -- If the buffer is not associated with a file, return nil
-  if current_file == "" then
+  if current_file == '' then
     current_dir = cwd
   else
     -- Extract the directory from the current file's path
-    current_dir = vim.fn.fnamemodify(current_file, ":h")
+    current_dir = vim.fn.fnamemodify(current_file, ':h')
   end
 
   -- Find the Git root directory from the current file's path
-  local git_root = vim.fn.systemlist("git -C " .. vim.fn.escape(current_dir, " ") .. " rev-parse --show-toplevel")[1]
+  local git_root = vim.fn.systemlist('git -C ' .. vim.fn.escape(current_dir, ' ') .. ' rev-parse --show-toplevel')[1]
   if vim.v.shell_error ~= 0 then
-    print("Not a git repository. Searching on current working directory")
+    print 'Not a git repository. Searching on current working directory'
     return cwd
   end
   return git_root
@@ -233,9 +233,9 @@ end
 local function live_grep_git_root()
   local git_root = find_git_root()
   if git_root then
-    require('telescope.builtin').live_grep({
+    require('telescope.builtin').live_grep {
       search_dirs = { git_root },
-    })
+    }
   end
 end
 
@@ -282,7 +282,7 @@ vim.defer_fn(function()
       },
     },
     autotag = {
-      enable = true
+      enable = true,
     },
     modules = {},
     sync_install = true,
@@ -438,7 +438,7 @@ cmp.setup {
     end,
   },
   completion = {
-    completeopt = 'menu,menuone,noinsert'
+    completeopt = 'menu,menuone,noinsert',
   },
   mapping = cmp.mapping.preset.insert {
     ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -472,11 +472,10 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-  }
+  },
 }
 
-
-require "custom.settings"
+require 'custom.settings'
 --
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
