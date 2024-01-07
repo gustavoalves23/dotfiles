@@ -88,13 +88,22 @@ require('lazy').setup({
     priority = 1000,
   },
   {
+    'folke/tokyonight.nvim',
+    priority = 1000
+  },
+  {
     'nvim-lualine/lualine.nvim',
     opts = {
       options = {
         icons_enabled = true,
-        theme = 'dracula',
+        theme = 'tokyonight',
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
+      },
+      sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch', 'diagnostics' },
+        lualine_c = {}
       },
     },
   },
@@ -103,7 +112,7 @@ require('lazy').setup({
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
     opts = {
-      defaults = { file_ignore_patterns = { "node_modules" } }
+      defaults = { file_ignore_patterns = { "node_modules", "%.min.js" } }
     },
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -377,6 +386,7 @@ local servers = {
   rust_analyzer = {},
   tsserver = {},
   tailwindcss = {},
+  cssls = {},
   html = { filetypes = { 'html', 'twig', 'hbs' } },
   csharp_ls = {},
   lua_ls = {
@@ -465,8 +475,8 @@ cmp.setup {
   }
 }
 
-require "custom.settings"
 
+require "custom.settings"
 --
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
