@@ -1,5 +1,4 @@
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -268,7 +267,24 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup({
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'c_sharp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+    ensure_installed = {
+      'c',
+      'cpp',
+      'c_sharp',
+      'go',
+      'lua',
+      'python',
+      'rust',
+      'tsx',
+      'regex',
+      'markdown',
+      'markdown_inline',
+      'javascript',
+      'typescript',
+      'vimdoc',
+      'vim',
+      'bash',
+    },
 
     auto_install = false,
     highlight = { enable = true },
