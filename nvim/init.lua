@@ -91,22 +91,6 @@ require('lazy').setup({
     'folke/tokyonight.nvim',
     priority = 1000,
   },
-  {
-    'nvim-lualine/lualine.nvim',
-    opts = {
-      options = {
-        icons_enabled = true,
-        theme = 'tokyonight',
-        component_separators = { left = '', right = '' },
-        section_separators = { left = '', right = '' },
-      },
-      sections = {
-        lualine_a = { 'mode' },
-        lualine_b = { 'branch', 'diagnostics' },
-        lualine_c = {},
-      },
-    },
-  },
   { 'numToStr/Comment.nvim', opts = {} },
   {
     'nvim-telescope/telescope.nvim',
