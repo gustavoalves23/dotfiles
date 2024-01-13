@@ -8,13 +8,14 @@ vim.wo.relativenumber = true
 vim.opt.scrolloff = 4
 
 --theme
-vim.cmd.colorscheme 'tokyonight'
+vim.cmd.colorscheme('tokyonight')
 vim.api.nvim_set_hl(0, 'iCursor', { foreground = '#ffffff', background = '#CD0058' })
 vim.opt.guicursor = 'i:block-iCursor'
 vim.api.nvim_set_hl(0, 'CursorLine', { background = '#233745' })
 vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
 vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
 vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
+vim.api.nvim_set_hl(0, 'DashboardHeader', { foreground = '#fc8803' })
 -- git-blame
 vim.g.gitblame_highlight_group = 'GitBlame'
 vim.api.nvim_set_hl(0, 'GitBlame', { background = '#233745', foreground = '#565f89' })
@@ -27,7 +28,7 @@ vim.g.copilot_no_tab_map = true
 vim.api.nvim_set_keymap('i', '<C-J>', 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
 --auto-resize
-vim.api.nvim_command 'autocmd VimResized * wincmd ='
+vim.api.nvim_command('autocmd VimResized * wincmd =')
 
 vim.api.nvim_set_keymap('n', '<C-w>s', '<C-w>v', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-w>v', '<C-w>s', { noremap = true, silent = true })
@@ -36,7 +37,7 @@ vim.api.nvim_set_keymap('n', '<C-w>v', '<C-w>s', { noremap = true, silent = true
 vim.api.nvim_set_keymap('n', '<leader>zz', ':let &scrolloff=999-&scrolloff<CR>', { noremap = true, silent = true })
 
 --disable auto comment on newline
-vim.cmd 'autocmd BufEnter * set formatoptions-=o'
+vim.cmd('autocmd BufEnter * set formatoptions-=o')
 
 --enable cursorline
 vim.opt.cursorline = true
