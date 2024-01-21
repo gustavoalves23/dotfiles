@@ -50,3 +50,9 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = 'Jenkinsfile',
   command = 'set ft=groovy',
 })
+
+--Auto refresh file changesoutside nvim
+vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter' }, {
+  pattern = '*',
+  command = 'checktime',
+})
