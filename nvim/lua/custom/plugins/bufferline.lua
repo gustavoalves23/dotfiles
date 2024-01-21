@@ -1,13 +1,13 @@
 return {
   'akinsho/bufferline.nvim',
-  event = "VeryLazy",
+  event = 'VeryLazy',
   config = function()
-    require("bufferline").setup({
+    require('bufferline').setup({
       options = {
         diagnostics = 'nvim_lsp',
-        separator_style = "slant"
-      }
+        separator_style = 'slope',
+      },
     })
   end,
-  dependencies = 'nvim-tree/nvim-web-devicons'
+  dependencies = 'nvim-tree/nvim-web-devicons',
 }
