@@ -1,9 +1,9 @@
 return {
   'nvimtools/none-ls.nvim',
   config = function()
-    local null_ls = require 'null-ls'
+    local null_ls = require('null-ls')
 
-    null_ls.setup {
+    null_ls.setup({
       sources = {
         -- JS/TS
         null_ls.builtins.diagnostics.eslint_d,
@@ -12,7 +12,11 @@ return {
         --LUA
         null_ls.builtins.formatting.stylua,
         --LUA
+        --CSS
+        -- null_ls.builtins.diagnostics.stylelint,
+        -- null_ls.builtins.formatting.stylelint,
+        --CSS
       },
-    }
+    })
   end,
 }
