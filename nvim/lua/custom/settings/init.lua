@@ -21,7 +21,7 @@ vim.g.gitblame_highlight_group = 'GitBlame'
 vim.api.nvim_set_hl(0, 'GitBlame', { background = '#233745', foreground = '#565f89' })
 
 --file explorer
-vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
+vim.keymap.set('n', '-', '<CMD>Oil<CR>', { noremap = true, desc = 'Open parent directory' })
 
 -- copilot
 vim.g.copilot_no_tab_map = true
