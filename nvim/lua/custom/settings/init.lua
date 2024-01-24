@@ -41,3 +41,7 @@ vim.cmd('autocmd BufEnter * set formatoptions-=o')
 
 --enable cursorline
 vim.opt.cursorline = true
+
+--copy and paste to and from the star register
+vim.api.nvim_set_keymap('v', '<leader>y', '"+y', { noremap = true, silent = true, desc = '[Y]ank from star register' })
+vim.api.nvim_set_keymap('n', '<leader>p', '"+p', { noremap = true, silent = true, desc = '[P]aste to star register' })

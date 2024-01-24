@@ -128,7 +128,7 @@ vim.o.hlsearch = false
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
-vim.o.clipboard = 'unnamedplus'
+-- vim.o.clipboard = 'unnamedplus'
 
 vim.o.breakindent = true
 
