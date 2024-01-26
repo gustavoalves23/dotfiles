@@ -16,6 +16,7 @@ vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
 vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
 vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
 vim.api.nvim_set_hl(0, 'DashboardHeader', { foreground = '#fc8803' })
+vim.api.nvim_set_hl(0, 'FlashCursor', { foreground = '#ffffff', background = '#000000' })
 -- git-blame
 vim.g.gitblame_highlight_group = 'GitBlame'
 vim.api.nvim_set_hl(0, 'GitBlame', { background = '#233745', foreground = '#565f89' })

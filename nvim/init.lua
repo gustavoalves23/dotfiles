@@ -83,10 +83,10 @@ require('lazy').setup({
       end,
     },
   },
-  {
-    'dracula/vim',
-    priority = 1000,
-  },
+  -- {
+  --   'dracula/vim',
+  --   priority = 1000,
+  -- },
   {
     'folke/tokyonight.nvim',
     priority = 1000,

@@ -34,10 +34,12 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
+    local nvim_config_dir = vim.fn.stdpath('config')
+
     -- C#
     dap.adapters.coreclr = {
       type = 'executable',
-      command = '/home/gmiyazaki/.config/nvim/adapters/netcoredbg/netcoredbg',
+      command = nvim_config_dir .. '/adapters/netcoredbg/netcoredbg',
       args = { '--interpreter=vscode' },
     }
 
