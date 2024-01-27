@@ -266,8 +266,8 @@ vim.defer_fn(function()
       'regex',
       'markdown',
       'markdown_inline',
-      'javascript',
-      'typescript',
+      -- 'javascript',
+      -- 'typescript',
       'vimdoc',
       'vim',
       'bash',
@@ -388,7 +388,7 @@ require('mason-lspconfig').setup()
 
 local servers = {
   rust_analyzer = {},
-  tsserver = {},
+  -- tsserver = {},
   tailwindcss = {},
   cssls = {},
   html = { filetypes = { 'html', 'twig', 'hbs' } },
