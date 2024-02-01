@@ -83,13 +83,12 @@ require('lazy').setup({
       end,
     },
   },
-  -- {
-  --   'dracula/vim',
-  --   priority = 1000,
-  -- },
   {
     'folke/tokyonight.nvim',
     priority = 1000,
+    opts = {
+      style = 'moon',
+    },
   },
   { 'numToStr/Comment.nvim', opts = {} },
   {
