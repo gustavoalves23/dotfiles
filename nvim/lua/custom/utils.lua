@@ -12,7 +12,20 @@ local function show_macro_recording()
   end
 end
 
+-- Debounce
+local function debounce(ms, fn)
+  local timer = vim.loop.new_timer()
+  return function(...)
+    local argv = { ... }
+    timer:start(ms, 0, function()
+      timer:stop()
+      vim.schedule_wrap(fn)(unpack(argv))
+    end)
+  end
+end
+
 return {
   Sad = Sad,
   show_macro_recording = show_macro_recording,
+  debounce = debounce,
 }
