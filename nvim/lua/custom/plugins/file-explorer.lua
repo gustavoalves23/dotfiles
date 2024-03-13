@@ -7,7 +7,9 @@ return {
     },
     keymaps = {
       ['<C-h>'] = false,
+      ['<C-l>'] = false,
       ['<C-c>'] = 'actions.select_split',
+      ['<C-r>'] = 'actions.refresh',
     },
   },
 }
