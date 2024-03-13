@@ -17,6 +17,7 @@ vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
 vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
 vim.api.nvim_set_hl(0, 'DashboardHeader', { foreground = '#fc8803' })
 vim.api.nvim_set_hl(0, 'FlashCursor', { foreground = '#ffffff', background = '#000000' })
+-- vim.api.nvim_set_hl(0, 'Normal', { foreground = 'NONE', background = 'NONE' })
 
 --file explorer
 vim.keymap.set('n', '-', '<CMD>Oil<CR>', { noremap = true, desc = 'Open parent directory' })
