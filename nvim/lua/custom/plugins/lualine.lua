@@ -17,13 +17,13 @@ return {
     },
   },
   config = function(_, opts)
-    local lualine = require('lualine')
+    local lualine = require 'lualine'
     lualine.setup(opts)
     vim.api.nvim_create_autocmd('RecordingEnter', {
       callback = function()
-        lualine.refresh({
+        lualine.refresh {
           place = { 'statusline' },
-        })
+        }
       end,
     })
 
@@ -34,9 +34,9 @@ return {
           50,
           0,
           vim.schedule_wrap(function()
-            lualine.refresh({
+            lualine.refresh {
               place = { 'statusline' },
-            })
+            }
           end)
         )
       end,
