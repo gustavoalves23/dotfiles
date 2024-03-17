@@ -3,8 +3,8 @@ return {
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   opts = {},
   config = function(_, opts)
-    local trouble = require('trouble')
+    local trouble = require 'trouble'
     trouble.setup(opts)
-    vim.keymap.set('n', '<leader>xx', trouble.toggle, { silent = true, noremap = true, desc = 'Open Problems List' })
+    vim.keymap.set('n', '<leader>xx', trouble.toggle, { silent = true, noremap = true, desc = 'Open diagnostics list' })
   end,
 }

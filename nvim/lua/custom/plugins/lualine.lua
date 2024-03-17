@@ -13,7 +13,10 @@ return {
         'macro-recording',
         fmt = require('custom.utils').show_macro_recording,
       } },
-      lualine_c = {},
+      lualine_c = { {
+        'filename',
+        path = 1,
+      } },
     },
   },
   config = function(_, opts)
