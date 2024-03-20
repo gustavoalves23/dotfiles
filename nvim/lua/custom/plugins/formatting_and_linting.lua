@@ -29,7 +29,7 @@ return {
         'BufWritePost',
         'BufReadPost',
         'InsertLeave',
-        -- 'TextChanged', -- uncomment this line if want to lint on every change on the file text (may increase CPU consumption)
+        'TextChanged', -- uncomment this line if want to lint on every change on the file text (may increase CPU consumption)
       },
       linters_by_ft = {
         typescript = { 'eslint_d' },
@@ -42,9 +42,9 @@ return {
       local nvim_lint_au = vim.api.nvim_create_augroup('nvim_lint', { clear = true })
       vim.api.nvim_create_autocmd(opts.events, {
         group = nvim_lint_au,
-        callback = function()
+        callback = require('custom.utils').debounce(100, function()
           lint.try_lint()
-        end,
+        end),
       })
     end,
   },

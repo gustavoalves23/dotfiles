@@ -3,10 +3,11 @@ return {
   dependencies = {
     'rcarriga/nvim-dap-ui',
     'williamboman/mason.nvim',
+    'nvim-neotest/nvim-nio',
   },
   config = function()
-    local dap = require('dap')
-    local dapui = require('dapui')
+    local dap = require 'dap'
+    local dapui = require 'dapui'
 
     vim.keymap.set('n', '<F5>', function()
       require('dap').continue()
@@ -27,14 +28,14 @@ return {
       require('dap').set_breakpoint()
     end)
 
-    dapui.setup({})
+    dapui.setup {}
     vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-    local nvim_config_dir = vim.fn.stdpath('config')
+    local nvim_config_dir = vim.fn.stdpath 'config'
 
     -- C#
     dap.adapters.coreclr = {
@@ -65,7 +66,7 @@ return {
     dap.adapters.node2 = {
       type = 'executable',
       command = 'node',
-      args = { vim.fn.stdpath('data') .. '/mason/packages/node-debug2-adapter/out/src/nodeDebug.js' },
+      args = { vim.fn.stdpath 'data' .. '/mason/packages/node-debug2-adapter/out/src/nodeDebug.js' },
     }
     dap.configurations.javascript = {
       {
