@@ -1,26 +1,3 @@
--- return {
---   'nvimtools/none-ls.nvim',
---   config = function()
---     local null_ls = require('null-ls')
---
---     null_ls.setup({
---       sources = {
---         -- JS/TS
---         null_ls.builtins.diagnostics.eslint_d,
---         null_ls.builtins.formatting.eslint_d,
---         -- JS/TS
---         --LUA
---         null_ls.builtins.formatting.stylua,
---         --LUA
---         --CSS
---         -- null_ls.builtins.diagnostics.stylelint,
---         -- null_ls.builtins.formatting.stylelint,
---         --CSS
---       },
---     })
---   end,
--- }
-
 return {
   {
     'mfussenegger/nvim-lint',
@@ -29,10 +6,9 @@ return {
         'BufWritePost',
         'BufReadPost',
         'InsertLeave',
-        'TextChanged', -- uncomment this line if want to lint on every change on the file text (may increase CPU consumption)
       },
       linters_by_ft = {
-        typescript = { 'eslint_d' },
+        typescript = { 'biomejs' },
       },
     },
     config = function(_, opts)
@@ -52,7 +28,9 @@ return {
     'stevearc/conform.nvim',
     opts = {
       formatters_by_ft = {
-        typescript = { 'eslint_d' },
+        typescript = {
+          'biome',
+        },
         lua = { 'stylua' },
       },
       format_on_save = {
