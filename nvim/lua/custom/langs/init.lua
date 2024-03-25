@@ -9,7 +9,7 @@ return {
       'typescript.tsx',
       'typescriptreact',
       'astro',
-      'svelte',
+      -- 'svelte',
       'vue',
     },
     linters = {
