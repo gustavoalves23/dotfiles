@@ -449,6 +449,9 @@ mason_lspconfig.setup_handlers {
 -- See `:help cmp`
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
+-- Add support for html snippets on .jsx and .tsx
+luasnip.filetype_extend('javascriptreact', { 'html' })
+luasnip.filetype_extend('typescriptreact', { 'html' })
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
