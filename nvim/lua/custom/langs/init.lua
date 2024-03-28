@@ -8,7 +8,7 @@ return {
       'typescript',
       'typescript.tsx',
       'typescriptreact',
-      'astro',
+      -- 'astro',
       -- 'svelte',
       'vue',
     },
