@@ -11,7 +11,9 @@ return {
       disabled_filetypes = { 'Trouble', 'oil' },
     },
     sections = {
-      lualine_a = { 'mode' },
+      lualine_a = { { 'mode', color = {
+        gui = 'bold',
+      } } },
       lualine_b = { 'branch', 'diagnostics', {
         'macro-recording',
         fmt = require('custom.utils').show_macro_recording,
