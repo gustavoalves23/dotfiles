@@ -60,13 +60,6 @@ return {
       desc = 'Noice Last Message',
     },
     {
-      '<leader>snh',
-      function()
-        require('noice').cmd 'history'
-      end,
-      desc = 'Noice History',
-    },
-    {
       '<leader>sna',
       function()
         require('noice').cmd 'all'

@@ -8,15 +8,13 @@ return {
       'typescript',
       'typescript.tsx',
       'typescriptreact',
-      -- 'astro',
-      -- 'svelte',
       'vue',
     },
     linters = {
-      'biomejs',
+      'eslint_d',
     },
     formatters = {
-      'biome',
+      'eslint_d',
     },
     debug_fn = function(dap)
       dap.adapters.node2 = {
