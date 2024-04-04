@@ -1,4 +1,25 @@
 return {
+  react = {
+    filetypes = {
+      'javascriptreact',
+      'typescriptreact',
+      'typescript.tsx',
+    },
+    snippets = {
+      extends = {
+        'html',
+      },
+      custom = function(s, t, i)
+        return {
+          s('cssm', {
+            t 'className={S.',
+            i(1),
+            t '}',
+          }),
+        }
+      end,
+    },
+  },
   javascript = {
     filetypes = {
       'javascript',

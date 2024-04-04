@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 vim.g.mapleader = ' '
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -13,6 +14,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 
 vim.opt.rtp:prepend(lazypath)
+
+local langs = require 'custom.langs'
 
 require('lazy').setup({
   'tpope/vim-fugitive',
@@ -460,9 +463,27 @@ mason_lspconfig.setup_handlers {
 -- See `:help cmp`
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
--- Add support for html snippets on .jsx and .tsx
-luasnip.filetype_extend('javascriptreact', { 'html' })
-luasnip.filetype_extend('typescriptreact', { 'html' })
+
+for _, lang in pairs(langs) do
+  if lang.snippets then
+    if lang.snippets.extends then
+      for _, extended_lang in pairs(lang.filetypes) do
+        luasnip.filetype_extend(extended_lang, lang.snippets.extends)
+      end
+    end
+
+    if lang.snippets.custom then
+      for _, extended_lang in pairs(lang.filetypes) do
+        local s = luasnip.snippet
+        local t = luasnip.text_node
+        local i = luasnip.insert_node
+
+        luasnip.add_snippets(extended_lang, lang.snippets.custom(s, t, i))
+      end
+    end
+  end
+end
+
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
