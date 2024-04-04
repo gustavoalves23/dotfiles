@@ -91,6 +91,9 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
+# Enter mini monitor layout
+bindsym $mod+Shift+m exec --no-startup-id autorandr resmini
+
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
@@ -169,6 +172,8 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# toggle mute sound
+bindsym $mod+m exec "pactl -- set-sink-mute alsa_output.pci-0000_00_1f.3.analog-stereo toggle"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -203,7 +208,7 @@ bindsym $mod+Shift+s exec --no-startup-id "flameshot gui --clipboard --path ~/Pi
 
 # UI
 # class                 border  bground text    indicator child_border
-client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4AA
+client.focused          #CC9901 #CC9901 #F8F8F2 #CC9901   #CC9901AA
 client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475AAA
 client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36AA
 client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
@@ -211,7 +216,7 @@ client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 
 client.background       #F8F8F2
 
-default_border pixel 1
+default_border pixel 2
 default_floating_border pixel 1
 
 #Gaps
@@ -224,7 +229,7 @@ gaps top 33
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh &
 
 #Wallpaper
-exec_always --no-startup-id feh --bg-fill /usr/share/backgrounds/3.png &
+exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/3.png &
 
 #Redshift
 exec --no-startup-id redshift-gtk &

@@ -3,8 +3,6 @@ return {
     filetypes = {
       'javascript',
       'javascriptreact',
-      'json',
-      'jsonc',
       'typescript',
       'typescript.tsx',
       'typescriptreact',
