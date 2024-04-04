@@ -466,19 +466,22 @@ local luasnip = require 'luasnip'
 
 for _, lang in pairs(langs) do
   if lang.snippets then
-    if lang.snippets.extends then
-      for _, extended_lang in pairs(lang.filetypes) do
-        luasnip.filetype_extend(extended_lang, lang.snippets.extends)
+    local extends = lang.snippets.extends
+    local custom = lang.snippets.custom
+    local filetypes = lang.filetypes
+    if extends then
+      for _, extended_lang in pairs(filetypes) do
+        luasnip.filetype_extend(extended_lang, extends)
       end
     end
 
-    if lang.snippets.custom then
-      for _, extended_lang in pairs(lang.filetypes) do
+    if custom then
+      for _, extended_lang in pairs(filetypes) do
         local s = luasnip.snippet
         local t = luasnip.text_node
         local i = luasnip.insert_node
 
-        luasnip.add_snippets(extended_lang, lang.snippets.custom(s, t, i))
+        luasnip.add_snippets(extended_lang, custom(s, t, i))
       end
     end
   end
