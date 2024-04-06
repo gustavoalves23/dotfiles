@@ -11,8 +11,8 @@ local function _remove_alacritty_padding()
   if not _is_alacritty then
     return
   end
-  utils.Sad('07', _padding, 0, _alacritty_config_file)
-  utils.Sad('08', _padding, 0, _alacritty_config_file)
+  utils.Sed('07', _padding, 0, _alacritty_config_file)
+  utils.Sed('08', _padding, 0, _alacritty_config_file)
 end
 
 local function _reset_alacritty_padding()
@@ -26,8 +26,8 @@ local function _reset_alacritty_padding()
     vim.cmd 'sleep 100m'
     return
   end
-  utils.Sad('07', 0, _padding, _alacritty_config_file)
-  utils.Sad('08', 0, _padding, _alacritty_config_file)
+  utils.Sed('07', 0, _padding, _alacritty_config_file)
+  utils.Sed('08', 0, _padding, _alacritty_config_file)
   vim.cmd 'sleep 100m'
 end
 

@@ -1,4 +1,4 @@
-local function Sad(line_nr, from, to, fname)
+local function Sed(line_nr, from, to, fname)
   vim.cmd(string.format("silent !sed -i '%ss/%s/%s/' %s", line_nr, from, to, fname))
 end
 
@@ -25,7 +25,7 @@ local function debounce(ms, fn)
 end
 
 return {
-  Sad = Sad,
+  Sed = Sed,
   show_macro_recording = show_macro_recording,
   debounce = debounce,
 }
