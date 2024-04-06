@@ -112,13 +112,9 @@ require('lazy').setup({
     },
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope-dap.nvim',
       {
         'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'make',
-        cond = function()
-          return vim.fn.executable 'make' == 1
-        end,
+        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
       },
     },
   },
@@ -201,6 +197,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
+  extensions = {
+    fzf = {
+      case_mode = 'ignore_case',
+    },
+  },
   defaults = {
     preview = {
       treesitter = false,
@@ -215,7 +216,6 @@ require('telescope').setup {
 }
 
 pcall(require('telescope').load_extension, 'fzf')
-pcall(require('telescope').load_extension, 'dap')
 
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path

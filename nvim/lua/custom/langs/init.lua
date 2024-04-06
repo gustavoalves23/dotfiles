@@ -1,4 +1,12 @@
 return {
+  -- svelte = {
+  --   filetypes = { 'svelte' },
+  --   snippets = {
+  --     extends = {
+  --       'typescript',
+  --     },
+  --   },
+  -- },
   react = {
     filetypes = {
       'javascriptreact',
@@ -28,6 +36,7 @@ return {
       'typescript.tsx',
       'typescriptreact',
       'vue',
+      'svelte',
     },
     linters = {
       'eslint_d',
