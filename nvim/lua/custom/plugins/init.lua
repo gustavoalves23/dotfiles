@@ -1,6 +1,11 @@
 return {
-	{ 'windwp/nvim-ts-autotag',     opts = {} },
-	{ 'github/copilot.vim' },
-	{ 'norcalli/nvim-colorizer.lua' },
-	{ 'ryanoasis/vim-devicons' },
+  { 'windwp/nvim-ts-autotag' },
+  { 'github/copilot.vim' },
+  {
+    'norcalli/nvim-colorizer.lua',
+    event = 'VeryLazy',
+    config = function()
+      require('colorizer').setup()
+    end,
+  },
 }
