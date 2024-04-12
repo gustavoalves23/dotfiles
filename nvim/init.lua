@@ -1,6 +1,6 @@
 vim.g.mapleader = ' '
 
-require 'lazy'
+require 'bootstrap'
 require 'settings'
 require 'langs.syntax_highlight'
 require 'langs.language_server'
