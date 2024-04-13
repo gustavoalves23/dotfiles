@@ -28,7 +28,7 @@ return {
       local nvim_lint_au = vim.api.nvim_create_augroup('nvim_lint', { clear = true })
       vim.api.nvim_create_autocmd(opts.events, {
         group = nvim_lint_au,
-        callback = require('utils.utils').debounce(100, function()
+        callback = require('utils').debounce(100, function()
           lint.try_lint()
         end),
       })

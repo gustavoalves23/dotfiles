@@ -19,7 +19,7 @@ return {
       },
       lualine_b = { 'branch', 'diagnostics', {
         'macro-recording',
-        fmt = require('utils.init').show_macro_recording,
+        fmt = require('utils').show_macro_recording,
       } },
       lualine_c = {
         {
@@ -31,7 +31,7 @@ return {
         {
           'lsp',
           fmt = function()
-            local lsps = require('utils.init').get_attached_lsps()
+            local lsps = require('utils').get_attached_lsps()
             local lsp_count = #lsps
 
             if lsp_count == 0 then
