@@ -10,18 +10,40 @@ return {
     },
     sections = {
       lualine_a = {
-        { 'mode', color = {
-          gui = 'bold',
-        } },
+        {
+          'mode',
+          color = {
+            gui = 'bold',
+          },
+        },
       },
       lualine_b = { 'branch', 'diagnostics', {
         'macro-recording',
-        fmt = require('utils.utils').show_macro_recording,
+        fmt = require('utils.init').show_macro_recording,
       } },
-      lualine_c = { {
-        'filename',
-        path = 1,
-      } },
+      lualine_c = {
+        {
+          'filename',
+          path = 1,
+        },
+      },
+      lualine_x = {
+        {
+          'lsp',
+          fmt = function()
+            local lsps = require('utils.init').get_attached_lsps()
+            local lsp_count = #lsps
+
+            if lsp_count == 0 then
+              return ''
+            end
+            return '[LSP: ' .. lsp_count .. ']'
+          end,
+        },
+        'encoding',
+        'fileformat',
+        'filetype',
+      },
     },
   },
   config = function(_, opts)
