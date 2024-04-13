@@ -3,14 +3,15 @@ return {
   event = 'VeryLazy',
   dependencies = {
     'MunifTanjim/nui.nvim',
-    'rcarriga/nvim-notify',
   },
   opts = {
     views = {
       mini = {
-        win_options = {
-          winblend = 0,
+        position = {
+          row = 1,
+          col = '100%',
         },
+        lsp_progress = {},
       },
     },
     lsp = {
