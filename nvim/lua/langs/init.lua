@@ -1,4 +1,4 @@
-local dap_fn = require 'langs.debug'
+local debug_fn = require('langs.utils').dap_fn_config
 return {
   svelte = {
     filetypes = { 'svelte' },
@@ -61,7 +61,12 @@ return {
     formatters = {
       'eslint_d',
     },
-    debug_fn = dap_fn.node2,
+    debuggers = {
+      {
+        name = 'node2',
+        fn = debug_fn.node2,
+      },
+    },
   },
   csharp = {
     filetypes = { 'cs' },
@@ -71,7 +76,12 @@ return {
         csharp_ls = {},
       },
     },
-    debug_fn = dap_fn.netcoredbg,
+    debuggers = {
+      {
+        name = 'coreclr',
+        fn = debug_fn.netcoredbg,
+      },
+    },
   },
   python = {
     filetypes = { 'python' },

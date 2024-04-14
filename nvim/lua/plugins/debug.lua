@@ -5,6 +5,7 @@ return {
     'rcarriga/nvim-dap-ui',
     'williamboman/mason.nvim',
     'nvim-neotest/nvim-nio',
+    'jay-babu/mason-nvim-dap.nvim',
   },
   config = function()
     local dap = require 'dap'
@@ -36,8 +37,11 @@ return {
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
     for _, value in pairs(langs) do
-      if value.debug_fn then
-        value.debug_fn(dap)
+      local debuggers = value.debuggers
+      if debuggers then
+        for _, debugger in pairs(debuggers) do
+          debugger.fn(dap)
+        end
       end
     end
     dapui.setup {}

@@ -2,6 +2,7 @@ local langs = require 'langs'
 return {
   {
     'mfussenegger/nvim-lint',
+    'rshkarin/mason-nvim-lint',
     opts = {
       events = {
         'BufWritePost',
