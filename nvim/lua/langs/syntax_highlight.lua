@@ -2,8 +2,8 @@ local langs = require 'langs'
 local ensure_installed = {}
 
 for _, lang in pairs(langs) do
-  if lang.treesitter then
-    for _, parser in pairs(lang.treesitter) do
+  if lang.language and lang.language.syntax then
+    for _, parser in pairs(lang.language.syntax) do
       table.insert(ensure_installed, parser)
     end
   end
@@ -36,8 +36,6 @@ vim.defer_fn(function()
         enable = true,
         lookahead = true,
         keymaps = {
-          ['aa'] = '@parameter.outer',
-          ['ia'] = '@parameter.inner',
           ['af'] = '@function.outer',
           ['if'] = '@function.inner',
           ['ac'] = '@class.outer',
@@ -58,15 +56,6 @@ vim.defer_fn(function()
         },
         goto_previous_end = {
           ['[M'] = '@function.outer',
-        },
-      },
-      swap = {
-        enable = true,
-        swap_next = {
-          ['<leader>a'] = '@parameter.inner',
-        },
-        swap_previous = {
-          ['<leader>A'] = '@parameter.inner',
         },
       },
     },

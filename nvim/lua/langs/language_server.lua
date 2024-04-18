@@ -7,8 +7,8 @@ require('mason-lspconfig').setup()
 local servers = {}
 
 for _, lang in pairs(langs) do
-  if lang.lsp and lang.lsp.servers then
-    for server_name, server_config in pairs(lang.lsp.servers) do
+  if lang.language and lang.language.servers then
+    for server_name, server_config in pairs(lang.language.servers) do
       servers[server_name] = server_config
     end
   end

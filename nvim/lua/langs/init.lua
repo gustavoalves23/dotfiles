@@ -13,10 +13,10 @@ return {
       'javascriptreact',
       'typescriptreact',
     },
-    treesitter = {
-      'tsx',
-    },
-    lsp = {
+    language = {
+      syntax = {
+        'tsx',
+      },
       servers = {
         cssmodules_ls = {},
         tailwindcss = {},
@@ -46,11 +46,11 @@ return {
       'vue',
       'svelte',
     },
-    treesitter = {
-      'javascript',
-      'typescript',
-    },
-    lsp = {
+    language = {
+      syntax = {
+        'javascript',
+        'typescript',
+      },
       servers = {
         tsserver = {},
       },
@@ -70,8 +70,8 @@ return {
   },
   csharp = {
     filetypes = { 'cs' },
-    treesitter = { 'c_sharp' },
-    lsp = {
+    language = {
+      syntax = { 'c_sharp' },
       servers = {
         csharp_ls = {},
       },
@@ -85,8 +85,8 @@ return {
   },
   python = {
     filetypes = { 'python' },
-    treesitter = { 'python' },
-    lsp = {
+    language = {
+      syntax = { 'python' },
       servers = {
         pylsp = {},
       },
@@ -95,8 +95,8 @@ return {
   lua = {
     filetypes = { 'lua' },
     formatters = { 'stylua' },
-    treesitter = { 'lua' },
-    lsp = {
+    language = {
+      syntax = { 'lua' },
       servers = {
         lua_ls = {
           Lua = {
@@ -109,23 +109,33 @@ return {
   },
   rust = {
     filetypes = { 'rust' },
-    treesitter = { 'rust' },
-    lsp = {
+    language = {
+      syntax = { 'rust' },
       servers = {
         rust_analyzer = {},
       },
     },
   },
-  others = {
-    treesitter = {
-      'regex',
-      'markdown',
-      'markdown_inline',
-      'vimdoc',
-      'vim',
-      'bash',
+  aspvbs = {
+    filetypes = { 'aspvbs' },
+    snippets = {
+      extends = {
+        'html',
+        'css',
+        'javascript'
+      },
     },
-    lsp = {
+  },
+  others = {
+    language = {
+      syntax = {
+        'regex',
+        'markdown',
+        'markdown_inline',
+        'vimdoc',
+        'vim',
+        'bash',
+      },
       servers = {
         cssls = {},
         html = { filetypes = { 'html', 'twig', 'hbs' } },
