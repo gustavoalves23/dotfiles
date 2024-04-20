@@ -36,7 +36,7 @@ mason_lspconfig.setup_handlers {
           servers[server_name].on_attach(client, bufnr)
         end
       end,
-      settings = servers[server_name].settings or {},
+      settings = (servers[server_name] or {}).settings,
       filetypes = (servers[server_name] or {}).filetypes,
       init_options = (servers[server_name] or {}).init_options,
     }

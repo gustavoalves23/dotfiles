@@ -85,8 +85,8 @@ return {
     },
     extra_lib = {
       {
-        "Hoffs/omnisharp-extended-lsp.nvim"
-      }
+        'Hoffs/omnisharp-extended-lsp.nvim',
+      },
     },
     debuggers = {
       {
@@ -116,7 +116,7 @@ return {
               workspace = { checkThirdParty = false },
               telemetry = { enable = false },
             },
-          }
+          },
         },
       },
     },
@@ -136,7 +136,7 @@ return {
       extends = {
         'html',
         'css',
-        'javascript'
+        'javascript',
       },
     },
   },
