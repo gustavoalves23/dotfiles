@@ -73,8 +73,20 @@ return {
     language = {
       syntax = { 'c_sharp' },
       servers = {
-        csharp_ls = {},
+        omnisharp = {
+          on_attach = function(_, bufnr)
+            local omnisharp_extended = require 'omnisharp_extended'
+            vim.keymap.set('n', 'gd', omnisharp_extended.lsp_definition, { buffer = bufnr, remap = true })
+            vim.keymap.set('n', 'gr', omnisharp_extended.lsp_references, { buffer = bufnr, remap = true })
+            vim.keymap.set('n', 'gi', omnisharp_extended.lsp_implementation, { buffer = bufnr, remap = true })
+          end,
+        },
       },
+    },
+    extra_lib = {
+      {
+        "Hoffs/omnisharp-extended-lsp.nvim"
+      }
     },
     debuggers = {
       {
@@ -99,10 +111,12 @@ return {
       syntax = { 'lua' },
       servers = {
         lua_ls = {
-          Lua = {
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
-          },
+          settings = {
+            Lua = {
+              workspace = { checkThirdParty = false },
+              telemetry = { enable = false },
+            },
+          }
         },
       },
     },
@@ -138,7 +152,7 @@ return {
       },
       servers = {
         cssls = {},
-        html = { filetypes = { 'html', 'twig', 'hbs' } },
+        html = {},
       },
     },
   },

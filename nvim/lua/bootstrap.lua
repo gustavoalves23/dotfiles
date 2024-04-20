@@ -12,7 +12,17 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({ { import = 'plugins' } }, {
+local langs = require 'langs'
+
+local extra_lib = {}
+
+for _, lang in pairs(langs) do
+  if lang.extra_lib then
+    table.insert(extra_lib, lang.extra_lib)
+  end
+end
+
+require('lazy').setup({ { import = 'plugins' }, { extra_lib } }, {
   checker = {
     enabled = true,
   },
