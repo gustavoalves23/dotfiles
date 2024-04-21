@@ -1,20 +1,31 @@
-import = ["/home/gmiyazaki/.config/alacritty/themes/dracula.toml"]
+import = ["/home/gmiyazaki/.config/alacritty/themes/tokyonight_moon.toml"]
 
 [window]
-opacity = 0.7
+opacity = 0.8
 
 [window.padding]
 x = 16
 y = 16
 
 [font]
-size = 10.0
+size = 10
 
 [font.normal]
-family = "MesloLGS Nerd Font"
+# family = "MesloLGS Nerd Font"
+family = "JetBrainsMono Nerd Font"
+style = "regular"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "italic"
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
 
 [shell]
 program = "/usr/bin/zsh"
 
 [env]
 TERM = "xterm-256color"
+
