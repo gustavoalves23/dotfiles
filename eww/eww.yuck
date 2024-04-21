@@ -1,0 +1,118 @@
+;; Hyprland stuff
+(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/get-workspaces")
+(deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/get-active-workspace")
+(deflisten urgent_workspace "bash ~/.config/eww/scripts/get-urgent-workspace")
+(deflisten window :initial "..." "sh ~/.config/eww/scripts/get-window-title")
+(defwidget workspaces []
+  (eventbox
+    :halign "start"
+    :onscroll "bash ~/.config/eww/scripts/change-active-workspace {} ${current_workspace}"
+    :class "workspaces-widget"
+    (box 
+      :class "workspaces-widget"
+      (label
+        :visible false
+        :text "${urgent_workspace}"
+      )
+      (for workspace in workspaces
+        (eventbox
+          :onclick "hyprctl dispatch workspace ${workspace.id}"
+          :width 10
+          :height 10
+          (box
+            :class "workspace-entry-container ${workspace.id == current_workspace ? "current" : "" } ${workspace.windows > 0 ? "occupied" : "empty"}"
+            (revealer
+              :transition "crossfade"
+              :reveal "${workspace.id == current_workspace || workspace.id == urgent_workspace}" 
+              (box
+                :width 20
+                :height 20
+                :class "workspace-entry ${workspace.id == urgent_workspace ? "urgent" : "" }"
+              )
+            )
+          ) 
+        )
+      )
+    )
+  )
+)
+;; Hyprland stuff
+;; -----------------
+;; VPN stuff
+(defpoll vpn_status :interval "1s" :initial "..." "bash ~/.config/eww/scripts/vpn-anyconnect-status")
+
+(defwidget vpn []
+  (box
+    :halign "end"
+    :class "grey-bg"
+    (label
+      :text "${vpn_status}"
+    )
+  ) 
+)
+;; VPN stuff
+;; -----------------
+;; Side stuff
+(defpoll time :interval "10s"
+  "date '+%H:%M %b %d, %Y'")
+
+(defwidget time []
+  (box
+    :halign "end"
+    :class "grey-bg"
+    (label
+      :text "${time}"
+    )
+  ) 
+)
+(defwidget sidestuff []
+  (box
+    :class "sidestuff"
+    :hexpand true
+    :space-evenly false
+    :spacing 10
+    :halign "end"
+    (box
+      :class "grey-bg"
+;;
+      (label
+        :text "CPU: ${round( EWW_CPU.avg , 0)}% "
+      )
+      (label
+        :text "${EWW_TEMPS.CORETEMP_PACKAGE_ID_0}"
+      )
+      (graph
+        :value "${EWW_TEMPS.CORETEMP_PACKAGE_ID_0}"
+        :time-range 60000
+        :max 100
+      )
+    )
+    (revealer
+      :transition "slideleft"
+      :reveal "${vpn_status != "VPN DISCONNECTED"}" 
+      (vpn)
+    )
+    (time)
+  )
+)
+
+(defwidget bar []
+  (box
+    :space-evenly false
+    :spacing 10
+    (workspaces)
+    (sidestuff)
+  )
+)
+
+(defwindow bar
+  :monitor 0
+  :windowtype "dock"
+  :geometry (geometry :x "0%"
+                      :y "1%"
+                      :width "99%"
+                      :height "20px"
+                      :anchor "top center")
+  :exclusive true
+  (bar)
+)

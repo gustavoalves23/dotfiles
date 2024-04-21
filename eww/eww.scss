@@ -1,0 +1,40 @@
+* {
+  all: unset;
+}
+
+.bar {
+  background: #0D0C16;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.icon {
+  font-family: "Font Awesome 6 Pro Regular";
+
+  &.golden {
+    color: #CC9901;
+  }
+}
+
+.workspaces-widget {
+  .workspace-entry-container {
+    border-radius: 50%;
+    border: 3px solid #FFFFFF;
+    margin: 0 5px;
+
+    &.occupied {
+      border-color: #1abc9c;
+    }
+
+    .workspace-entry {
+      border-radius: 50%;
+      margin: 2px;
+
+      background-color: #FFFFFF;
+
+      &.urgent {
+        background-color: #ff007c;
+      }
+    }
+  }
+}
