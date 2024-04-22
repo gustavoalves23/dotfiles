@@ -3,6 +3,7 @@
 (deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/get-active-workspace")
 (deflisten urgent_workspace "bash ~/.config/eww/scripts/get-urgent-workspace")
 (deflisten window :initial "..." "sh ~/.config/eww/scripts/get-window-title")
+(deflisten submap :initial "" "sh ~/.config/eww/scripts/get-active-submap")
 (defwidget workspaces []
   (eventbox
     :halign "start"
@@ -38,20 +39,6 @@
 )
 ;; Hyprland stuff
 ;; -----------------
-;; VPN stuff
-(defpoll vpn_status :interval "1s" :initial "..." "bash ~/.config/eww/scripts/vpn-anyconnect-status")
-
-(defwidget vpn []
-  (box
-    :halign "end"
-    :class "grey-bg"
-    (label
-      :text "${vpn_status}"
-    )
-  ) 
-)
-;; VPN stuff
-;; -----------------
 ;; Side stuff
 (defpoll time :interval "10s"
   "date '+%H:%M %b %d, %Y'")
@@ -78,19 +65,14 @@
       (label
         :text "CPU: ${round( EWW_CPU.avg , 0)}% "
       )
-      (label
-        :text "${EWW_TEMPS.CORETEMP_PACKAGE_ID_0}"
-      )
-      (graph
-        :value "${EWW_TEMPS.CORETEMP_PACKAGE_ID_0}"
-        :time-range 60000
-        :max 100
-      )
-    )
-    (revealer
-      :transition "slideleft"
-      :reveal "${vpn_status != "VPN DISCONNECTED"}" 
-      (vpn)
+      ;; (label
+        ;; :text "${EWW_TEMPS.CORETEMP_PACKAGE_ID_0}"
+      ;; )
+      ;; (graph
+      ;;   :value "${EWW_TEMPS.CORETEMP_PACKAGE_ID_0}"
+      ;;   :time-range 60000
+      ;;   :max 100
+      ;; )
     )
     (time)
   )
@@ -101,6 +83,9 @@
     :space-evenly false
     :spacing 10
     (workspaces)
+      (label
+        :text submap
+      )
     (sidestuff)
   )
 )

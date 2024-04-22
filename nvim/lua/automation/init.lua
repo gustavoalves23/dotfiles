@@ -20,11 +20,14 @@ vim.api.nvim_create_autocmd('VimLeavePre', {
     if not _is_alacritty then
       return
     end
-    local nvim_count = vim.fn.system 'pgrep -c nvim'
-    if tonumber(nvim_count) > 2 then
-      vim.cmd 'sleep 100m'
-      return
+    if vim.env.TMUX then
+      local nvim_session_count = vim.fn.system(vim.fn.stdpath 'config' .. '/lua/automation/scripts/tmux_nvim_sessions.sh')
+      if tonumber(nvim_session_count) > 1 then
+        vim.cmd 'sleep 100m'
+        return
+      end
     end
+
     vim.fn.jobstart('alacritty msg --socket $ALACRITTY_SOCKET config -w $ALACRITTY_WINDOW_ID -r', { detach = true })
   end,
 })
