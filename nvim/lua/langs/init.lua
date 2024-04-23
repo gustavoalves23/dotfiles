@@ -73,19 +73,7 @@ return {
     language = {
       syntax = { 'c_sharp' },
       servers = {
-        omnisharp = {
-          on_attach = function(_, bufnr)
-            local omnisharp_extended = require 'omnisharp_extended'
-            vim.keymap.set('n', 'gd', omnisharp_extended.lsp_definition, { buffer = bufnr, remap = true })
-            vim.keymap.set('n', 'gr', omnisharp_extended.lsp_references, { buffer = bufnr, remap = true })
-            vim.keymap.set('n', 'gi', omnisharp_extended.lsp_implementation, { buffer = bufnr, remap = true })
-          end,
-        },
-      },
-    },
-    extra_lib = {
-      {
-        'Hoffs/omnisharp-extended-lsp.nvim',
+        csharp_ls = {},
       },
     },
     debuggers = {
