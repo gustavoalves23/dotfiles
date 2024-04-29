@@ -7,6 +7,14 @@ return {
         'typescript',
       },
     },
+    language = {
+      servers = {
+        svelte = {},
+      },
+      syntax = {
+        'svelte',
+      },
+    },
   },
   react = {
     filetypes = {
