@@ -15,6 +15,17 @@ return {
       },
     },
     lsp = {
+      progress = {
+        enabled = true,
+        format = 'lsp_progress',
+        format_done = {
+          { '󰄬 ', hl_group = 'NoiceLspProgressSpinner' },
+          { '{data.progress.title} ', hl_group = 'NoiceLspProgressTitle' },
+          { '{data.progress.client} ', hl_group = 'NoiceLspProgressClient' },
+        },
+        throttle = 1000 / 30,
+        view = 'mini',
+      },
       hover = {
         silent = true,
       },
