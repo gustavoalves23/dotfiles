@@ -29,18 +29,19 @@ return {
         },
       },
       lualine_x = {
-        'encoding',
-        'fileformat',
         {
-          'filetype',
+          'formatting_status',
           fmt = function()
             if slow_format_filetypes[vim.bo.filetype] then
-              return vim.bo.filetype .. ' (async)'
+              return ''
             end
 
-            return vim.bo.filetype
+            return ''
           end,
         },
+        'encoding',
+        'fileformat',
+        'filetype',
       },
     },
   },

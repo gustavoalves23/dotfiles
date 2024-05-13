@@ -2,7 +2,7 @@ vim.g.mapleader = ' '
 
 -- Initialize lazy.nvim and load the plugins
 require 'bootstrap'
--- Define native nvim and plugins settings and keymaps
+-- Define settings and keymaps for nvim and plugins
 require 'settings'
 -- Configure language specific definitions and capabilities
 require 'langs.syntax_highlight'
