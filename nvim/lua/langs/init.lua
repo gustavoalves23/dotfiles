@@ -136,7 +136,7 @@ return {
         'markdown_inline',
         'vimdoc',
         'vim',
-        'bash',
+        'bash'
       },
       servers = {
         cssls = {},
