@@ -1,4 +1,5 @@
 local langs = require 'langs'
+local slow_format_filetypes = require('utils').slow_format_filetypes
 return {
   {
     'mfussenegger/nvim-lint',
@@ -28,19 +29,35 @@ return {
       local nvim_lint_au = vim.api.nvim_create_augroup('nvim_lint', { clear = true })
       vim.api.nvim_create_autocmd(opts.events, {
         group = nvim_lint_au,
-        callback = require('utils').debounce(100, function()
+        callback = function()
           lint.try_lint()
-        end),
+        end,
       })
     end,
   },
   {
     'stevearc/conform.nvim',
     opts = {
-      format_on_save = {
-        timeout_ms = 500,
-        lsp_fallback = true,
-      },
+      format_on_save = function(bufnr)
+        if slow_format_filetypes[vim.bo[bufnr].filetype] then
+          return
+        end
+        local function on_format(err)
+          if err and err:match 'timeout$' then
+            slow_format_filetypes[vim.bo[bufnr].filetype] = true
+            vim.notify('Formatting is taking too long, enabling async formatting.', vim.log.levels.INFO)
+          end
+        end
+
+        return { timeout_ms = 200, lsp_fallback = true }, on_format
+      end,
+
+      format_after_save = function(bufnr)
+        if not slow_format_filetypes[vim.bo[bufnr].filetype] then
+          return
+        end
+        return { lsp_fallback = true }
+      end,
     },
     config = function(_, opts)
       local conform = require 'conform'

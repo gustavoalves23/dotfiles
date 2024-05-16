@@ -39,7 +39,7 @@ vim.filetype.add {
   },
 }
 
---Auto refresh file changesoutside nvim
+--Auto refresh file changes outside nvim
 vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter' }, {
   pattern = '*',
   command = 'checktime',

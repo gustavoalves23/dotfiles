@@ -81,7 +81,12 @@ vim.g.copilot_no_tab_map = true
 vim.api.nvim_set_keymap('i', '<C-j>', 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
 --auto-resize
-vim.api.nvim_command 'autocmd VimResized * wincmd ='
+vim.api.nvim_create_autocmd('VimResized', {
+  pattern = '*',
+  callback = function()
+    vim.cmd 'wincmd ='
+  end,
+})
 
 vim.api.nvim_set_keymap('n', '<C-w>s', '<C-w>v', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-w>v', '<C-w>s', { noremap = true, silent = true })
@@ -90,7 +95,12 @@ vim.api.nvim_set_keymap('n', '<C-w>v', '<C-w>s', { noremap = true, silent = true
 vim.api.nvim_set_keymap('n', '<leader>zz', ':let &scrolloff=999-&scrolloff<CR>', { noremap = true, silent = true })
 
 --disable auto comment on newline
-vim.cmd 'autocmd BufEnter * set formatoptions-=o'
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = '*',
+  callback = function()
+    vim.opt.formatoptions:remove 'o'
+  end,
+})
 
 --enable cursorline
 vim.opt.cursorline = true

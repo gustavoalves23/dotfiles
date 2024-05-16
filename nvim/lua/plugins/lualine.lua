@@ -1,3 +1,4 @@
+local slow_format_filetypes = require('utils').slow_format_filetypes
 return {
   'nvim-lualine/lualine.nvim',
   opts = {
@@ -29,15 +30,13 @@ return {
       },
       lualine_x = {
         {
-          'lsp',
+          'formatting_status',
           fmt = function()
-            local lsps = require('utils').get_attached_lsps()
-            local lsp_count = #lsps
-
-            if lsp_count == 0 then
-              return ''
+            if slow_format_filetypes[vim.bo.filetype] then
+              return ''
             end
-            return '[LSP: ' .. lsp_count .. ']'
+
+            return ''
           end,
         },
         'encoding',

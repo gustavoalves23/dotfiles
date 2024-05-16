@@ -2,7 +2,7 @@ return {
   'nvimdev/dashboard-nvim',
   event = 'VimEnter',
   config = function()
-    require('dashboard').setup({
+    require('dashboard').setup {
       hide = {
         tabline = true,
       },
@@ -52,7 +52,7 @@ return {
         },
         footer = {},
       },
-    })
+    }
   end,
   dependencies = { { 'nvim-tree/nvim-web-devicons' } },
 }
