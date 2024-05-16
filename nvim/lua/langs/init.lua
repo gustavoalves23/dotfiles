@@ -81,7 +81,8 @@ return {
     language = {
       syntax = { 'c_sharp' },
       servers = {
-        csharp_ls = {},
+        omnisharp = {
+        },
       },
     },
     debuggers = {
