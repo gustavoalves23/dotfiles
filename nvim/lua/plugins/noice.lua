@@ -22,6 +22,27 @@ return {
       long_message_to_split = true,
       inc_rename = true,
     },
+    views = {
+      mini = {
+        position = {
+          row = 1,
+          col = "100%",
+        },
+      },
+    },
+    lsp = {
+      progress = {
+        enabled = true,
+        format = 'lsp_progress',
+        format_done = {
+          { '󰄬 ', hl_group = 'NoiceLspProgressSpinner' },
+          { '{data.progress.title} ', hl_group = 'NoiceLspProgressTitle' },
+          { '{data.progress.client} ', hl_group = 'NoiceLspProgressClient' },
+        },
+        throttle = 1000 / 30,
+        view = 'mini',
+      }
+    }
   },
   keys = {
     {
