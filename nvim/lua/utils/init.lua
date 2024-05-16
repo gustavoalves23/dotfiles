@@ -16,7 +16,6 @@ end
 local function get_table_keys(t)
   local keys = {}
   for key, _ in pairs(t) do
-    print(key)
     table.insert(keys, key)
   end
   return keys

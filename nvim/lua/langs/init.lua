@@ -136,6 +136,14 @@ return {
       },
     },
   },
+  handlebars = {
+    filetypes = { 'hbs' },
+    snippets = {
+      extends = {
+        'html',
+      },
+    },
+  },
   others = {
     language = {
       syntax = {
