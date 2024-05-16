@@ -31,6 +31,9 @@ return {
       },
     },
     lsp = {
+      hover = {
+        silent = true,
+      },
       progress = {
         enabled = true,
         format = 'lsp_progress',
@@ -44,7 +47,18 @@ return {
       }
     }
   },
+  config = function(_, opts)
+    require('noice').setup(opts)
+    require('telescope').load_extension 'noice'
+  end,
   keys = {
+    {
+      '<leader>snh',
+      function()
+        require('noice').cmd 'telescope'
+      end,
+      desc = 'Noice Notification History',
+    },
     {
       '<leader>snl',
       function()
