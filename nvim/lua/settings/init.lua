@@ -76,10 +76,6 @@ vim.keymap.set('n', '<leader>sr', telescope_builtin.resume, { desc = '[S]earch [
 --file explorer
 vim.keymap.set('n', '-', '<CMD>Oil<CR>', { noremap = true, desc = 'Open parent directory' })
 
--- copilot
-vim.g.copilot_no_tab_map = true
-vim.api.nvim_set_keymap('i', '<C-j>', 'copilot#Accept("<CR>")', { silent = true, expr = true })
-
 --auto-resize
 vim.api.nvim_create_autocmd('VimResized', {
   pattern = '*',
