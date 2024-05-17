@@ -83,7 +83,7 @@ return {
       servers = {
         omnisharp = {
           on_attach = function()
-            local lazy_require = require("lazy-require")
+            local lazy_require = require("utils.lazy-require")
             local omnisharp_extended = lazy_require.require_on_exported_call('omnisharp_extended')
 
             vim.keymap.set('n', 'gd', omnisharp_extended.lsp_definition, { desc = 'Omnisharp: [G]oto [D]efinition' })
