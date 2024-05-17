@@ -23,7 +23,9 @@ for _, lang in pairs(langs) do
   end
 end
 
-require('lazy').setup({ { import = 'plugins' }, { extra_lib } }, {
+require('lazy').setup({
+  "tjdevries/lazy-require.nvim",
+  { import = 'plugins' }, { extra_lib } }, {
   checker = {
     enabled = true,
   },
