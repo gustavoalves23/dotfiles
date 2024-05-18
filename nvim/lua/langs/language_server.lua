@@ -5,11 +5,17 @@ require('mason').setup()
 require('mason-lspconfig').setup()
 
 local servers = {}
+local server_names = {}
 
 for _, lang in pairs(langs) do
   if lang.language and lang.language.servers then
     for server_name, server_config in pairs(lang.language.servers) do
       servers[server_name] = server_config
+      if server_config.version then
+        table.insert(server_names, server_name .. '@' .. server_config.version)
+      else
+        table.insert(server_names, server_name)
+      end
     end
   end
 end
@@ -19,7 +25,6 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local mason_lspconfig = require 'mason-lspconfig'
 
-local server_names = vim.tbl_keys(servers)
 
 mason_lspconfig.setup {
   ensure_installed = server_names,

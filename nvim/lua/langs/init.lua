@@ -82,6 +82,7 @@ return {
       syntax = { 'c_sharp' },
       servers = {
         omnisharp = {
+          version = "v1.39.8",
           on_attach = function()
             local lazy_require = require("utils.lazy-require")
             local omnisharp_extended = lazy_require.require_on_exported_call('omnisharp_extended')
