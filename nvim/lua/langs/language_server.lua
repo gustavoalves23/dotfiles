@@ -46,3 +46,4 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
+
