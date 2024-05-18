@@ -11,7 +11,7 @@ return {
         timeout = 3000,
         on_open = function(win)
           vim.api.nvim_win_set_config(win, { zindex = 100 })
-        end
+        end,
       },
     }
   },
@@ -28,6 +28,19 @@ return {
           row = 1,
           col = "100%",
         },
+      },
+    },
+    routes = {
+      {
+        filter = {
+          event = "msg_show",
+          any = {
+            { find = "%d+L, %d+B" },
+            { find = "; after #%d+" },
+            { find = "; before #%d+" },
+          },
+        },
+        view = "mini",
       },
     },
     lsp = {
