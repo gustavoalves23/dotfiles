@@ -1,6 +1,9 @@
 local slow_format_filetypes = require('utils').slow_format_filetypes
 return {
   'nvim-lualine/lualine.nvim',
+  dependencies = {
+    'AndreM222/copilot-lualine'
+  },
   opts = {
     options = {
       icons_enabled = true,
@@ -18,7 +21,12 @@ return {
           },
         },
       },
-      lualine_b = { 'branch', 'diagnostics', {
+      lualine_b = { {
+        'branch',
+        fmt = function(content)
+          return content:sub(1, 10)
+        end
+      }, 'diagnostics', {
         'macro-recording',
         fmt = require('utils').show_macro_recording,
       } },
@@ -26,6 +34,12 @@ return {
         {
           'filename',
           path = 1,
+          fmt = function(content)
+            if #content > 50 then
+              return '.../' .. vim.fn.fnamemodify(content, ':t')
+            end
+            return content
+          end
         },
       },
       lualine_x = {
@@ -39,6 +53,8 @@ return {
             return ''
           end,
         },
+
+        'copilot',
         'encoding',
         'fileformat',
         'filetype',
