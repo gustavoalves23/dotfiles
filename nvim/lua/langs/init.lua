@@ -113,7 +113,7 @@ return {
     language = {
       syntax = { 'python' },
       servers = {
-        pylsp = {},
+        pyright = {},
       },
     },
   },
