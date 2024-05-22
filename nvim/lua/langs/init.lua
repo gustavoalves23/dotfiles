@@ -98,11 +98,11 @@ return {
         }
       },
     },
-  },
-  debuggers = {
-    {
-      name = 'coreclr',
-      fn = debug_fn.netcoredbg,
+    debuggers = {
+      {
+        name = 'coreclr',
+        fn = debug_fn.netcoredbg,
+      },
     },
     extra_lib = {
       "Hoffs/omnisharp-extended-lsp.nvim"
