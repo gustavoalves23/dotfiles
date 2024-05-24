@@ -43,7 +43,9 @@ mason_lspconfig.setup_handlers {
       settings = (servers[server_name] or {}).settings,
       filetypes = (servers[server_name] or {}).filetypes,
       init_options = (servers[server_name] or {}).init_options,
+      handlers = {
+        ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+      }
     }
   end,
 }
-

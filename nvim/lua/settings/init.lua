@@ -19,6 +19,7 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 vim.o.showcmd = false
 vim.o.showmode = false
+vim.o.cmdheight = 0
 
 --theme
 vim.cmd.colorscheme 'tokyonight'
