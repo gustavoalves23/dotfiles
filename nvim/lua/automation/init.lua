@@ -23,7 +23,6 @@ vim.api.nvim_create_autocmd('VimLeavePre', {
     if vim.env.TMUX then
       local nvim_session_count = vim.fn.system(vim.fn.stdpath 'config' .. '/lua/automation/scripts/tmux_nvim_sessions.sh')
       if tonumber(nvim_session_count) > 1 then
-        vim.cmd 'sleep 100m'
         return
       end
     end
