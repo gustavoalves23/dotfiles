@@ -25,7 +25,6 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local mason_lspconfig = require 'mason-lspconfig'
 
-
 mason_lspconfig.setup {
   ensure_installed = server_names,
 }
@@ -35,8 +34,8 @@ mason_lspconfig.setup_handlers {
     require('lspconfig')[server_name].setup {
       capabilities = capabilities,
       on_attach = function(client, bufnr)
-        langs_utils.on_attach(client, bufnr, servers[server_name].has_custom_decompiler)
-        if servers[server_name].on_attach then
+        langs_utils.on_attach(client, bufnr, (servers[server_name] or {}).has_custom_decompiler)
+        if (servers[server_name] or {}).on_attach then
           servers[server_name].on_attach(client, bufnr)
         end
       end,

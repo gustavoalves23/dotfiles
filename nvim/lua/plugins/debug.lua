@@ -6,7 +6,6 @@ return {
     'williamboman/mason.nvim',
     'nvim-neotest/nvim-nio',
     'jay-babu/mason-nvim-dap.nvim',
-    'rshkarin/mason-nvim-lint',
   },
   config = function()
     local dap = require 'dap'

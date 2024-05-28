@@ -76,13 +76,6 @@ return {
       opts.formatters_by_ft = formatters_by_ft
 
       conform.setup(opts)
-      local nvim_format_au = vim.api.nvim_create_augroup('nvim_format', { clear = true })
-      vim.api.nvim_create_autocmd('BufWritePre', {
-        group = nvim_format_au,
-        callback = function(args)
-          conform.format { bufnr = args.buf }
-        end,
-      })
     end,
   },
 }
