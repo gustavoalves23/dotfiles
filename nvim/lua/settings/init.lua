@@ -20,6 +20,7 @@ vim.o.termguicolors = true
 vim.o.showcmd = false
 vim.o.showmode = false
 vim.o.cmdheight = 0
+vim.g.have_nerd_font = true
 
 --theme
 vim.cmd.colorscheme 'tokyonight'
@@ -32,8 +33,7 @@ vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
 vim.api.nvim_set_hl(0, 'DashboardHeader', { foreground = '#fc8803' })
 vim.api.nvim_set_hl(0, 'FlashCursor', { foreground = '#ffffff', background = '#000000' })
 
-
-vim.api.nvim_set_hl(0, 'NormalFloat', { background = '#222436' })                         -- Popup window bg
+vim.api.nvim_set_hl(0, 'NormalFloat', { background = '#222436' }) -- Popup window bg
 vim.api.nvim_set_hl(0, 'FloatBorder', { foreground = '#4ED1BA', background = '#222436' }) -- Popup window border - Related to Noice/NUI
 
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })

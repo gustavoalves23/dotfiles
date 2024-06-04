@@ -38,6 +38,7 @@ return {
   {
     'stevearc/conform.nvim',
     opts = {
+      notify_on_error = false,
       format_on_save = function(bufnr)
         if slow_format_filetypes[vim.bo[bufnr].filetype] then
           return
