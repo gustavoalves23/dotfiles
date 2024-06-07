@@ -22,7 +22,7 @@ local function get_table_keys(t)
 end
 
 local function get_attached_lsps()
-  local buf_clients = vim.lsp.get_active_clients()
+  local buf_clients = vim.lsp.get_clients()
   local buf_client_names = {}
   for _, client in pairs(buf_clients) do
     table.insert(buf_client_names, client.name)
@@ -42,6 +42,20 @@ local function debounce(ms, fn)
   end
 end
 
+
+local function sort_lines_by_character_count(args)
+  local lines_count = args.count
+
+  if lines_count == -1 then
+    return
+  end
+
+  local start_line, end_line = args.line1, args.line2
+  local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+  table.sort(lines, function(a, b) return #a < #b end)
+  vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, lines)
+end
+
 local slow_format_filetypes = {}
 
 return {
@@ -51,4 +65,5 @@ return {
   get_attached_lsps = get_attached_lsps,
   get_table_keys = get_table_keys,
   slow_format_filetypes = slow_format_filetypes,
+  sort_lines_by_character_count = sort_lines_by_character_count,
 }

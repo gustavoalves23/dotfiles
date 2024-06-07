@@ -1,26 +1,27 @@
+local utils = require 'utils'
 -- Defaults
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
-vim.wo.number = true
-vim.wo.relativenumber = true
-vim.opt.scrolloff = 4
-vim.o.hlsearch = false
 vim.o.mouse = 'a'
-vim.o.breakindent = true
-vim.o.undofile = true
-vim.o.ignorecase = true
-vim.o.smartcase = true
-vim.wo.signcolumn = 'yes'
-vim.o.updatetime = 250
-vim.o.timeoutlen = 300
-vim.o.completeopt = 'menuone,noselect'
-vim.o.termguicolors = true
-vim.o.showcmd = false
-vim.o.showmode = false
+vim.opt.tabstop = 2
 vim.o.cmdheight = 0
+vim.wo.number = true
+vim.o.showcmd = false
+vim.opt.scrolloff = 4
+vim.o.undofile = true
+vim.o.hlsearch = false
+vim.o.timeoutlen = 300
+vim.o.showmode = false
+vim.o.smartcase = true
+vim.o.updatetime = 250
+vim.opt.shiftwidth = 2
+vim.o.ignorecase = true
+vim.opt.softtabstop = 2
+vim.o.breakindent = true
+vim.opt.expandtab = true
+vim.wo.signcolumn = 'yes'
+vim.o.termguicolors = true
 vim.g.have_nerd_font = true
+vim.wo.relativenumber = true
+vim.o.completeopt = 'menuone,noselect'
 
 --theme
 vim.cmd.colorscheme 'tokyonight'
@@ -33,7 +34,7 @@ vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
 vim.api.nvim_set_hl(0, 'DashboardHeader', { foreground = '#fc8803' })
 vim.api.nvim_set_hl(0, 'FlashCursor', { foreground = '#ffffff', background = '#000000' })
 
-vim.api.nvim_set_hl(0, 'NormalFloat', { background = '#222436' }) -- Popup window bg
+vim.api.nvim_set_hl(0, 'NormalFloat', { background = '#222436' })                         -- Popup window bg
 vim.api.nvim_set_hl(0, 'FloatBorder', { foreground = '#4ED1BA', background = '#222436' }) -- Popup window border - Related to Noice/NUI
 
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
@@ -111,3 +112,7 @@ vim.opt.cursorline = true
 --copy and paste to and from the star register
 vim.api.nvim_set_keymap('v', '<leader>y', '"+y', { noremap = true, silent = true, desc = '[Y]ank from star register' })
 vim.api.nvim_set_keymap('n', '<leader>p', '"+p', { noremap = true, silent = true, desc = '[P]aste to star register' })
+
+--reorder lines by character count
+
+vim.api.nvim_create_user_command('SortLinesByCharacterCount', utils.sort_lines_by_character_count, { range = true })

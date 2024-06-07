@@ -8,7 +8,7 @@ return {
     options = {
       icons_enabled = true,
       theme = 'tokyonight',
-      component_separators = '|',
+      component_separators = { left = '', right = '|' },
       section_separators = { left = '', right = '' },
       disabled_filetypes = { 'Trouble', 'oil' },
     },
@@ -24,7 +24,12 @@ return {
       lualine_b = { {
         'branch',
         fmt = function(content)
-          return content:sub(1, 10)
+          local ret = content:sub(1, 10)
+
+          if #content > 10 then
+            ret = ret .. '...'
+          end
+          return content
         end
       }, 'diagnostics', {
         'macro-recording',
@@ -32,26 +37,19 @@ return {
       } },
       lualine_c = {
         {
+          'filetype',
+          icon_only = true,
+        },
+        {
           'filename',
           path = 1,
           fmt = function(content)
-            if #content > 50 then
+            if #content > 30 then
               local parts = vim.fn.split(content, '/')
-              local last = parts[#parts]
-
-              local path = ''
-
-              for i = 1, #parts - 1 do
-                path = path .. parts[i]:sub(1, 3)
-
-                if #parts[i] > 3 then
-                  path = path .. '..'
-                end
-
-                path = path .. '/'
+              if #parts < 3 then
+                return content
               end
-
-              return path .. last
+              return parts[1] .. '/…/' .. parts[#parts - 1] .. '/' .. parts[#parts]
             end
             return content
           end
@@ -68,11 +66,7 @@ return {
             return ''
           end,
         },
-
-        'copilot',
-        'encoding',
-        'fileformat',
-        'filetype',
+        'copilot'
       },
     },
   },
