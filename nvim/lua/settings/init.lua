@@ -114,5 +114,4 @@ vim.api.nvim_set_keymap('v', '<leader>y', '"+y', { noremap = true, silent = true
 vim.api.nvim_set_keymap('n', '<leader>p', '"+p', { noremap = true, silent = true, desc = '[P]aste to star register' })
 
 --reorder lines by character count
-
 vim.api.nvim_create_user_command('SortLinesByCharacterCount', utils.sort_lines_by_character_count, { range = true })

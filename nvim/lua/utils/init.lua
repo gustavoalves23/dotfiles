@@ -60,10 +60,10 @@ local slow_format_filetypes = {}
 
 return {
   Sed = Sed,
-  show_macro_recording = show_macro_recording,
   debounce = debounce,
-  get_attached_lsps = get_attached_lsps,
   get_table_keys = get_table_keys,
+  get_attached_lsps = get_attached_lsps,
+  show_macro_recording = show_macro_recording,
   slow_format_filetypes = slow_format_filetypes,
   sort_lines_by_character_count = sort_lines_by_character_count,
 }
