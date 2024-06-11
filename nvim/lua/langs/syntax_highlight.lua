@@ -32,9 +32,6 @@ vim.defer_fn(function()
         node_decremental = '<M-space>',
       },
     },
-    autotag = {
-      enable = true,
-    },
     modules = {},
     sync_install = true,
     ignore_install = {},
