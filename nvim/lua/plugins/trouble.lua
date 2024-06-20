@@ -1,7 +1,6 @@
 return {
   'folke/trouble.nvim',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
-  commit = "250ea79c810a3e5fff846c788792441f1c795c92",
   opts = {
     modes = {
       preview_float = {
