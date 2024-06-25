@@ -60,8 +60,8 @@ return {
         'typescript',
       },
       servers = {
-        -- vtsls = {},
-        tsserver = {},
+        vtsls = {},
+        -- tsserver = {},
       },
     },
     linters = {
@@ -90,8 +90,10 @@ return {
 
             vim.keymap.set('n', 'gd', omnisharp_extended.lsp_definition, { desc = 'Omnisharp: [G]oto [D]efinition' })
             vim.keymap.set('n', 'gr', omnisharp_extended.lsp_references, { desc = 'Omnisharp: [G]oto [R]eferences' })
-            vim.keymap.set('n', 'gI', omnisharp_extended.lsp_implementation, { desc = 'Omnisharp: [G]oto [I]mplementation' })
-            vim.keymap.set('n', 'gD', omnisharp_extended.lsp_type_definition, { desc = 'Omnisharp: [G]oto [D]eclaration' })
+            vim.keymap.set('n', 'gI', omnisharp_extended.lsp_implementation,
+              { desc = 'Omnisharp: [G]oto [I]mplementation' })
+            vim.keymap.set('n', 'gD', omnisharp_extended.lsp_type_definition,
+              { desc = 'Omnisharp: [G]oto [D]eclaration' })
           end,
           has_custom_decompiler = true,
         },
