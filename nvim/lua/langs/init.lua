@@ -9,7 +9,18 @@ return {
     },
     language = {
       servers = {
-        svelte = {},
+        svelte = {
+          on_attach = function(client)
+            vim.api.nvim_create_autocmd('BufWritePost', {
+              pattern = { '*.js', '*.ts' },
+              callback = function(ctx)
+                if client.name == 'svelte' then
+                  client.notify('$/onDidChangeTsOrJsFile', { uri = ctx.file })
+                end
+              end,
+            })
+          end,
+        },
       },
       syntax = {
         'svelte',
@@ -60,8 +71,8 @@ return {
         'typescript',
       },
       servers = {
-        -- vtsls = {},
-        tsserver = {},
+        vtsls = {},
+        -- tsserver = {},
       },
     },
     linters = {
@@ -82,19 +93,7 @@ return {
     language = {
       syntax = { 'c_sharp' },
       servers = {
-        omnisharp = {
-          version = 'v1.39.8',
-          on_attach = function()
-            local lazy_require = require 'utils.lazy-require'
-            local omnisharp_extended = lazy_require.require_on_exported_call 'omnisharp_extended'
-
-            vim.keymap.set('n', 'gd', omnisharp_extended.lsp_definition, { desc = 'Omnisharp: [G]oto [D]efinition' })
-            vim.keymap.set('n', 'gr', omnisharp_extended.lsp_references, { desc = 'Omnisharp: [G]oto [R]eferences' })
-            vim.keymap.set('n', 'gI', omnisharp_extended.lsp_implementation, { desc = 'Omnisharp: [G]oto [I]mplementation' })
-            vim.keymap.set('n', 'gD', omnisharp_extended.lsp_type_definition, { desc = 'Omnisharp: [G]oto [D]eclaration' })
-          end,
-          has_custom_decompiler = true,
-        },
+        csharp_ls = {},
       },
     },
     debuggers = {
