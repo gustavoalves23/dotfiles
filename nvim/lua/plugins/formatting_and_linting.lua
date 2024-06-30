@@ -19,7 +19,17 @@ return {
         local filetypes = value.filetypes
         if linters and filetypes then
           for _, file_type in pairs(filetypes) do
-            linters_by_ft[file_type] = linters
+            local linters_name = {}
+
+            for _, linter in pairs(linters) do
+              if type(linter) == 'string' then
+                table.insert(linters_name, linter)
+              else
+                table.insert(linters_name, linter.name)
+              end
+            end
+
+            linters_by_ft[file_type] = linters_name
           end
         end
       end

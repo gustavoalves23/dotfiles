@@ -7,7 +7,11 @@ local mason_nvim_lint = require 'mason-nvim-lint'
 for _, lang in pairs(langs) do
   if lang.linters then
     for _, linter in pairs(lang.linters) do
-      table.insert(ensure_installed, linter)
+      if type(linter) == 'string' then
+        table.insert(ensure_installed, linter)
+      else
+        table.insert(ensure_installed, linter.install_alias or linter.name)
+      end
     end
   end
 end

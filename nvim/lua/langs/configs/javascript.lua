@@ -5,8 +5,6 @@ return {
       'javascriptreact',
       'typescript',
       'typescriptreact',
-      'vue',
-      'svelte',
     },
     language = {
       syntax = {
@@ -15,14 +13,13 @@ return {
       },
       servers = {
         vtsls = {},
-        -- tsserver = {},
       },
     },
     linters = {
-      'eslint_d',
+      'eslint_d'
     },
     formatters = {
-      'eslint_d',
+      'eslint_d'
     },
     debuggers = {
       {
