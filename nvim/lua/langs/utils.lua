@@ -1,4 +1,4 @@
-local on_attach = function(_, bufnr, has_custom_decompiler)
+local on_attach = function(_, bufnr)
   local telescope_builtin = require 'telescope.builtin'
   local nmap = function(keys, func, desc)
     if desc then
@@ -11,12 +11,10 @@ local on_attach = function(_, bufnr, has_custom_decompiler)
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
-  if not has_custom_decompiler then
-    nmap('gd', telescope_builtin.lsp_definitions, '[G]oto [D]efinition')
-    nmap('gr', telescope_builtin.lsp_references, '[G]oto [R]eferences')
-    nmap('gI', telescope_builtin.lsp_implementations, '[G]oto [I]mplementation')
-    nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  end
+  nmap('gd', telescope_builtin.lsp_definitions, '[G]oto [D]efinition')
+  nmap('gr', telescope_builtin.lsp_references, '[G]oto [R]eferences')
+  nmap('gI', telescope_builtin.lsp_implementations, '[G]oto [I]mplementation')
+  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
   nmap('<leader>D', telescope_builtin.lsp_type_definitions, 'Type [D]efinition')
   nmap('<leader>ds', telescope_builtin.lsp_document_symbols, '[D]ocument [S]ymbols')
@@ -34,60 +32,6 @@ local on_attach = function(_, bufnr, has_custom_decompiler)
   end, { desc = 'Format current buffer with LSP' })
 end
 
-local dap_fn_config = {
-  node2 = function(dap)
-    dap.adapters.node2 = {
-      type = 'executable',
-      command = 'node',
-      args = { vim.fn.stdpath 'data' .. '/mason/packages/node-debug2-adapter/out/src/nodeDebug.js' },
-    }
-    dap.configurations.javascript = {
-      {
-        name = 'Launch',
-        type = 'node2',
-        request = 'launch',
-        program = '${file}',
-        cwd = vim.fn.getcwd(),
-        sourceMaps = true,
-        protocol = 'inspector',
-        console = 'integratedTerminal',
-      },
-      {
-        name = 'Attach to process',
-        type = 'node2',
-        request = 'attach',
-        processId = require('dap.utils').pick_process,
-      },
-    }
-  end,
-  netcoredbg = function(dap)
-    dap.adapters.coreclr = {
-      type = 'executable',
-      command = vim.fn.stdpath 'data' .. '/mason/bin/netcoredbg',
-      args = { '--interpreter=vscode' },
-    }
-
-    dap.configurations.cs = {
-      {
-        type = 'coreclr',
-        name = 'launch - netcoredbg',
-        request = 'launch',
-        program = function()
-          ---@diagnostic disable-next-line: redundant-parameter
-          return vim.fn.input('DLL Location: ', vim.fn.getcwd() .. '/bin/Debug/', 'file')
-        end,
-      },
-      {
-        type = 'coreclr',
-        name = 'attach - netcoredbg',
-        request = 'attach',
-        processId = require('dap.utils').pick_process,
-      },
-    }
-  end,
-}
-
 return {
-  on_attach = on_attach,
-  dap_fn_config = dap_fn_config,
+  on_attach = on_attach
 }

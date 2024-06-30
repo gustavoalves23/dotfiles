@@ -34,7 +34,7 @@ mason_lspconfig.setup_handlers {
     require('lspconfig')[server_name].setup {
       capabilities = capabilities,
       on_attach = function(client, bufnr)
-        langs_utils.on_attach(client, bufnr, (servers[server_name] or {}).has_custom_decompiler)
+        langs_utils.on_attach(client, bufnr)
         if (servers[server_name] or {}).on_attach then
           servers[server_name].on_attach(client, bufnr)
         end
@@ -43,8 +43,8 @@ mason_lspconfig.setup_handlers {
       filetypes = (servers[server_name] or {}).filetypes,
       init_options = (servers[server_name] or {}).init_options,
       handlers = {
-        ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
-      }
+        ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' }),
+      },
     }
   end,
 }
