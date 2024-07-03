@@ -2,7 +2,7 @@ local slow_format_filetypes = require('utils').slow_format_filetypes
 return {
   'nvim-lualine/lualine.nvim',
   dependencies = {
-    'AndreM222/copilot-lualine'
+    'AndreM222/copilot-lualine',
   },
   opts = {
     options = {
@@ -21,20 +21,24 @@ return {
           },
         },
       },
-      lualine_b = { {
-        'branch',
-        fmt = function(content)
-          local ret = content:sub(1, 10)
+      lualine_b = {
+        {
+          'branch',
+          fmt = function(content)
+            local ret = content:sub(1, 10)
 
-          if #content > 10 then
-            ret = ret .. '...'
-          end
-          return content
-        end
-      }, 'diagnostics', {
-        'macro-recording',
-        fmt = require('utils').show_macro_recording,
-      } },
+            if #content > 10 then
+              ret = ret .. '...'
+            end
+            return content
+          end,
+        },
+        'diagnostics',
+        {
+          'macro-recording',
+          fmt = require('utils').show_macro_recording,
+        },
+      },
       lualine_c = {
         {
           'filetype',
@@ -52,7 +56,7 @@ return {
               return parts[1] .. '/…/' .. parts[#parts - 1] .. '/' .. parts[#parts]
             end
             return content
-          end
+          end,
         },
       },
       lualine_x = {
@@ -66,7 +70,7 @@ return {
             return ''
           end,
         },
-        'copilot'
+        'copilot',
       },
     },
   },
