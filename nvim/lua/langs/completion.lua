@@ -1,3 +1,5 @@
+---@diagnostic disable: missing-fields
+
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 local lspkind = require 'lspkind'
