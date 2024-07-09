@@ -1,19 +1,20 @@
 -- return { 'github/copilot.vim' }
 return {
-  "zbirenbaum/copilot.lua",
+  'zbirenbaum/copilot.lua',
+  enabled = false,
   opts = {
     suggestion = { enabled = true, auto_trigger = true },
     panel = {
       enabled = true,
       auto_refresh = false,
       keymap = {
-        jump_prev = "[[",
-        jump_next = "]]",
-        accept = "<CR>",
-        refresh = "gr",
+        jump_prev = '[[',
+        jump_next = ']]',
+        accept = '<CR>',
+        refresh = 'gr',
       },
       layout = {
-        position = "bottom",
+        position = 'bottom',
         ratio = 0.4,
       },
     },
@@ -23,10 +24,10 @@ return {
     },
   },
   config = function(_, opts)
-    local copilot = require("copilot")
+    local copilot = require 'copilot'
     copilot.setup(opts)
 
-    local suggestion = require("copilot.suggestion")
+    local suggestion = require 'copilot.suggestion'
 
     vim.keymap.set('i', '<C-j>', function()
       if suggestion.is_visible() then
@@ -35,5 +36,5 @@ return {
         suggestion.next()
       end
     end)
-  end
+  end,
 }
