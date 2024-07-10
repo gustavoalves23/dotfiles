@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+paplay ~/.config/dunst/notification/2.wav --volume 60000
