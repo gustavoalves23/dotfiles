@@ -1,9 +1,11 @@
 return {
   'folke/which-key.nvim',
-  opts = {},
+  opts = {
+    notify = false
+  },
   config = function(_, opts)
     local wk = require 'which-key'
-    wk.register {
+    wk.add {
       ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
       ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
       ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
