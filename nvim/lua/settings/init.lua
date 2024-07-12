@@ -121,14 +121,16 @@ do
   (function()
     local is_enabled = false
 
-    vim.api.nvim_create_user_command('PairProgramming', function()
+    vim.api.nvim_create_user_command('Ruler', function()
       if is_enabled then
         vim.opt.cursorcolumn = false
         vim.api.nvim_set_hl(0, 'CursorLine', { background = '#233745' })
+        vim.notify("Ruler: disabled")
       else
         vim.opt.cursorcolumn = true
         vim.api.nvim_set_hl(0, 'CursorLine', { background = '#303000' })
         vim.api.nvim_set_hl(0, 'CursorColumn', { background = '#303000' })
+        vim.notify("Ruler: enabled")
       end
       is_enabled = not is_enabled
     end, {})
