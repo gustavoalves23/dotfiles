@@ -115,3 +115,22 @@ vim.api.nvim_set_keymap('n', '<leader>p', '"+p', { noremap = true, silent = true
 
 --reorder lines by character count
 vim.api.nvim_create_user_command('SortLinesByCharacterCount', utils.sort_lines_by_character_count, { range = true })
+
+--hightlight lines and colums on pair programming
+do
+  (function()
+    local is_enabled = false
+
+    vim.api.nvim_create_user_command('PairProgramming', function()
+      if is_enabled then
+        vim.opt.cursorcolumn = false
+        vim.api.nvim_set_hl(0, 'CursorLine', { background = '#233745' })
+      else
+        vim.opt.cursorcolumn = true
+        vim.api.nvim_set_hl(0, 'CursorLine', { background = '#303000' })
+        vim.api.nvim_set_hl(0, 'CursorColumn', { background = '#303000' })
+      end
+      is_enabled = not is_enabled
+    end, {})
+  end)()
+end
