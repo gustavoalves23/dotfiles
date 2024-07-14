@@ -1,0 +1,15 @@
+[
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "space s f": ["workspace::SendKeystrokes", "ctrl-p"]
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-w s": "pane::SplitLeft",
+      "ctrl-w v": "pane::SplitDown"
+    }
+  }
+]

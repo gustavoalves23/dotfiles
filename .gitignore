@@ -1,3 +1,5 @@
 lazy-lock.json
 hypr/env.conf
 hypr/display.conf
+zed/.tmp*
+

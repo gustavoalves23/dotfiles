@@ -4,24 +4,30 @@ vim.o.mouse = 'a'
 vim.opt.tabstop = 2
 vim.o.cmdheight = 0
 vim.wo.number = true
-vim.o.showcmd = false
-vim.opt.scrolloff = 4
 vim.o.undofile = true
-vim.o.hlsearch = false
-vim.o.timeoutlen = 300
-vim.o.showmode = false
-vim.o.smartcase = true
-vim.o.updatetime = 250
+vim.opt.scrolloff = 4
+vim.o.showcmd = false
 vim.opt.shiftwidth = 2
-vim.o.ignorecase = true
+vim.o.smartcase = true
+vim.o.showmode = false
+vim.o.updatetime = 250
+vim.o.timeoutlen = 300
+vim.o.hlsearch = false
 vim.opt.softtabstop = 2
-vim.o.breakindent = true
+vim.o.ignorecase = true
 vim.opt.expandtab = true
+vim.o.breakindent = true
 vim.wo.signcolumn = 'yes'
 vim.o.termguicolors = true
 vim.g.have_nerd_font = true
 vim.wo.relativenumber = true
 vim.o.completeopt = 'menuone,noselect'
+
+--disable optional providers
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_node_provider = 0
 
 --theme
 vim.cmd.colorscheme 'tokyonight'
@@ -34,7 +40,7 @@ vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
 vim.api.nvim_set_hl(0, 'DashboardHeader', { foreground = '#fc8803' })
 vim.api.nvim_set_hl(0, 'FlashCursor', { foreground = '#ffffff', background = '#000000' })
 
-vim.api.nvim_set_hl(0, 'NormalFloat', { background = '#222436' })                         -- Popup window bg
+vim.api.nvim_set_hl(0, 'NormalFloat', { background = '#222436' }) -- Popup window bg
 vim.api.nvim_set_hl(0, 'FloatBorder', { foreground = '#4ED1BA', background = '#222436' }) -- Popup window border - Related to Noice/NUI
 
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
@@ -95,9 +101,6 @@ vim.api.nvim_create_autocmd('VimResized', {
 vim.api.nvim_set_keymap('n', '<C-w>s', '<C-w>v', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-w>v', '<C-w>s', { noremap = true, silent = true })
 
---lock scroll with cursor on center of screen
-vim.api.nvim_set_keymap('n', '<leader>zz', ':let &scrolloff=999-&scrolloff<CR>', { noremap = true, silent = true })
-
 --disable auto comment on newline
 vim.api.nvim_create_autocmd('BufEnter', {
   pattern = '*',
@@ -125,12 +128,12 @@ do
       if is_enabled then
         vim.opt.cursorcolumn = false
         vim.api.nvim_set_hl(0, 'CursorLine', { background = '#233745' })
-        vim.notify("Ruler: disabled")
+        vim.notify 'Ruler: disabled'
       else
         vim.opt.cursorcolumn = true
         vim.api.nvim_set_hl(0, 'CursorLine', { background = '#303000' })
         vim.api.nvim_set_hl(0, 'CursorColumn', { background = '#303000' })
-        vim.notify("Ruler: enabled")
+        vim.notify 'Ruler: enabled'
       end
       is_enabled = not is_enabled
     end, {})

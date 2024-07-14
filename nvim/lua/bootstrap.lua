@@ -25,7 +25,12 @@ for _, lang in pairs(langs) do
 end
 
 require('lazy').setup({
-  { import = 'plugins' }, { extra_lib } }, {
+  { import = 'plugins' },
+  { extra_lib },
+}, {
+  rocks = {
+    enabled = false,
+  },
   checker = {
     enabled = true,
   },
