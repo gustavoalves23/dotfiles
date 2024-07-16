@@ -10,5 +10,6 @@ require 'langs.language_server'
 require 'langs.completion'
 require 'langs.lint'
 require 'langs.debug'
+require 'styles'
 -- Configure custom automations
 require 'automation'
