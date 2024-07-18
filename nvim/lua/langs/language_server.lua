@@ -35,9 +35,9 @@ mason_lspconfig.setup_handlers {
       capabilities = capabilities,
       on_attach = function(client, bufnr)
         langs_utils.on_attach(client, bufnr)
-        -- if (servers[server_name] or {}).on_attach then
-        --   servers[server_name].on_attach(client, bufnr)
-        -- end
+        if (servers[server_name] or {}).on_attach then
+          servers[server_name].on_attach(client, bufnr)
+        end
       end,
       settings = (servers[server_name] or {}).settings,
       filetypes = (servers[server_name] or {}).filetypes,
