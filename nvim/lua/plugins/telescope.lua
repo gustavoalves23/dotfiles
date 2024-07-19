@@ -4,8 +4,7 @@ return {
     'nvim-lua/plenary.nvim',
     {
       'nvim-telescope/telescope-fzf-native.nvim',
-      build =
-      'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+      build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
     },
   },
   opts = {
@@ -15,11 +14,11 @@ return {
       },
     },
     defaults = {
-      sorting_strategy = "ascending",
-      layout_strategy = "horizontal",
+      sorting_strategy = 'ascending',
+      layout_strategy = 'horizontal',
       layout_config = {
         horizontal = {
-          prompt_position = "top",
+          prompt_position = 'top',
           preview_width = 0.55,
           results_width = 0.8,
         },

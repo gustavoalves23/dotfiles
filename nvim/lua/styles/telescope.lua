@@ -1,9 +1,9 @@
-local colors = require('styles.colors')
+local colors = require 'styles.colors'
 
 vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = colors.red, bg = colors.black2 })
 vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = colors.darker_black })
 vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { fg = colors.black, bg = colors.green })
-vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { fg = colors.black, bg = colors.red })
+vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { fg = colors.black, bg = colors.blue })
 vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = colors.white, bg = colors.black2 })
 vim.api.nvim_set_hl(0, 'TelescopeResultsDiffAdd', { fg = colors.green })
 vim.api.nvim_set_hl(0, 'TelescopeResultsDiffChange', { fg = colors.yellow })
