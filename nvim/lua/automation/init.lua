@@ -17,17 +17,21 @@ vim.api.nvim_create_autocmd('VimEnter', {
 vim.api.nvim_create_autocmd('VimLeavePre', {
   group = _alacritty_au,
   callback = function()
-    if not _is_alacritty then
-      return
-    end
-    if vim.env.TMUX then
-      local nvim_session_count = vim.fn.system(vim.fn.stdpath 'config' .. '/lua/automation/scripts/tmux_nvim_sessions.sh')
-      if tonumber(nvim_session_count) > 1 then
+    local function run()
+      if not _is_alacritty then
         return
       end
+      if vim.env.TMUX then
+        local nvim_session_count = vim.fn.system(vim.fn.stdpath 'config' .. '/lua/automation/scripts/tmux_nvim_sessions.sh')
+        if tonumber(nvim_session_count) > 1 then
+          return
+        end
+      end
+      vim.fn.jobstart('alacritty msg --socket $ALACRITTY_SOCKET config -w $ALACRITTY_WINDOW_ID -r', { detach = true })
+      vim.cmd 'sleep 100m'
     end
 
-    vim.fn.jobstart('alacritty msg --socket $ALACRITTY_SOCKET config -w $ALACRITTY_WINDOW_ID -r', { detach = true })
+    pcall(run)
   end,
 })
 
