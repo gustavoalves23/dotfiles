@@ -73,11 +73,12 @@ cmp.setup {
       else
         fallback()
       end
-    end, { 'i', 's' })
+    end, { 'i', 's' }),
   },
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'path' },
   },
 }
 
