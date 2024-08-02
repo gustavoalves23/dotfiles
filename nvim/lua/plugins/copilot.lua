@@ -4,7 +4,10 @@ return {
     suggestion = { enabled = true, auto_trigger = true },
     panel = {
       enabled = false,
-    }
+    },
+    filetypes = {
+      rust = false,
+    },
   },
   config = function(_, opts)
     local copilot = require 'copilot'
