@@ -32,7 +32,7 @@ mason_lspconfig.setup {
 mason_lspconfig.setup_handlers {
   function(server_name)
     require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
+      capabilities = vim.tbl_deep_extend('keep', capabilities, (servers[server_name] or {}).capabilities or {}),
       on_attach = function(client, bufnr)
         langs_utils.on_attach(client, bufnr)
         if (servers[server_name] or {}).on_attach then

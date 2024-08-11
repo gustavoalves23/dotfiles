@@ -13,15 +13,17 @@ return {
       },
       servers = {
         vtsls = {},
-        -- tsserver = {},
+        eslint = {
+          capabilities = {
+            textDocument = {
+              formatting = false,
+            },
+          },
+        },
       },
     },
-    linters = {
-      'eslint_d',
-    },
-    formatters = {
-      'eslint_d',
-    },
+    linters = {},
+    formatters = {},
     debuggers = {
       {
         name = 'node2',
