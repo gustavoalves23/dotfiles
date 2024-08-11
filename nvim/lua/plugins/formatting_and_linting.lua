@@ -6,8 +6,6 @@ return {
     opts = {
       events = {
         'BufWritePost',
-        -- 'BufReadPost',
-        -- 'InsertLeave',
       },
     },
     config = function(_, opts)
@@ -47,9 +45,16 @@ return {
   },
   {
     'stevearc/conform.nvim',
+    event = { 'BufWritePre' },
+    cmd = { 'ConformInfo' },
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
+        local conform = require 'conform'
+        if #conform.list_formatters_to_run(bufnr) == 0 then
+          return
+        end
+
         if slow_format_filetypes[vim.bo[bufnr].filetype] then
           return
         end
@@ -64,6 +69,11 @@ return {
       end,
 
       format_after_save = function(bufnr)
+        local conform = require 'conform'
+        if #conform.list_formatters_to_run(bufnr) == 0 then
+          return
+        end
+
         if not slow_format_filetypes[vim.bo[bufnr].filetype] then
           return
         end

@@ -64,9 +64,7 @@ return {
           'formatting_status',
           cond = function()
             local conform = require 'conform'
-
-            local formatters = conform.list_formatters(0)
-
+            local formatters = conform.list_formatters_to_run(0)
             return #formatters > 0
           end,
           color = function()
