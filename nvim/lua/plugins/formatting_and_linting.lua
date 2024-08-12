@@ -63,7 +63,6 @@ return {
       end,
     },
     config = function(_, opts)
-      print 'Configuring conform.nvim'
       local conform = require 'conform'
       opts.formatters_by_ft = formatters_by_ft
       conform.setup(opts)
