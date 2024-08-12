@@ -1,8 +1,14 @@
+local utils = require 'utils'
 local langs = require 'langs'
 local slow_format_filetypes = require('utils').slow_format_filetypes
+
+local linters_by_ft, lint_file_types = utils.get_linters_by_ft(langs)
+local formatters_by_ft, format_file_types = utils.get_formatters_by_ft(langs)
+
 return {
   {
     'mfussenegger/nvim-lint',
+    ft = lint_file_types,
     opts = {
       events = {
         'BufWritePost',
@@ -10,30 +16,7 @@ return {
     },
     config = function(_, opts)
       local lint = require 'lint'
-      local linters_by_ft = {}
-
-      for _, value in pairs(langs) do
-        local linters = value.linters
-        local filetypes = value.filetypes
-        if linters and filetypes then
-          for _, file_type in pairs(filetypes) do
-            local linters_name = {}
-
-            for _, linter in pairs(linters) do
-              if type(linter) == 'string' then
-                table.insert(linters_name, linter)
-              else
-                table.insert(linters_name, linter.name)
-              end
-            end
-
-            linters_by_ft[file_type] = linters_name
-          end
-        end
-      end
-
       lint.linters_by_ft = linters_by_ft
-
       local nvim_lint_au = vim.api.nvim_create_augroup('nvim_lint', { clear = true })
       vim.api.nvim_create_autocmd(opts.events, {
         group = nvim_lint_au,
@@ -45,8 +28,7 @@ return {
   },
   {
     'stevearc/conform.nvim',
-    event = { 'BufWritePre' },
-    cmd = { 'ConformInfo' },
+    ft = format_file_types,
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
@@ -81,21 +63,9 @@ return {
       end,
     },
     config = function(_, opts)
+      print 'Configuring conform.nvim'
       local conform = require 'conform'
-      local formatters_by_ft = {}
-
-      for _, value in pairs(langs) do
-        local formatters = value.formatters
-        local filetypes = value.filetypes
-        if formatters and filetypes then
-          for _, file_type in pairs(filetypes) do
-            formatters_by_ft[file_type] = formatters
-          end
-        end
-      end
-
       opts.formatters_by_ft = formatters_by_ft
-
       conform.setup(opts)
     end,
   },

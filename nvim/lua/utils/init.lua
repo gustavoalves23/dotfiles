@@ -42,7 +42,6 @@ local function debounce(ms, fn)
   end
 end
 
-
 local function sort_lines_by_character_count(args)
   local lines_count = args.count
 
@@ -52,18 +51,68 @@ local function sort_lines_by_character_count(args)
 
   local start_line, end_line = args.line1, args.line2
   local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
-  table.sort(lines, function(a, b) return #a < #b end)
+  table.sort(lines, function(a, b)
+    return #a < #b
+  end)
   vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, lines)
 end
 
 local slow_format_filetypes = {}
 
+local function get_linters_by_ft(langs)
+  local linters_by_ft = {}
+  local filetypes_global = {}
+
+  for _, value in pairs(langs) do
+    local linters = value.linters
+    local filetypes = value.filetypes
+    if linters and #linters > 0 and filetypes then
+      for _, file_type in pairs(filetypes) do
+        table.insert(filetypes_global, file_type)
+        local linters_name = {}
+
+        for _, linter in pairs(linters) do
+          if type(linter) == 'string' then
+            table.insert(linters_name, linter)
+          else
+            table.insert(linters_name, linter.name)
+          end
+        end
+
+        linters_by_ft[file_type] = linters_name
+      end
+    end
+  end
+
+  return linters_by_ft, filetypes_global
+end
+
+local function get_formatters_by_ft(langs)
+  local formatters_by_ft = {}
+  local filetypes_global = {}
+
+  for _, value in pairs(langs) do
+    local formatters = value.formatters
+    local filetypes = value.filetypes
+    if formatters and #formatters > 0 and filetypes then
+      for _, file_type in pairs(filetypes) do
+        table.insert(filetypes_global, file_type)
+        formatters_by_ft[file_type] = formatters
+      end
+    end
+  end
+
+  return formatters_by_ft, filetypes_global
+end
+
 return {
   Sed = Sed,
   debounce = debounce,
   get_table_keys = get_table_keys,
+  get_linters_by_ft = get_linters_by_ft,
   get_attached_lsps = get_attached_lsps,
   show_macro_recording = show_macro_recording,
+  get_formatters_by_ft = get_formatters_by_ft,
   slow_format_filetypes = slow_format_filetypes,
   sort_lines_by_character_count = sort_lines_by_character_count,
 }

@@ -63,24 +63,9 @@ return {
         {
           'formatting_status',
           cond = function()
-            local conform = require 'conform'
-            local formatters = conform.list_formatters_to_run(0)
-            return #formatters > 0
+            return slow_format_filetypes[vim.bo.filetype] ~= nil and #slow_format_filetypes[vim.bo.filetype] > 0
           end,
-          color = function()
-            if slow_format_filetypes[vim.bo.filetype] then
-              return { fg = '#FF0000' }
-            end
-
-            return { fg = '#CC9901' }
-          end,
-          fmt = function()
-            if slow_format_filetypes[vim.bo.filetype] then
-              return ''
-            end
-
-            return ''
-          end,
+          fmt = '',
         },
         'copilot',
       },
