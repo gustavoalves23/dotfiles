@@ -30,6 +30,7 @@ return {
     'stevearc/conform.nvim',
     ft = format_file_types,
     opts = {
+      formatters_by_ft = formatters_by_ft,
       notify_on_error = false,
       format_on_save = function(bufnr)
         local conform = require 'conform'
@@ -62,10 +63,5 @@ return {
         return { lsp_fallback = false }
       end,
     },
-    config = function(_, opts)
-      local conform = require 'conform'
-      opts.formatters_by_ft = formatters_by_ft
-      conform.setup(opts)
-    end,
   },
 }
