@@ -14,7 +14,6 @@ return {
               pattern = { '*.js', '*.ts' },
               callback = function(ctx)
                 if client.name == 'svelte' then
-                  vim.notify('onDidChangeTsOrJsFile' .. ctx.file)
                   client.notify('$/onDidChangeTsOrJsFile', { uri = ctx.file })
                 end
               end,

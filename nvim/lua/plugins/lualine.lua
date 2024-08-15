@@ -60,13 +60,6 @@ return {
         },
       },
       lualine_x = {
-        {
-          'formatting_status',
-          cond = function()
-            return slow_format_filetypes[vim.bo.filetype] ~= nil and #slow_format_filetypes[vim.bo.filetype] > 0
-          end,
-          fmt = '',
-        },
         'copilot',
       },
     },
