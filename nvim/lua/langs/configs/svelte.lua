@@ -25,11 +25,5 @@ return {
         'svelte',
       },
     },
-    linters = {
-      'eslint_d',
-    },
-    formatters = {
-      'eslint_d',
-    },
   },
 }
