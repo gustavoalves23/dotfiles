@@ -1,5 +1,6 @@
 return {
   'akinsho/bufferline.nvim',
+  dependencies = 'nvim-tree/nvim-web-devicons',
   event = 'VeryLazy',
   opts = {
     options = {
@@ -8,8 +9,4 @@ return {
       always_show_bufferline = false,
     },
   },
-  config = function(_, opts)
-    require('bufferline').setup(opts)
-  end,
-  dependencies = 'nvim-tree/nvim-web-devicons',
 }
