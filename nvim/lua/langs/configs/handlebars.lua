@@ -1,6 +1,6 @@
 return {
   handlebars = {
-    filetypes = { 'hbs' },
+    filetypes = { 'handlebars' },
     snippets = {
       extends = {
         'html',

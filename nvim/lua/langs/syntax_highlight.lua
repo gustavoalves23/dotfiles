@@ -1,6 +1,6 @@
 local langs = require 'langs'
 local ensure_installed = {}
-local parser_config = require 'nvim-treesitter.parsers'.get_parser_configs()
+local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
 
 for _, lang in pairs(langs) do
   if lang.language and lang.language.syntax then
@@ -13,6 +13,11 @@ for _, lang in pairs(langs) do
           table.insert(ensure_installed, key)
         end
       end
+    end
+  end
+  if lang.register_by_treesitter then
+    for _, filetype in pairs(lang.filetypes) do
+      vim.treesitter.language.register(lang.register_by_treesitter, filetype)
     end
   end
 end
