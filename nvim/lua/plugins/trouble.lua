@@ -1,6 +1,7 @@
 -- Show the erros in my code in a floating window
 return {
   'folke/trouble.nvim',
+  keys = { '<leader>xx' },
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   opts = {
     modes = {

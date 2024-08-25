@@ -1,4 +1,3 @@
-local slow_format_filetypes = require('utils').slow_format_filetypes
 return {
   'nvim-lualine/lualine.nvim',
   dependencies = {

@@ -1,11 +1,12 @@
 local langs = require 'langs'
 return {
-  'mfussenegger/nvim-dap',
+  'rcarriga/nvim-dap-ui',
   dependencies = {
-    'rcarriga/nvim-dap-ui',
-    'williamboman/mason.nvim',
+    'mfussenegger/nvim-dap',
     'nvim-neotest/nvim-nio',
-    'jay-babu/mason-nvim-dap.nvim',
+  },
+  keys = {
+    { '<F5>' },
   },
   config = function()
     local dap = require 'dap'

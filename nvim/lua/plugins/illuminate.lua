@@ -1,6 +1,7 @@
 -- Associate symbol highlighting
 return {
   'RRethy/vim-illuminate',
+  event = 'VeryLazy',
   config = function()
     local illuminate = require 'illuminate'
 

@@ -101,14 +101,6 @@ vim.api.nvim_create_autocmd('VimResized', {
 vim.api.nvim_set_keymap('n', '<C-w>s', '<C-w>v', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-w>v', '<C-w>s', { noremap = true, silent = true })
 
---disable auto comment on newline
-vim.api.nvim_create_autocmd('BufEnter', {
-  pattern = '*',
-  callback = function()
-    vim.opt.formatoptions:remove 'o'
-  end,
-})
-
 --enable cursorline
 vim.opt.cursorline = true
 

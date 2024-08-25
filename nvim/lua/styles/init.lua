@@ -1,1 +1,1 @@
-require "styles.telescope"
+require 'styles.telescope'
