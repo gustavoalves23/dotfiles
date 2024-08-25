@@ -1,3 +1,4 @@
+-- Highlight colors in code
 return {
   'norcalli/nvim-colorizer.lua',
   event = 'VeryLazy',

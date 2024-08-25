@@ -1,3 +1,4 @@
+-- Add indent lines to the left of the code
 return {
   'lukas-reineke/indent-blankline.nvim',
   event = 'VeryLazy',

@@ -1,3 +1,4 @@
+-- extends telescope to some other UIs
 return {
   'nvim-telescope/telescope-ui-select.nvim',
   config = function()

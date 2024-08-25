@@ -1,3 +1,4 @@
+-- Associate symbol highlighting
 return {
   'RRethy/vim-illuminate',
   config = function()
