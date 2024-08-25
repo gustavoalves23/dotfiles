@@ -23,8 +23,7 @@ vim.api.nvim_create_autocmd('VimLeavePre', {
         return
       end
       if vim.env.TMUX then
-        local nvim_session_count = vim.fn.system(vim.fn.stdpath 'config' ..
-          '/lua/automation/scripts/tmux_nvim_sessions.sh')
+        local nvim_session_count = vim.fn.system(vim.fn.stdpath 'config' .. '/lua/automation/scripts/tmux_nvim_sessions.sh')
         if tonumber(nvim_session_count) > 1 then
           return
         end
@@ -58,4 +57,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
   group = highlight_group,
   pattern = '*',
+})
+
+vim.api.nvim_create_autocmd('InsertEnter', {
+  pattern = '*',
+  command = 'set norelativenumber',
+})
+
+vim.api.nvim_create_autocmd('InsertLeave', {
+  pattern = '*',
+  command = 'set relativenumber',
 })
