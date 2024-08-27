@@ -6,7 +6,7 @@ return {
     'nvim-neotest/nvim-nio',
   },
   keys = {
-    { '<F5>' },
+    { '<F5>', '<leader>b', '<leader>B', '<F10>', '<F11>', '<F12>', '<F7>' },
   },
   config = function()
     local dap = require 'dap'
