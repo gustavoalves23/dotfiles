@@ -4,7 +4,6 @@ local utils = require 'utils'
 
 vim.o.mouse = 'a'
 vim.o.cmdheight = 0
-vim.opt.list = true
 vim.opt.tabstop = 2
 vim.wo.number = true
 vim.o.undofile = true
@@ -26,7 +25,6 @@ vim.g.have_nerd_font = true
 vim.wo.relativenumber = true
 vim.opt.inccommand = 'split'
 vim.o.completeopt = 'menuone,noselect'
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 --disable optional providers
 vim.g.loaded_python3_provider = 0
