@@ -1,4 +1,4 @@
----@diagnostic disable: missing-fields
+--@diagnostic disable: missing-fields
 
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
@@ -79,6 +79,10 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
+    {
+      name = 'lazydev',
+      group_index = 0,
+    },
   },
 }
 
