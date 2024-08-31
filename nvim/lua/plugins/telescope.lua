@@ -35,7 +35,7 @@ return {
           ['<C-d>'] = false,
         },
       },
-      file_ignore_patterns = { '%.min.js' },
+      file_ignore_patterns = { '%.min.js', 'node_modules', '%.git', '%.vs' },
       preview = {
         treesitter = false,
       },
