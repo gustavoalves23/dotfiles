@@ -8,6 +8,7 @@ return {
         'vimdoc',
         'vim',
         'bash',
+        'html',
       },
       servers = {
         cssls = {},

@@ -1,33 +1,35 @@
 local utils = require 'utils'
+
 -- Defaults
+
 vim.o.mouse = 'a'
-vim.opt.tabstop = 2
 vim.o.cmdheight = 0
+vim.opt.tabstop = 2
 vim.wo.number = true
 vim.o.undofile = true
 vim.opt.scrolloff = 4
 vim.o.showcmd = false
+vim.o.hlsearch = false
+vim.o.updatetime = 250
+vim.o.timeoutlen = 300
 vim.opt.shiftwidth = 2
 vim.o.smartcase = true
 vim.o.showmode = false
-vim.o.updatetime = 250
-vim.o.timeoutlen = 300
-vim.o.hlsearch = false
-vim.opt.softtabstop = 2
 vim.o.ignorecase = true
+vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 vim.o.breakindent = true
 vim.wo.signcolumn = 'yes'
 vim.o.termguicolors = true
 vim.g.have_nerd_font = true
 vim.wo.relativenumber = true
+vim.opt.inccommand = 'split'
 vim.o.completeopt = 'menuone,noselect'
 
 --disable optional providers
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
-vim.g.loaded_node_provider = 0
 
 --theme
 vim.cmd.colorscheme 'tokyonight'
@@ -89,6 +91,9 @@ vim.keymap.set('n', '<leader>sr', telescope_builtin.resume, { desc = '[S]earch [
 
 --file explorer
 vim.keymap.set('n', '-', '<CMD>Oil<CR>', { noremap = true, desc = 'Open parent directory' })
+
+--diagnostics
+vim.keymap.set('n', '<leader>xx', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 --auto-resize
 vim.api.nvim_create_autocmd('VimResized', {
