@@ -2,7 +2,6 @@
 
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
-local lspkind = require 'lspkind'
 
 local langs = require 'langs'
 for _, lang in pairs(langs) do
@@ -39,16 +38,6 @@ cmp.setup {
   },
   completion = {
     completeopt = 'menu,menuone,noinsert',
-  },
-  formatting = {
-    format = lspkind.cmp_format {
-      menu = {
-        nvim_lsp = '[LSP]',
-        path = '[Path]',
-        buffer = '[Buffer]',
-        luasnip = '[LuaSnip]',
-      },
-    },
   },
   mapping = cmp.mapping.preset.insert {
     ['<C-n>'] = cmp.mapping.select_next_item(),

@@ -136,3 +136,10 @@ do
     end, {})
   end)()
 end
+
+-- toggle inlay hints
+if vim.lsp.inlay_hint then
+  vim.keymap.set('n', '<leader>ih', function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+  end, { desc = '[I]nlay [H]int' })
+end
