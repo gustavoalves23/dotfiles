@@ -1,6 +1,6 @@
 -- Highlight colors in code
 return {
-  'brenoprata10/nvim-highlight-colors',
+  'NvChad/nvim-colorizer.lua',
   event = 'VeryLazy',
   opts = {},
 }
