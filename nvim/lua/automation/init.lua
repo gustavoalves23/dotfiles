@@ -11,6 +11,10 @@ vim.api.nvim_create_autocmd('VimEnter', {
       return
     end
     vim.fn.system "alacritty msg --socket $ALACRITTY_SOCKET config -w $ALACRITTY_WINDOW_ID options 'window.padding.x=0' 'window.padding.y=0' 'window.dynamic_padding=false'"
+
+    vim.api.nvim_create_user_command("AlacrittyBorder", function()
+    vim.fn.system "alacritty msg --socket $ALACRITTY_SOCKET config -w $ALACRITTY_WINDOW_ID options 'window.padding.x=0' 'window.padding.y=0' 'window.dynamic_padding=false'"
+    end, {})
   end,
   once = true,
 })
