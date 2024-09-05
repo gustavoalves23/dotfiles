@@ -1,8 +1,6 @@
 -- Highlight colors in code
 return {
-  'norcalli/nvim-colorizer.lua',
+  'brenoprata10/nvim-highlight-colors',
   event = 'VeryLazy',
-  config = function()
-    require('colorizer').setup()
-  end,
+  opts = {},
 }

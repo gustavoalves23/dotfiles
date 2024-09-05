@@ -36,9 +36,6 @@ vim.cmd.colorscheme 'tokyonight'
 vim.api.nvim_set_hl(0, 'iCursor', { foreground = '#ffffff', background = '#CD0058' })
 vim.opt.guicursor = 'i:block-iCursor'
 vim.api.nvim_set_hl(0, 'CursorLine', { background = '#233745' })
-vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
-vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
-vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
 vim.api.nvim_set_hl(0, 'DashboardHeader', { foreground = '#fc8803' })
 vim.api.nvim_set_hl(0, 'FlashCursor', { foreground = '#ffffff', background = '#000000' })
 
