@@ -30,7 +30,7 @@ input type:keyboard {
 seat seat0 xcursor_theme macOS 20
 
 #emoji menu
-bindsym $mod+period exec "rofimoji &"
+bindsym $mod+period exec '~/.local/bin/rofimoji --selector-args="-theme ~/.config/rofi/dracula.rasi" &'
 
 # change focus
 bindsym $mod+h focus left
@@ -166,4 +166,4 @@ output * bg ~/Pictures/Wallpapers/6.png fill
 exec --no-startup-id gammastep -O 3000k &
 
 #Clipboard persistence
-exec --no-startup-id wl-clip-persist --clipboard both &
+exec --no-startup-id wl-clip-persist --clipboard primary &
