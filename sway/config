@@ -139,6 +139,7 @@ for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disa
 bindsym Print exec --no-startup-id "flameshot screen --path ~/Pictures/Screenshots &"
 bindsym $mod+Shift+s exec --no-startup-id "flameshot gui --raw --path ~/Pictures/Screenshots | wl-copy &"
 
+
 # UI
 # class                 border  bground text    indicator child_border
 client.focused          #FAE3B0 #FAE3B0 #44475A #FAE3B0   #FAE3B0AA
@@ -166,4 +167,9 @@ output * bg ~/Pictures/Wallpapers/6.png fill
 exec --no-startup-id gammastep -O 3000k &
 
 #Clipboard persistence
-exec --no-startup-id wl-clip-persist --clipboard primary &
+exec --no-startup-id wl-clip-persist --clipboard regular &
+
+#Clipboard manager
+exec --no-startup-id copyq --start-server &
+for_window [app_id="copyq"] floating enable, resize set 500 800, move position 100 5
+
