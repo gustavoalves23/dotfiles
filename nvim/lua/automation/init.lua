@@ -57,12 +57,25 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+local relative_number_group = vim.api.nvim_create_augroup('RelativeNumber', { clear = true })
+
 vim.api.nvim_create_autocmd('InsertEnter', {
   pattern = '*',
   command = 'set norelativenumber',
+  group = relative_number_group,
 })
 
 vim.api.nvim_create_autocmd('InsertLeave', {
   pattern = '*',
   command = 'set relativenumber',
+  group = relative_number_group,
+})
+
+local disable_new_line_comment_group = vim.api.nvim_create_augroup('DisableNewLineComment', { clear = true })
+vim.api.nvim_create_autocmd('BufEnter', {
+  callback = function()
+    vim.opt.formatoptions:remove { 'c', 'r', 'o' }
+  end,
+  group = disable_new_line_comment_group,
+  desc = 'Disable New Line Comment',
 })
