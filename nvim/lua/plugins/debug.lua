@@ -6,7 +6,13 @@ return {
     'nvim-neotest/nvim-nio',
   },
   keys = {
-    { '<F5>', '<leader>b', '<leader>B', '<F10>', '<F11>', '<F12>', '<F7>' },
+    { '<F5>' },
+    { '<F10>' },
+    { '<F11>' },
+    { '<F12>' },
+    { '<Leader>b' },
+    { '<Leader>B' },
+    { '<F7>' },
   },
   config = function()
     local dap = require 'dap'
@@ -45,6 +51,7 @@ return {
         end
       end
     end
+    ---@diagnostic disable-next-line: missing-fields
     dapui.setup {}
   end,
 }
