@@ -1,8 +1,5 @@
 return {
   'nvim-lualine/lualine.nvim',
-  dependencies = {
-    'AndreM222/copilot-lualine',
-  },
   opts = {
     options = {
       icons_enabled = true,
@@ -57,9 +54,6 @@ return {
             return content
           end,
         },
-      },
-      lualine_x = {
-        'copilot',
       },
     },
   },
