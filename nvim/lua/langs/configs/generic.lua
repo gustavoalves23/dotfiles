@@ -9,6 +9,7 @@ return {
         'vim',
         'bash',
         'html',
+        'styled',
       },
       servers = {
         cssls = {},
