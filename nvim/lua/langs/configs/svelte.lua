@@ -28,7 +28,6 @@ return {
               client.notify('$/onDidChangeSvelteFile', {
                 uri = vim.api.nvim_buf_get_name(0),
               })
-              vim.notify(client.name .. ' server reloading for file ' .. vim.api.nvim_buf_get_name(0), vim.log.levels.INFO)
             end, {
               nargs = 0,
             })
