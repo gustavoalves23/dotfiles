@@ -12,7 +12,7 @@ return {
         'typescript',
       },
       servers = {
-        tsserver = {
+        ts_ls = {
           settings = {
             typescript = {
               inlayHints = {
