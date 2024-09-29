@@ -1,6 +1,11 @@
 return {
   'supermaven-inc/supermaven-nvim',
   opts = {
+    ignore_filetypes = {
+      'oil',
+      'TelescopePrompt',
+      'TelescopeResults',
+    },
     keymaps = {
       accept_suggestion = '<C-j>',
       clear_suggestion = '<C-]>',
