@@ -3,7 +3,6 @@ local utils = require 'utils'
 -- Defaults
 
 vim.o.mouse = 'a'
-vim.o.cmdheight = 0
 vim.opt.tabstop = 2
 vim.wo.number = true
 vim.o.undofile = true
