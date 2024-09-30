@@ -1,0 +1,94 @@
+{
+  "layer": "top",
+  "modules-left": [
+    "custom/vpn",
+    "custom/scratchpad",
+    "cpu",
+    "temperature",
+    "memory",
+    "tray"
+  ],
+  "modules-center": [
+    "sway/workspaces"
+  ],
+  "modules-right": [
+    "pulseaudio",
+    "clock",
+    "battery",
+    "custom/power"
+  ],
+  "pulseaudio": {
+    "tooltip": false,
+    "scroll-step": 5,
+    "format": "{icon}  {volume}%",
+    "format-muted": "󰝟 muted",
+    "on-click": "pavucontrol",
+    "on-click-right": "pactl set-sink-mute $(pactl get-default-sink) toggle",
+    "format-icons": {
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    }
+  },
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 20
+    },
+    "format": "{icon}  {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-alt": "{time} {icon}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "tray": {
+    "icon-size": 18,
+    "spacing": 10
+  },
+  "clock": {
+    "format": "{:󰥔 %H:%M %p|  %d/%m/%Y}"
+  },
+  "cpu": {
+    "interval": 4,
+    "format": "  {usage}%",
+    "max-length": 10
+  },
+  "memory": {
+    "interval": 20,
+    "format": "  {}%",
+    "max-length": 10
+  },
+  "custom/power": {
+    "format": " ",
+    "on-click": "bash ~/.config/rofi/powermenu.sh"
+  },
+  "custom/vpn": {
+    "exec": "bash ~/.config/waybar/scripts/vpn-anyconnect-status.sh",
+    "on-click": "ifconfig cscotun0 | grep inet | awk '{print $2}' | cut -f2 -d ':' | wl-copy; notify-send 'IP copiado para o clipboard'",
+    "return-type": "json",
+    "interval": 1
+  },
+  "custom/scratchpad": {
+    "exec": "bash ~/.config/waybar/scripts/sway_scratch.sh",
+    "return-type": "json",
+    "interval": 1,
+    "max-length": 50,
+    "format": "  {}"
+  },
+  "temperature": {
+    "format": " {}°C",
+    "critical-threshold": 85,
+    "thermal-zone": 8,
+    "format-critical": " {}°C",
+    "max-length": 10
+  }
+}
