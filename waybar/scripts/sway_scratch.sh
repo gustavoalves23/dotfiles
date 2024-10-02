@@ -3,6 +3,12 @@
 # Get the list of applications on the scratchpad
 scratchpad_items=$(swaymsg -t get_tree | jq -r '.nodes[] | select(.name == "__i3") | .nodes[] | select(.name == "__i3_scratch") | .floating_nodes[] | .name')
 
+# Check if the scratchpad is empty
+if [ -z "$scratchpad_items" ]; then
+  echo "{\"text\": \"0\", \"tooltip\": \"No items\"}"
+  exit
+fi
+
 # Convert the list to an array
 readarray -t items_array <<< "$scratchpad_items"
 
