@@ -5,6 +5,7 @@ return {
       'oil',
       'TelescopePrompt',
       'TelescopeResults',
+      'rust',
     },
     keymaps = {
       accept_suggestion = '<C-j>',

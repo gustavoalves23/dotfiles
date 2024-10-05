@@ -1,0 +1,81 @@
+{
+  "layer": "top",
+  "modules-left": [
+    "cpu",
+    "temperature",
+    "memory",
+    "tray"
+  ],
+  "modules-center": [
+    "hyprland/workspaces"
+  ],
+  "modules-right": [
+    "pulseaudio",
+    "clock",
+    "battery",
+    "custom/power"
+  ],
+  "pulseaudio": {
+    "tooltip": false,
+    "scroll-step": 5,
+    "format": "{icon}  {volume}%",
+    "format-muted": "󰝟 muted",
+    "on-click": "pavucontrol",
+    "on-click-right": "pactl set-sink-mute $(pactl get-default-sink) toggle",
+    "format-icons": {
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    }
+  },
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 20
+    },
+    "format": "{icon}  {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-alt": "{time} {icon}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "tray": {
+    "icon-size": 18,
+    "spacing": 10
+  },
+  "clock": {
+    "format": "{:%H:%M %p | %d/%m/%Y}",
+    "tooltip": false
+  },
+  "cpu": {
+    "interval": 4,
+    "format": "  {usage}%",
+    "max-length": 10
+  },
+  "memory": {
+    "interval": 20,
+    "format": "  {}%",
+    "max-length": 10
+  },
+  "custom/power": {
+    "format": " ",
+    "on-click": "bash ~/.config/rofi/powermenu.sh"
+  },
+  "temperature": {
+    "format": " {}°C",
+    "critical-threshold": 85,
+    "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+    "format-critical": " {}°C",
+    "interval": 1,
+    "max-length": 10
+  }
+}
