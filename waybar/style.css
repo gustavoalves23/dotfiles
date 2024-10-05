@@ -107,10 +107,9 @@ window#waybar.hidden {
 	margin-bottom: 0px;
 	border-radius: 10px;
 	transition: none;
-	color: #E8A2AF;
-	background: #1A1826;
+	background: #E8A2AF;
+	color: #1A1826;
 }
-
 
 #battery {
 	margin-top: 6px;
@@ -298,7 +297,7 @@ window#waybar.hidden {
 #custom-media:hover {
 	color: #161320;
 	background: #F2CDCD;
-}	
+}
 
 #custom-vpn {
 	font-size: 16px;

@@ -50,11 +50,11 @@ mason_lspconfig.setup_handlers {
 }
 
 -- Temporary workaround for bug pre nvim 0.10.2
-require('lspconfig').omnisharp.setup {
-  cmd = { '/opt/OmniSharp/OmniSharp.Stdio.Driver/net6.0/OmniSharp' },
-  capabilities = capabilities,
-  on_attach = langs_utils.on_attach,
-  handlers = {
-    ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' }),
-  },
-}
+-- require('lspconfig').omnisharp.setup {
+--   cmd = { '/opt/OmniSharp/OmniSharp.Stdio.Driver/net6.0/OmniSharp' },
+--   capabilities = capabilities,
+--   on_attach = langs_utils.on_attach,
+--   handlers = {
+--     ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' }),
+--   },
+-- }

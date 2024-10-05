@@ -55,7 +55,8 @@
     "spacing": 10
   },
   "clock": {
-    "format": "{:󰥔 %H:%M %p|  %d/%m/%Y}"
+    "format": "{:󰥔 %H:%M %p|  %d/%m/%Y}",
+    "tooltip": false
   },
   "cpu": {
     "interval": 4,

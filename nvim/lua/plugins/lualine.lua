@@ -30,10 +30,6 @@ return {
           end,
         },
         'diagnostics',
-        {
-          'macro-recording',
-          fmt = require('utils').show_macro_recording,
-        },
       },
       lualine_c = {
         {

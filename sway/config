@@ -17,7 +17,8 @@ focus_wrapping no
 #Toggle between monitors
 bindsym $mod+Shift+d move workspace to output next
 
-bindcode $mod+40 exec "rofi -show drun -theme ~/.config/rofi/dracula.rasi"
+set $drun tofi-drun | xargs swaymsg exec --
+bindsym $mod+d exec $drun
 
 input type:keyboard {
     repeat_delay 250

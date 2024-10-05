@@ -4,8 +4,7 @@ return {
     language = {
       syntax = { 'c_sharp' },
       servers = {
-        -- Using omnisharp without mason for now. Installing based on the instructions on this page: https://github.com/OmniSharp/omnisharp-roslyn/issues/2574
-        -- Will be fixed on nvim 0.10.2
+        omnisharp = {},
       },
     },
     debuggers = {
