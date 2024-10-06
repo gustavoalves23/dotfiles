@@ -14,11 +14,12 @@ bindsym $mod+Shift+q kill
 
 focus_wrapping no
 
-#Toggle between monitors
-bindsym $mod+Shift+d move workspace to output next
 
 set $drun tofi-drun | xargs swaymsg exec --
 bindsym $mod+d exec $drun
+
+set $run tofi-run | xargs swaymsg exec --
+bindsym $mod+Shift+d exec $run
 
 input type:keyboard {
     repeat_delay 250
