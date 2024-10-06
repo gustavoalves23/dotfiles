@@ -1,16 +1,16 @@
-;; Sway stuff
-(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/sway/get-workspaces")
-(deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/sway/get-active-workspace")
-(deflisten urgent_workspace "bash ~/.config/eww/scripts/sway/get-urgent-workspace")
-(deflisten window :initial "..." "sh ~/.config/eww/scripts/sway/get-window-title")
-(deflisten submap :initial "" "sh ~/.config/eww/scripts/sway/get-active-submap")
+;; Hyprland stuff
+(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/hyprland/get-workspaces")
+(deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/hyprland/get-active-workspace")
+(deflisten urgent_workspace "bash ~/.config/eww/scripts/hyprland/get-urgent-workspace")
+(deflisten window :initial "..." "sh ~/.config/eww/scripts/hyprland/get-window-title")
+(deflisten submap :initial "" "sh ~/.config/eww/scripts/hyprland/get-active-submap")
 (defwidget workspaces []
   (eventbox
-    :halign "start"
-    :onscroll "bash ~/.config/eww/scripts/change-active-workspace {} ${current_workspace}"
+    :onscroll "bash ~/.config/eww/scripts/hyprland/change-active-workspace {} ${current_workspace}"
     :class "workspaces-widget"
     (box 
       :class "workspaces-widget"
+      :spacing 4
       (label
         :visible false
         :text "${urgent_workspace}"
@@ -26,8 +26,7 @@
               :transition "crossfade"
               :reveal "${workspace.id == current_workspace || workspace.id == urgent_workspace}" 
               (box
-                :width 20
-                :height 20
+                :width 22
                 :class "workspace-entry ${workspace.id == urgent_workspace ? "urgent" : "" }"
               )
             )
@@ -42,6 +41,7 @@
 ;; Side stuff
 (defpoll time :interval "10s"
   "date '+%H:%M %b %d, %Y'")
+(defvar temperature_threshold 80)
 
 (defwidget time []
   (box
@@ -52,42 +52,51 @@
     )
   ) 
 )
-(defwidget sidestuff []
+(defwidget left []
   (box
-    :class "sidestuff"
+    :space-evenly false
     :hexpand true
+    :class "left"
+    (box
+      :spacing 4
+      (label
+        :class "field cpu"
+        :text "  ${round( EWW_CPU.avg , 0)}%"
+      )
+      (label
+        :class "field temp ${EWW_TEMPS.K10TEMP_TCCD1 > temperature_threshold ? "" : "critical"}"
+        :text "${EWW_TEMPS.K10TEMP_TCCD1 < temperature_threshold ? "" : ""} ${round(EWW_TEMPS.K10TEMP_TCCD1, 0)}°C"
+      )
+    )
+  )
+)
+
+
+(defwidget right []
+  (box
     :space-evenly false
     :spacing 10
+    :hexpand true
     :halign "end"
     (box
-      :class "grey-bg"
-;;
       (label
-        :text "CPU: ${round( EWW_CPU.avg , 0)}% "
+        :class "field"
+        :text "    ${round( EWW_CPU.avg , 0)}%"
       )
-      ;; (label
-        ;; :text "${EWW_TEMPS.CORETEMP_PACKAGE_ID_0}"
-      ;; )
-      ;; (graph
-      ;;   :value "${EWW_TEMPS.CORETEMP_PACKAGE_ID_0}"
-      ;;   :time-range 60000
-      ;;   :max 100
-      ;; )
     )
-    (time)
   )
 )
 
 (defwidget bar []
-  (box
-    :space-evenly false
-    :spacing 10
-    (workspaces)
-      (label
-        :text submap
+    (box
+      :space-evenly false
+      :spacing 10
+      (left)
+      (workspaces
+        :halign "center"
       )
-    (sidestuff)
-  )
+      (right)
+    )
 )
 
 (defwindow bar
@@ -95,7 +104,7 @@
   :windowtype "dock"
   :geometry (geometry :x "0%"
                       :y "1%"
-                      :width "99%"
+                      :width "99.5%"
                       :height "20px"
                       :anchor "top center")
   :exclusive true

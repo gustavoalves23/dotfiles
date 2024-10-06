@@ -354,3 +354,20 @@ window#waybar.hidden {
 	color: #161320;
 	background: #ABE9B3;
 }
+
+#custom-brightness {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	color: #ABE9B3;
+	background: #161320;
+	transition: all .3s;
+}
+
+#custom-brightness:hover {
+	color: #161320;
+	background: #ABE9B3;
+}	

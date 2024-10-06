@@ -1,39 +1,63 @@
+$color-background-dark: #161320;
+$color-background-light: #FAE3B0;
+$color-teal-light: #B5E8E0;
+$color-pink-bright: #F28FAD;
+$color-green-light: #ABE9B3;
+$color-purple-light: #DDB6F2;
+$color-pink-light: #E8A2AF;
+$color-blue-light: #96CDFB;
+$color-purple-bright: #bd93f9;
+$color-gray-dark: #1A1826;
+$color-orange-light: #F8BD96;
+$color-red-bright: #BF616A;
+$color-pink-lightest: #F2CDCD;
+$color-pink-urgent: #FF007C;
+
 * {
   all: unset;
+  font-family: "JetBrainsMono Nerd Font";
+  border: none;
+  font-size: 15px;
+  transition: all .3s;
 }
 
-.bar {
-  background: #0D0C16;
-  padding: 10px;
-  border-radius: 15px;
+.field {
+  padding: 4px 10px;
+  border-radius: 10px;
+  background: $color-background-dark;
 }
 
-.icon {
-  font-family: "Font Awesome 6 Pro Regular";
+.field.cpu {
+  color: $color-blue-light;
+}
 
-  &.golden {
-    color: #CC9901;
-  }
+
+.field.temp {
+  color: $color-green-light;
+}
+
+.field.temp.critical {
+  color: $color-background-dark;
+  background: $color-red-bright;
 }
 
 .workspaces-widget {
   .workspace-entry-container {
     border-radius: 50%;
     border: 3px solid #FFFFFF;
-    margin: 0 5px;
 
     &.occupied {
-      border-color: #1abc9c;
+      border-color: $color-green-light;
     }
 
     .workspace-entry {
       border-radius: 50%;
       margin: 2px;
 
-      background-color: #FFFFFF;
+      background-color: white;
 
       &.urgent {
-        background-color: #ff007c;
+        background-color: $color-pink-urgent;
       }
     }
   }

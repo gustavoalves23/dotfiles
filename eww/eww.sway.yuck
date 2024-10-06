@@ -1,9 +1,9 @@
-;; Hyprland stuff
-(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/hyprland/get-workspaces")
-(deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/hyprland/get-active-workspace")
-(deflisten urgent_workspace "bash ~/.config/eww/scripts/hyprland/get-urgent-workspace")
-(deflisten window :initial "..." "sh ~/.config/eww/scripts/hyprland/get-window-title")
-(deflisten submap :initial "" "sh ~/.config/eww/scripts/hyprland/get-active-submap")
+;; Sway stuff
+(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/sway/get-workspaces")
+(deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/sway/get-active-workspace")
+(deflisten urgent_workspace "bash ~/.config/eww/scripts/sway/get-urgent-workspace")
+(deflisten window :initial "..." "sh ~/.config/eww/scripts/sway/get-window-title")
+(deflisten submap :initial "" "sh ~/.config/eww/scripts/sway/get-active-submap")
 (defwidget workspaces []
   (eventbox
     :halign "start"

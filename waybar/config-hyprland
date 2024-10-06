@@ -1,5 +1,6 @@
 {
   "layer": "top",
+  "output": "DP-2",
   "modules-left": [
     "cpu",
     "temperature",
