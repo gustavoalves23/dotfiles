@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+spaces (){
+  WORKSPACE_JSON=$(hyprctl workspaces -j)
+
+  ACTIVE_WORKSPACE=$(hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id')
+
+    echo "${WORKSPACE_JSON}" | jq -Mc --arg id "$1" --arg active "$ACTIVE_WORKSPACE" '
+    ( .[] | select(.id | tostring == $id) | {
+      class: [
+        "workspace",
+        if ($active | tostring) == $id then "active"
+        else if .windows > 0 then "occupied" else "" end
+        end
+      ],
+      text: " "
+    }) // {
+      class: ["workspace", ""],
+      text: " "  # Default values if no item is found
+    }
+  '
+}
+
+spaces "$@"
+socat -u UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - | while read -r line; do
+	spaces "$@"
+done

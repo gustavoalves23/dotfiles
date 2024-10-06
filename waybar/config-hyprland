@@ -8,7 +8,7 @@
     "tray"
   ],
   "modules-center": [
-    "hyprland/workspaces"
+    "group/hyprland-workspaces"
   ],
   "modules-right": [
     "pulseaudio",
@@ -78,5 +78,60 @@
     "format-critical": " {}°C",
     "interval": 1,
     "max-length": 10
+  },
+  "group/hyprland-workspaces": {
+    "orientation": "horizontal",
+    "modules": [
+      "custom/workspace1",
+      "custom/workspace2",
+      "custom/workspace3",
+      "custom/workspace4",
+      "custom/workspace5",
+      "custom/workspace6",
+      "custom/workspace7",
+      "custom/workspace8",
+      "custom/workspace9",
+      "custom/workspace10"
+    ]
+  },
+  "custom/workspace1": {
+    "exec": "bash ~/.config/waybar/scripts/hyprland/get-workspace-details 1",
+    "return-type": "json"
+  },
+  "custom/workspace2": {
+    "exec": "bash ~/.config/waybar/scripts/hyprland/get-workspace-details 2",
+    "return-type": "json"
+  },
+  "custom/workspace3": {
+    "exec": "bash ~/.config/waybar/scripts/hyprland/get-workspace-details 3",
+    "return-type": "json"
+  },
+  "custom/workspace4": {
+    "exec": "bash ~/.config/waybar/scripts/hyprland/get-workspace-details 4",
+    "return-type": "json"
+  },
+  "custom/workspace5": {
+    "exec": "bash ~/.config/waybar/scripts/hyprland/get-workspace-details 5",
+    "return-type": "json"
+  },
+  "custom/workspace6": {
+    "exec": "bash ~/.config/waybar/scripts/hyprland/get-workspace-details 6",
+    "return-type": "json"
+  },
+  "custom/workspace7": {
+    "exec": "bash ~/.config/waybar/scripts/hyprland/get-workspace-details 7",
+    "return-type": "json"
+  },
+  "custom/workspace8": {
+    "exec": "bash ~/.config/waybar/scripts/hyprland/get-workspace-details 8",
+    "return-type": "json"
+  },
+  "custom/workspace9": {
+    "exec": "bash ~/.config/waybar/scripts/hyprland/get-workspace-details 9",
+    "return-type": "json"
+  },
+  "custom/workspace10": {
+    "exec": "bash ~/.config/waybar/scripts/hyprland/get-workspace-details 10",
+    "return-type": "json"
   }
 }
