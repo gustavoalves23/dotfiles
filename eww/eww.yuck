@@ -106,6 +106,7 @@
     (box
       :class "field"
       (systray
+        :spacing 8
         :icon-size 20
       )
     )
