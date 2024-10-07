@@ -27,7 +27,7 @@
               :transition "crossfade"
               :reveal "${workspace.id == current_workspace || workspace.id == urgent_workspace}" 
               (box
-                :width 22
+                :width 23
                 :class "workspace-entry ${workspace.id == urgent_workspace ? "urgent" : "" }"
               )
             )
