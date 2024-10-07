@@ -387,7 +387,8 @@ window#waybar.hidden {
 }
 
 #hyprland-workspaces .workspace.active {
-	background-color: #ABE9B3;
+	background-color: #FFFFFF;
+	border-color: #ABE9B3;
 }
 
 #hyprland-workspaces .workspace.occupied {

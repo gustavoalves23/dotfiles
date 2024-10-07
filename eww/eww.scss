@@ -1,5 +1,5 @@
 $color-background-dark: #161320;
-$color-background-light: #FAE3B0;
+$color-orange-light: #F8BD96;
 $color-teal-light: #B5E8E0;
 $color-pink-bright: #F28FAD;
 $color-green-light: #ABE9B3;
@@ -8,10 +8,11 @@ $color-pink-light: #E8A2AF;
 $color-blue-light: #96CDFB;
 $color-purple-bright: #bd93f9;
 $color-gray-dark: #1A1826;
-$color-orange-light: #F8BD96;
+$color-orange-bright: #F8BD96;
 $color-red-bright: #BF616A;
 $color-pink-lightest: #F2CDCD;
 $color-pink-urgent: #FF007C;
+$color-yellow-light: #FAE3B0;
 
 * {
   all: unset;
@@ -22,7 +23,7 @@ $color-pink-urgent: #FF007C;
 }
 
 .field {
-  padding: 4px 10px;
+  padding: 4px 8px;
   border-radius: 10px;
   background: $color-background-dark;
 }
@@ -30,7 +31,6 @@ $color-pink-urgent: #FF007C;
 .field.cpu {
   color: $color-blue-light;
 }
-
 
 .field.temp {
   color: $color-green-light;
@@ -40,6 +40,32 @@ $color-pink-urgent: #FF007C;
   color: $color-background-dark;
   background: $color-red-bright;
 }
+
+.field.ram {
+  color: $color-purple-light;
+}
+
+.field.audio {
+  color: $color-yellow-light;
+}
+
+.field.audio.muted {
+  background: $color-pink-urgent;
+}
+
+.field.time {
+  color: $color-green-light;
+}
+
+.field.power {
+  color: $color-pink-light;
+  padding: 0 10px 0 12px;
+
+  label {
+    font-size: 18px;
+  }
+}
+
 
 .workspaces-widget {
   .workspace-entry-container {

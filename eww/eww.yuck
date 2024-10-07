@@ -7,7 +7,7 @@
 (defwidget workspaces []
   (eventbox
     :onscroll "bash ~/.config/eww/scripts/hyprland/change-active-workspace {} ${current_workspace}"
-    :class "workspaces-widget"
+    :halign "center"
     (box 
       :class "workspaces-widget"
       :spacing 4
@@ -18,6 +18,7 @@
       (for workspace in workspaces
         (eventbox
           :onclick "hyprctl dispatch workspace ${workspace.id}"
+          :cursor "pointer"
           :width 10
           :height 10
           (box
@@ -38,34 +39,74 @@
 )
 ;; Hyprland stuff
 ;; -----------------
-;; Side stuff
+
 (defpoll time :interval "10s"
   "date '+%H:%M %b %d, %Y'")
-(defvar temperature_threshold 80)
 
 (defwidget time []
   (box
-    :halign "end"
-    :class "grey-bg"
+    :class "field time"
     (label
-      :text "${time}"
+      :text "󰥔  ${time}"
     )
   ) 
 )
+
+(defpoll volume :interval "1s" `~/.config/eww/scripts/get-current-volume.sh`)
+(defpoll volume-muted :interval "1s" `pactl get-sink-mute @DEFAULT_SINK@ | sed -e 's/Mute: //'`)
+
+(defwidget audio []
+  (eventbox
+    :cursor "pointer"
+    :onclick "pavucontrol &"
+    :onrightclick "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    (box 
+      :class "field audio ${volume-muted == "yes" ? "muted" : "" }"
+      (label
+        :text "${volume-muted == "yes" ? " " : " "} ${volume-muted == "yes" ? "muted" : round(volume, 0) + "%"}"
+      )
+    )
+  )
+)
+
+(defwidget power []
+  (eventbox
+    :onclick "~/.config/rofi/powermenu.sh"
+    (box
+      :class "field power"
+      (label
+        :text " "
+      )
+    )
+  )
+)
+
+(defvar temperature_threshold 80)
+
 (defwidget left []
   (box
     :space-evenly false
-    :hexpand true
     :class "left"
+    :spacing 8
     (box
-      :spacing 4
+      :spacing 8
       (label
         :class "field cpu"
         :text "  ${round( EWW_CPU.avg , 0)}%"
       )
       (label
-        :class "field temp ${EWW_TEMPS.K10TEMP_TCCD1 > temperature_threshold ? "" : "critical"}"
+        :class "field temp ${EWW_TEMPS.K10TEMP_TCCD1 < temperature_threshold ? "" : "critical"}"
         :text "${EWW_TEMPS.K10TEMP_TCCD1 < temperature_threshold ? "" : ""} ${round(EWW_TEMPS.K10TEMP_TCCD1, 0)}°C"
+      )
+      (label
+        :class "field ram"
+        :text "  ${round(EWW_RAM.used_mem_perc, 0)}%"
+      )
+    )
+    (box
+      :class "field"
+      (systray
+        :icon-size 20
       )
     )
   )
@@ -75,26 +116,18 @@
 (defwidget right []
   (box
     :space-evenly false
-    :spacing 10
-    :hexpand true
+    :spacing 8
     :halign "end"
-    (box
-      (label
-        :class "field"
-        :text "    ${round( EWW_CPU.avg , 0)}%"
-      )
-    )
+    (audio)
+    (time)
+    (power)
   )
 )
 
 (defwidget bar []
     (box
-      :space-evenly false
-      :spacing 10
       (left)
-      (workspaces
-        :halign "center"
-      )
+      (workspaces)
       (right)
     )
 )
@@ -103,7 +136,7 @@
   :monitor 0
   :windowtype "dock"
   :geometry (geometry :x "0%"
-                      :y "1%"
+                      :y "10px"
                       :width "99.5%"
                       :height "20px"
                       :anchor "top center")

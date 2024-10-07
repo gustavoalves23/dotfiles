@@ -8,7 +8,7 @@
     "tray"
   ],
   "modules-center": [
-    "group/hyprland-workspaces"
+    "hyprland/workspaces",
   ],
   "modules-right": [
     "pulseaudio",
