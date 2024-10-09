@@ -134,7 +134,7 @@
 )
 
 (defwindow bar
-  :monitor 0
+  :monitor "DP-2"
   :windowtype "dock"
   :geometry (geometry :x "0%"
                       :y "10px"
