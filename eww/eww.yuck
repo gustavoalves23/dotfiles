@@ -60,6 +60,7 @@
     :cursor "pointer"
     :onclick "pavucontrol &"
     :onrightclick "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    :onscroll 'pactl set-sink-volume @DEFAULT_SINK@ "$( [ {} = "up" ] && echo + || echo -)10%"'
     (box 
       :class "field audio ${volume-muted == "yes" ? "muted" : "" }"
       (label
