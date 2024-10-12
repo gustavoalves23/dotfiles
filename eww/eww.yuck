@@ -19,6 +19,7 @@
         (eventbox
           :onclick "hyprctl dispatch workspace ${workspace.id}"
           :cursor "pointer"
+          :onmiddleclick "~/.config/eww/scripts/hyprland/kill-all-apps-on-workspace ${workspace.id}"
           :width 10
           :height 10
           (box
@@ -52,8 +53,8 @@
   ) 
 )
 
-(defpoll volume :interval "1s" `~/.config/eww/scripts/get-current-volume.sh`)
-(defpoll volume-muted :interval "1s" `pactl get-sink-mute @DEFAULT_SINK@ | sed -e 's/Mute: //'`)
+(deflisten volume :initial "0" `~/.config/eww/scripts/get-current-volume.sh`)
+(deflisten volume-muted :initial "no" `~/.config/eww/scripts/get-mute.sh`)
 
 (defwidget audio []
   (eventbox

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+ hyprctl clients -j | jq ".[] 
+| select(.workspace.id==$1) 
+| select(.focushistoryid!=0) 
+| .pid" | xargs kill
