@@ -73,7 +73,7 @@
 
 (defwidget power []
   (eventbox
-    :onclick "~/.config/rofi/powermenu.sh"
+    :onclick "poweroff"
     (box
       :class "field power"
       (label
