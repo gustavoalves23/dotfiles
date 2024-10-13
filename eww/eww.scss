@@ -88,3 +88,31 @@ $color-yellow-light: #FAE3B0;
     }
   }
 }
+
+.tray menu {
+  padding: 5px 5px;
+  background-color: #0d0f18;
+
+  >menuitem {
+    font-size: 14px;
+    padding: 2px 5px;
+    color: #a5b6cf;
+
+    &:disabled label {
+      color: black;
+    }
+
+    &:hover {
+      background-color: #1c1e27;
+    }
+  }
+
+  separator {
+    background-color: #a5b6cf;
+    padding-top: 1px;
+
+    &:last-child {
+      padding: unset;
+    }
+  }
+}

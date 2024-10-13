@@ -108,13 +108,13 @@
     (box
       :class "field"
       (systray
+        :class "tray"
         :spacing 8
         :icon-size 20
       )
     )
   )
 )
-
 
 (defwidget right []
   (box
