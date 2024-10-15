@@ -19,6 +19,7 @@
         (eventbox
           :onclick "hyprctl dispatch workspace ${workspace.id}"
           :cursor "pointer"
+          :onmiddleclick "~/.config/eww/scripts/hyprland/kill-all-apps-on-workspace ${workspace.id}"
           :width 10
           :height 10
           (box
@@ -52,14 +53,15 @@
   ) 
 )
 
-(defpoll volume :interval "1s" `~/.config/eww/scripts/get-current-volume.sh`)
-(defpoll volume-muted :interval "1s" `pactl get-sink-mute @DEFAULT_SINK@ | sed -e 's/Mute: //'`)
+(deflisten volume :initial "0" `~/.config/eww/scripts/get-current-volume.sh`)
+(deflisten volume-muted :initial "no" `~/.config/eww/scripts/get-mute.sh`)
 
 (defwidget audio []
   (eventbox
     :cursor "pointer"
     :onclick "pavucontrol &"
     :onrightclick "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    :onscroll 'pactl set-sink-volume @DEFAULT_SINK@ "$( [ {} = "up" ] && echo + || echo -)10%"'
     (box 
       :class "field audio ${volume-muted == "yes" ? "muted" : "" }"
       (label
@@ -71,7 +73,7 @@
 
 (defwidget power []
   (eventbox
-    :onclick "~/.config/rofi/powermenu.sh"
+    :onclick "poweroff"
     (box
       :class "field power"
       (label
@@ -106,13 +108,13 @@
     (box
       :class "field"
       (systray
+        :class "tray"
         :spacing 8
         :icon-size 20
       )
     )
   )
 )
-
 
 (defwidget right []
   (box
