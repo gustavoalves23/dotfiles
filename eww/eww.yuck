@@ -83,6 +83,24 @@
   )
 )
 
+(deflisten music_status :initial "..." "~/.config/eww/scripts/get-music-status.sh")
+(deflisten current_music :initial "..." "~/.config/eww/scripts/get-current-music.sh")
+
+(defwidget music []
+  (revealer
+    :reveal "${music_status == "Playing"}"
+    (eventbox
+      :onclick "playerctl play-pause"
+      (box
+        :class "field music"
+        (label
+          :text "  ${current_music}"
+        )
+      )
+    )
+  )
+)
+
 (defvar temperature_threshold 80)
 
 (defwidget left []
@@ -121,6 +139,7 @@
     :space-evenly false
     :spacing 8
     :halign "end"
+    (music)
     (audio)
     (time)
     (power)
