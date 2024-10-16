@@ -89,6 +89,7 @@
 (defwidget music []
   (revealer
     :reveal "${music_status == "Playing"}"
+    :transition "slideleft"
     (eventbox
       :onclick "playerctl play-pause"
       (box
