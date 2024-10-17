@@ -1,3 +1,3 @@
 #!/bin/bash
 
-playerctl status --follow
+playerctl --player=spotify status --follow
