@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+paplay ~/.config/mako/notification/$1.wav --volume 60000

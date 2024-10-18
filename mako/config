@@ -1,0 +1,11 @@
+on-notify=exec $HOME/.config/mako/notification/exec common
+font=JetBrainsMono Nerd Font 10
+on-button-left=dismiss
+on-button-right=invoke-default-action
+on-button-middle=dismiss-all
+default-timeout=5000
+ignore-timeout=1
+[body="grim's screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments"]
+background-color=#ff0000
+on-notify=exec echo "test"
+invisible=1
