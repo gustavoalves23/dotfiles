@@ -91,7 +91,7 @@
     :reveal "${music_info.status == "Playing" || music_info.status == "Paused"}"
     :transition "slideleft"
     (eventbox
-      :onclick "playerctl play-pause"
+      :onclick "playerctl --player=spotify play-pause"
       :cursor "pointer"
       (box
         :class "field music"
