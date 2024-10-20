@@ -92,6 +92,7 @@
     :transition "slideleft"
     (eventbox
       :onclick "playerctl play-pause"
+      :cursor "pointer"
       (box
         :class "field music"
         :style "background: linear-gradient(90deg, #6E67E5 ${music_info.progress_percentage}%, #161320 ${music_info.progress_percentage}%)"
