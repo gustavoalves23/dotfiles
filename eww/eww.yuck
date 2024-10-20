@@ -94,7 +94,7 @@
       :onclick "playerctl play-pause"
       (box
         :class "field music"
-        :style "background: linear-gradient(90deg, #A3C9F1 ${music_info.progress_percentage}%, #FAD4C0 ${music_info.progress_percentage}%)"
+        :style "background: linear-gradient(90deg, #6E67E5 ${music_info.progress_percentage}%, #161320 ${music_info.progress_percentage}%)"
         (label
           :text "${music_info.status == "Playing" ? "": ""}  ${music_info.artist} - ${music_info.title}"
         )
