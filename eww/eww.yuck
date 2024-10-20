@@ -83,19 +83,20 @@
   )
 )
 
-(deflisten music_status :initial "..." "~/.config/eww/scripts/get-music-status.sh")
-(deflisten current_music :initial "..." "~/.config/eww/scripts/get-current-music.sh")
+(deflisten music_info :initial "..." "~/.config/eww/scripts/get-music-status.sh")
+
 
 (defwidget music []
   (revealer
-    :reveal "${music_status == "Playing"}"
+    :reveal "${music_info.status == "Playing" || music_info.status == "Paused"}"
     :transition "slideleft"
     (eventbox
       :onclick "playerctl play-pause"
       (box
         :class "field music"
+        :style "background: linear-gradient(90deg, #A3C9F1 ${music_info.progress_percentage}%, #FAD4C0 ${music_info.progress_percentage}%)"
         (label
-          :text "  ${current_music}"
+          :text "${music_info.status == "Playing" ? "": ""}  ${music_info.artist} - ${music_info.title}"
         )
       )
     )
