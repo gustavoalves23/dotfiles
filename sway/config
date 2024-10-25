@@ -177,7 +177,7 @@ bar {
     swaybar_command waybar
 }
 
-output * bg ~/Pictures/Wallpapers/6.png fill
+output * bg ~/Pictures/Wallpapers/9.png fill
 
 #Nightshift
 exec --no-startup-id gammastep -O 3000k &
