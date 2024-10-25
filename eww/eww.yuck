@@ -83,21 +83,23 @@
   )
 )
 
-(deflisten music_info :initial "..." "~/.config/eww/scripts/get-music-status.sh")
+(deflisten spotify_info :initial "..." "~/.config/eww/scripts/get-music-status.sh")
 
 
-(defwidget music []
+(defwidget spotify []
   (revealer
-    :reveal "${music_info != "" && (music_info.status == "Playing" || music_info.status == "Paused")}"
+    :reveal "${spotify_info != "" && (spotify_info.status == "Playing" || spotify_info.status == "Paused")}"
     :transition "slideleft"
     (eventbox
       :onclick "playerctl --player=spotify play-pause"
+      :onrightclick "hyprctl dispatch focuswindow spotify"
+      :onscroll 'playerctl --player=spotify volume 0.10$( [ {} = "up" ] && echo + || echo -)'
       :cursor "pointer"
       (box
         :class "field music"
-        :style "background: linear-gradient(90deg, #6E67E5 ${music_info.progress_percentage}%, #161320 ${music_info.progress_percentage}%)"
+        :style "background: linear-gradient(90deg, #6E67E5 ${spotify_info.progress_percentage}%, #161320 ${spotify_info.progress_percentage}%)"
         (label
-          :text "${music_info.status == "Playing" ? "": ""}  ${music_info.artist} - ${music_info.title}"
+          :text "${spotify_info.status == "Playing" ? "": ""}  ${spotify_info.artist} - ${spotify_info.title}"
         )
       )
     )
@@ -142,7 +144,7 @@
     :space-evenly false
     :spacing 8
     :halign "end"
-    (music)
+    (spotify)
     (audio)
     (time)
     (power)
