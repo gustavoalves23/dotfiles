@@ -1,4 +1,3 @@
-import = ["/home/gmiyazaki/.config/alacritty/themes/tokyo-night.toml"]
 
 [window]
 opacity = 0.60
@@ -22,6 +21,11 @@ style = "italic"
 family = "JetBrainsMono Nerd Font"
 style = "Bold"
 
-[shell]
+[general]
+import = ["/home/gmiyazaki/.config/alacritty/themes/tokyo-night.toml"]
+
+[terminal]
+
+[terminal.shell]
 program = "/usr/bin/zsh"
 
