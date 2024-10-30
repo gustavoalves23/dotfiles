@@ -9,3 +9,8 @@ ignore-timeout=1
 background-color=#ff0000
 on-notify=exec echo "test"
 invisible=1
+
+[mode=not_disturb]
+background-color=#ff0000
+on-notify=exec echo "test"
+invisible=1

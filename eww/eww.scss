@@ -66,6 +66,15 @@ $color-yellow-light: #FAE3B0;
   }
 }
 
+.field.dpms {
+  color: $color-pink-light;
+  padding: 0 16px 0 12px;
+
+  label {
+    font-size: 18px;
+  }
+}
+
 .field.music {
   color: #E0E3F4;
   padding: 0 12px;

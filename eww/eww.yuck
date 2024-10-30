@@ -74,10 +74,24 @@
 (defwidget power []
   (eventbox
     :onclick "poweroff"
+    :cursor "pointer"
     (box
       :class "field power"
       (label
         :text " "
+      )
+    )
+  )
+)
+
+(defwidget dpms []
+  (eventbox
+    :onclick "notify-send 'Disabling screen' -t 1 && sleep 1 && hyprctl dispatch dpms off &"
+    :cursor "pointer"
+    (box
+      :class "field dpms"
+      (label
+        :text ""
       )
     )
   )
@@ -147,6 +161,7 @@
     (spotify)
     (audio)
     (time)
+    (dpms)
     (power)
   )
 )
