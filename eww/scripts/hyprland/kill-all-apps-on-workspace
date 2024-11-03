@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
- hyprctl clients -j | jq ".[] 
+windows=$(hyprctl clients -j | jq -r ".[] 
 | select(.workspace.id==$1) 
 | select(.focushistoryid!=0) 
-| .pid" | xargs kill
+| .address")
+
+echo $windows
+for window in $windows; do
+  hyprctl dispatch closewindow address:$window
+done
