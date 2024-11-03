@@ -5,7 +5,6 @@ windows=$(hyprctl clients -j | jq -r ".[]
 | select(.focushistoryid!=0) 
 | .address")
 
-echo $windows
 for window in $windows; do
   hyprctl dispatch closewindow address:$window
 done
