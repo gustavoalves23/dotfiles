@@ -1,34 +1,31 @@
 ;; Sway stuff
-(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/sway/get-workspaces")
-(deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/sway/get-active-workspace")
-(deflisten urgent_workspace "bash ~/.config/eww/scripts/sway/get-urgent-workspace")
-(deflisten window :initial "..." "sh ~/.config/eww/scripts/sway/get-window-title")
-(deflisten submap :initial "" "sh ~/.config/eww/scripts/sway/get-active-submap")
+(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/sway/get-active-workspace")
 (defwidget workspaces []
   (eventbox
-    :halign "start"
-    :onscroll "bash ~/.config/eww/scripts/change-active-workspace {} ${current_workspace}"
-    :class "workspaces-widget"
+    ;:onscroll "bash ~/.config/eww/scripts/hyprland/change-active-workspace {} ${current_workspace}"
+    :halign "center"
     (box 
       :class "workspaces-widget"
+      :spacing 4
       (label
         :visible false
-        :text "${urgent_workspace}"
+        ;:text "${urgent_workspace}"
       )
       (for workspace in workspaces
         (eventbox
-          :onclick "hyprctl dispatch workspace ${workspace.id}"
+          ;:onclick "hyprctl dispatch workspace ${workspace.id}"
+          :cursor "pointer"
+          ;:onmiddleclick "~/.config/eww/scripts/hyprland/kill-all-apps-on-workspace ${workspace.id}"
           :width 10
           :height 10
           (box
-            :class "workspace-entry-container ${workspace.id == current_workspace ? "current" : "" } ${workspace.windows > 0 ? "occupied" : "empty"}"
+            :class "workspace-entry-container ${workspace.visible ? "current" : "" } ${workspace.has_windows ? "occupied" : "empty"}"
             (revealer
               :transition "crossfade"
-              :reveal "${workspace.id == current_workspace || workspace.id == urgent_workspace}" 
+              :reveal "${workspace.visible}" 
               (box
-                :width 20
-                :height 20
-                :class "workspace-entry ${workspace.id == urgent_workspace ? "urgent" : "" }"
+                :width 23
+                :class "workspace-entry ${workspace.urgent ? "urgent" : "" }"
               )
             )
           ) 
@@ -39,65 +36,141 @@
 )
 ;; Hyprland stuff
 ;; -----------------
-;; Side stuff
+
 (defpoll time :interval "10s"
   "date '+%H:%M %b %d, %Y'")
 
 (defwidget time []
   (box
-    :halign "end"
-    :class "grey-bg"
+    :class "field time"
     (label
-      :text "${time}"
+      :text "󰥔  ${time}"
     )
   ) 
 )
-(defwidget sidestuff []
-  (box
-    :class "sidestuff"
-    :hexpand true
-    :space-evenly false
-    :spacing 10
-    :halign "end"
-    (box
-      :class "grey-bg"
-;;
+
+(deflisten volume :initial "0" `~/.config/eww/scripts/get-current-volume.sh`)
+(deflisten volume-muted :initial "no" `~/.config/eww/scripts/get-mute.sh`)
+
+(defwidget audio []
+  (eventbox
+    :cursor "pointer"
+    :onclick "pavucontrol &"
+    :onrightclick "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    :onscroll 'pactl set-sink-volume @DEFAULT_SINK@ "$( [ {} = "up" ] && echo + || echo -)5%"'
+    (box 
+      :class "field audio ${volume-muted == "yes" ? "muted" : "" }"
       (label
-        :text "CPU: ${round( EWW_CPU.avg , 0)}% "
+        :text "${volume-muted == "yes" ? " " : " "} ${volume-muted == "yes" ? "muted" : round(volume, 0) + "%"}"
       )
-      ;; (label
-        ;; :text "${EWW_TEMPS.CORETEMP_PACKAGE_ID_0}"
-      ;; )
-      ;; (graph
-      ;;   :value "${EWW_TEMPS.CORETEMP_PACKAGE_ID_0}"
-      ;;   :time-range 60000
-      ;;   :max 100
-      ;; )
     )
+  )
+)
+
+(defwidget power []
+  (eventbox
+    :onclick "poweroff"
+    :cursor "pointer"
+    (box
+      :class "field power"
+      (label
+        :text " "
+      )
+    )
+  )
+)
+
+(deflisten spotify_info :initial "..." "~/.config/eww/scripts/get-music-status.sh")
+
+(defwidget spotify []
+  (revealer
+    :reveal "${spotify_info != "" && (spotify_info.status == "Playing" || spotify_info.status == "Paused")}"
+    :transition "slideleft"
+    (eventbox
+      :onclick "playerctl --player=spotify play-pause"
+      :onrightclick "hyprctl dispatch focuswindow spotify"
+      :onscroll 'playerctl --player=spotify volume 0.10$( [ {} = "up" ] && echo + || echo -)'
+      :cursor "pointer"
+      (box
+        :class "field music"
+        :style "background: linear-gradient(90deg, #6E67E5 ${spotify_info.progress_percentage}%, #161320 ${spotify_info.progress_percentage}%)"
+        (label
+          :text "${spotify_info.status == "Playing" ? "": ""}  ${spotify_info.artist} - ${spotify_info.title}"
+        )
+      )
+    )
+  )
+)
+
+(defpoll vpn :interval "1s" "bash ~/.config/eww/scripts/vpn-anyconnect-status.sh")
+(defvar temperature_threshold 80)
+
+(defwidget left []
+  (box
+    :space-evenly false
+    :class "left"
+    :spacing 8
+    (box
+      (label
+        :class "field vpn ${vpn.class}"
+        :text "${vpn.text}"
+      )
+    )
+    (box
+      :spacing 8
+      (label
+        :class "field cpu"
+        :text "  ${round( EWW_CPU.avg , 0)}%"
+      )
+      (label
+        :class "field temp ${EWW_TEMPS.CORETEMP_CORE_0 < temperature_threshold ? "" : "critical"}"
+        :text "${EWW_TEMPS.CORETEMP_CORE_0 < temperature_threshold ? "" : ""} ${round(EWW_TEMPS.CORETEMP_CORE_0, 0)}°C"
+      )
+      (label
+        :class "field ram"
+        :text "  ${round(EWW_RAM.used_mem_perc, 0)}%"
+      )
+    )
+    (box
+      :class "field"
+      (systray
+        :class "tray"
+        :spacing 8
+        :icon-size 20
+      )
+    )
+  )
+)
+
+(defwidget right []
+  (box
+    :space-evenly false
+    :spacing 8
+    :halign "end"
+    (spotify)
+    (audio)
     (time)
+    (power)
   )
 )
 
 (defwidget bar []
-  (box
-    :space-evenly false
-    :spacing 10
-    (workspaces)
-      (label
-        :text submap
-      )
-    (sidestuff)
-  )
+    (box
+      (left)
+      (workspaces)
+      (right)
+    )
 )
 
-(defwindow bar
-  :monitor 0
+(defwindow swaybar
+  :monitor "0"
   :windowtype "dock"
   :geometry (geometry :x "0%"
-                      :y "1%"
-                      :width "99%"
+                      :y "10px"
+                      :width "99.5%"
                       :height "20px"
                       :anchor "top center")
   :exclusive true
   (bar)
 )
+

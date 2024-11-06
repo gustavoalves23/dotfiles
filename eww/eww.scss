@@ -103,6 +103,14 @@ $color-yellow-light: #FAE3B0;
   }
 }
 
+.field.vpn.disconnected {
+  color: $color-pink-bright;
+}
+
+.field.vpn.connected {
+  color: $color-green-light;
+}
+
 .tray menu {
   padding: 5px 5px;
   background-color: #0d0f18;

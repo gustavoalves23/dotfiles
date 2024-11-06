@@ -1,6 +1,36 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id'
+function get_workspaces_info() {
+    # Get and sort workspaces, replacing Roman numerals with numbers
+    active_workspaces=$(swaymsg -t get_workspaces | jq 'sort_by(.name | gsub("Ⅰ";"1") | gsub("Ⅱ";"2") | gsub("Ⅲ";"3") | gsub("Ⅳ";"4") | gsub("Ⅴ";"5") | gsub("Ⅵ";"6") | gsub("Ⅶ";"7") | gsub("Ⅷ";"8") | gsub("Ⅸ";"9") | gsub("Ⅹ";"10") | tonumber)')
 
-socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
-  stdbuf -o0 awk -F '>>|,' --source '/^workspace>>/ {print $2}' -e '/^focusedmon>>/ {print $3}'
+    # Predefine 10 workspace names
+    predefined_workspaces=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
+
+    # Convert predefined workspaces to JSON and add fields
+    output=$(jq -c -n --argjson active "$active_workspaces" --argjson names "$(printf '%s\n' "${predefined_workspaces[@]}" | jq -R . | jq -s .)" '
+        # Iterate through predefined names, merging with active data and adding `has_windows`
+        $names | map(
+            . as $name |
+            $active | map(select(.name == $name))[0] as $ws |
+            if $ws then
+                $ws + {has_windows: true}
+            else
+                {name: $name, has_windows: false, visible: false}
+            end
+        )')
+
+    # Output the result
+    echo "$output"
+}
+
+# Initial call to display workspaces
+get_workspaces_info
+
+# Listen to workspace changes and update output
+swaymsg -t subscribe '["workspace"]' --monitor | {
+    while read -r event; do
+        get_workspaces_info
+    done
+}
+
