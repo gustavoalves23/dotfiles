@@ -1,20 +1,3 @@
--- return {
---   'supermaven-inc/supermaven-nvim',
---   opts = {
---     ignore_filetypes = {
---       'oil',
---       'TelescopePrompt',
---       'TelescopeResults',
---       'rust',
---     },
---     keymaps = {
---       accept_suggestion = '<C-j>',
---       clear_suggestion = '<C-]>',
---       accept_word = '<C-z>',
---     },
---   },
--- }
-
 return {
   'zbirenbaum/copilot.lua',
   event = 'VeryLazy',
