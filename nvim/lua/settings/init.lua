@@ -30,6 +30,11 @@ vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
 
+--sync clipboard with system clipboard
+vim.schedule(function()
+  vim.opt.clipboard = 'unnamedplus'
+end)
+
 --theme
 vim.cmd.colorscheme 'tokyonight'
 vim.api.nvim_set_hl(0, 'iCursor', { foreground = '#ffffff', background = '#CD0058' })
@@ -106,8 +111,8 @@ vim.api.nvim_set_keymap('n', '<C-w>v', '<C-w>s', { noremap = true, silent = true
 vim.opt.cursorline = true
 
 --copy and paste to and from the star register
-vim.api.nvim_set_keymap('v', '<leader>y', '"+y', { noremap = true, silent = true, desc = '[Y]ank from star register' })
-vim.api.nvim_set_keymap('n', '<leader>p', '"+p', { noremap = true, silent = true, desc = '[P]aste to star register' })
+-- vim.api.nvim_set_keymap('v', '<leader>y', '"+y', { noremap = true, silent = true, desc = '[Y]ank from star register' })
+-- vim.api.nvim_set_keymap('n', '<leader>p', '"+p', { noremap = true, silent = true, desc = '[P]aste to star register' })
 
 --reorder lines by character count
 vim.api.nvim_create_user_command('SortLinesByCharacterCount', utils.sort_lines_by_character_count, { range = true })
