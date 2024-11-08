@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+info () {
+  hyprctl workspaces -j | jq -c ".[] | select(.id == -99) // {id: -99, windows: 0}"
+}
+
+info
+
+socat -u UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - | while read -r line; do
+  info
+done
