@@ -1,4 +1,16 @@
 local _is_alacritty = vim.env.ALACRITTY_WINDOW_ID ~= nil
+local _is_tmux = vim.env.TMUX ~= nil
+
+local _get_true_alacritty_variables = function()
+  if not _is_tmux then
+    return { vim.env.ALACRITTY_SOCKET, vim.env.ALACRITTY_WINDOW_ID }
+  end
+
+  local json = vim.fn.system(vim.fn.stdpath 'config' .. '/lua/automation/scripts/tmux_get_true_alacritty_variables.sh')
+  local trimmed = vim.fn.trim(json)
+  local decoded = vim.json.decode(trimmed)
+  return { decoded.alacritty_socket, decoded.alacritty_window_id }
+end
 
 if _is_alacritty then
   local _alacritty_au = vim.api.nvim_create_augroup('alacritty_padding_au', {
@@ -6,7 +18,11 @@ if _is_alacritty then
   })
 
   local function add_padding()
-    vim.fn.system "alacritty msg --socket $ALACRITTY_SOCKET config -w $ALACRITTY_WINDOW_ID options 'window.padding.x=0' 'window.padding.y=0' 'window.dynamic_padding=false'"
+    local vars = _get_true_alacritty_variables()
+
+    vim.fn.system(
+      'alacritty msg --socket ' .. vars[1] .. ' config -w ' .. vars[2] .. " options 'window.padding.x=0' 'window.padding.y=0' 'window.dynamic_padding=false'"
+    )
   end
 
   vim.api.nvim_create_user_command('AlacrittyPadding', add_padding, {})
@@ -20,13 +36,15 @@ if _is_alacritty then
     group = _alacritty_au,
     callback = function()
       local function run()
-        if vim.env.TMUX then
+        if _is_tmux then
           local nvim_session_count = vim.fn.system(vim.fn.stdpath 'config' .. '/lua/automation/scripts/tmux_nvim_sessions.sh')
           if tonumber(nvim_session_count) > 1 then
             return
           end
         end
-        vim.fn.jobstart('alacritty msg --socket $ALACRITTY_SOCKET config -w $ALACRITTY_WINDOW_ID -r', { detach = true })
+
+        local vars = _get_true_alacritty_variables()
+        vim.fn.jobstart('alacritty msg --socket ' .. vars[1] .. ' config -w ' .. vars[2] .. ' -r', { detach = true })
       end
       pcall(run)
     end,
