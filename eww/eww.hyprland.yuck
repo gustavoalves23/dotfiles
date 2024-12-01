@@ -87,7 +87,7 @@
 
 (defwidget dpms []
   (eventbox
-    :onclick "notify-send 'Disabling screen' -t 1 && sleep 1 && hyprctl dispatch dpms off &"
+    :onclick "notify-send 'Disabling screen' -t 1000 && sleep 1 && hyprctl dispatch dpms off &"
     :cursor "pointer"
     (box
       :class "field dpms"
