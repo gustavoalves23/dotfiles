@@ -81,7 +81,7 @@
       "actions": [
         {
           "label": "",
-          "command": "hyprsunset --temperature 3000"
+          "command": "/home/gmiyazaki/.config/swaync/scripts/night-shift.sh"
         },
         {
           "label": "󰹑",
