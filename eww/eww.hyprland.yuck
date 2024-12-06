@@ -85,14 +85,15 @@
   )
 )
 
-(defwidget dpms []
+(deflisten not :initial "{}" "swaync-client -s")
+(defwidget notifications []
   (eventbox
-    :onclick "notify-send 'Disabling screen' -t 1000 && sleep 1 && hyprctl dispatch dpms off &"
+    :onclick "swaync-client -t"
     :cursor "pointer"
     (box
-      :class "field dpms"
+      :class "field notifications ${not.count > 0 ? "active" : ""}"
       (label
-        :text ""
+        :text "${not.dnd ? "󰂛" : (not.count > 0 ? "󱅫" : "󰂚")}${not.count > 0 ? "  ${not.count}" : ""}"
       )
     )
   )
@@ -170,7 +171,7 @@
     (spotify)
     (audio)
     (time)
-    (dpms)
+    (notifications)
     (power)
   )
 )
