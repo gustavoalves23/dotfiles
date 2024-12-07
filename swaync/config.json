@@ -23,7 +23,7 @@
   "control-center-width": 500,
   "control-center-height": 600,
   "notification-window-width": 500,
-  "keyboard-shortcuts": true,
+  "keyboard-shortcuts": false,
   "image-visibility": "when-available",
   "transition-time": 200,
   "hide-on-clear": false,
@@ -33,13 +33,6 @@
     "sound": {
       "exec": "/home/gmiyazaki/.config/swaync/notification/exec",
       "urgency": "Normal"
-    }
-  },
-  "notification-visibility": {
-    "example-name": {
-      "state": "muted",
-      "urgency": "Low",
-      "app-name": "Spotify"
     }
   },
   "widgets": [
