@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+paplay ~/.config/swaync/notification/common.wav --volume 60000

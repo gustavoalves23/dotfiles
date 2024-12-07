@@ -30,14 +30,9 @@
   "hide-on-action": true,
   "script-fail-notify": true,
   "scripts": {
-    "example-script": {
-      "exec": "echo 'Do something...'",
+    "sound": {
+      "exec": "/home/gmiyazaki/.config/swaync/notification/exec",
       "urgency": "Normal"
-    },
-    "example-action-script": {
-      "exec": "echo 'Do something actionable!'",
-      "urgency": "Normal",
-      "run-on": "action"
     }
   },
   "notification-visibility": {
@@ -81,11 +76,11 @@
       "actions": [
         {
           "label": "",
-          "command": "/home/gmiyazaki/.config/swaync/scripts/night-shift.sh"
+          "command": "/home/gmiyazaki/.config/swaync/scripts/dpms.sh"
         },
         {
           "label": "󰹑",
-          "command": "/home/gmiyazaki/.config/swaync/scripts/dpms.sh"
+          "command": "/home/gmiyazaki/.config/swaync/scripts/night-shift.sh"
         }
       ]
     }
