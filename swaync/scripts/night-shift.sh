@@ -4,4 +4,6 @@ pkill hyprsunset
 
 sleep .1
 
-hyprsunset --temperature 3000
+nohup hyprsunset --temperature 3000 > /dev/null 2>&1 &
+
+swaync-client -t
