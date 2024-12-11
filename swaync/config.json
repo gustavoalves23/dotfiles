@@ -74,6 +74,10 @@
         {
           "label": "󰹑",
           "command": "/home/gmiyazaki/.config/swaync/scripts/night-shift.sh"
+        },
+        {
+          "label": "",
+          "command": "reboot"
         }
       ]
     }
