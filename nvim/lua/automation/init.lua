@@ -12,18 +12,22 @@ local _get_true_alacritty_variables = function()
   return { decoded.alacritty_socket, decoded.alacritty_window_id }
 end
 
+local function add_padding()
+  local vars = _get_true_alacritty_variables()
+
+  vim.fn.system(
+    'alacritty msg --socket '
+      .. vars[1]
+      .. ' config -w '
+      .. vars[2]
+      .. " options 'window.padding.x=0' 'window.padding.y=0' 'window.dynamic_padding=false'"
+  )
+end
+
 if _is_alacritty then
   local _alacritty_au = vim.api.nvim_create_augroup('alacritty_padding_au', {
     clear = true,
   })
-
-  local function add_padding()
-    local vars = _get_true_alacritty_variables()
-
-    vim.fn.system(
-      'alacritty msg --socket ' .. vars[1] .. ' config -w ' .. vars[2] .. " options 'window.padding.x=0' 'window.padding.y=0' 'window.dynamic_padding=false'"
-    )
-  end
 
   vim.api.nvim_create_user_command('AlacrittyPadding', add_padding, {})
   vim.api.nvim_create_autocmd('VimEnter', {
@@ -44,7 +48,7 @@ if _is_alacritty then
         end
 
         local vars = _get_true_alacritty_variables()
-        vim.fn.jobstart('alacritty msg --socket ' .. vars[1] .. ' config -w ' .. vars[2] .. ' -r', { detach = true })
+        vim.fn.system('alacritty msg --socket ' .. vars[1] .. ' config -w ' .. vars[2] .. ' -r')
       end
       pcall(run)
     end,
