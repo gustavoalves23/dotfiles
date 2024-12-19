@@ -7,7 +7,6 @@ require 'settings'
 -- Configure language specific definitions and capabilities
 require 'langs.syntax_highlight'
 require 'langs.language_server'
-require 'langs.completion'
 require 'styles'
 -- Configure custom automations
 require 'automation'
