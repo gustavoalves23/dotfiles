@@ -3,6 +3,5 @@ return {
   dependencies = {
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
-    require 'plugins/dependencies/blink',
   },
 }
