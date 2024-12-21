@@ -96,6 +96,9 @@ vim.keymap.set('n', '-', '<CMD>Oil<CR>', { noremap = true, desc = 'Open parent d
 --diagnostics
 vim.keymap.set('n', '<leader>xx', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+--disable mouse
+vim.cmd 'set mouse='
+
 --auto-resize
 vim.api.nvim_create_autocmd('VimResized', {
   pattern = '*',
