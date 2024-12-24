@@ -2,6 +2,7 @@ set $mod Mod4
 
 font pango:monospace 8
 
+
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
@@ -14,11 +15,10 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 
 floating_modifier $mod
 
-bindsym $mod+Return exec --no-startup-id /usr/bin/alacritty
+bindsym $mod+Return exec --no-startup-id ~/.local/bin/kitty
 bindsym $mod+Shift+q kill
 
 focus_wrapping no
-
 
 set $drun tofi-drun | xargs swaymsg exec --
 bindsym $mod+d exec $drun

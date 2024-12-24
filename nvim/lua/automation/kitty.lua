@@ -36,12 +36,16 @@ vim.api.nvim_create_user_command('Padding', add_padding, {})
 vim.api.nvim_create_user_command('Reset', reset_config, {})
 vim.api.nvim_create_autocmd('VimEnter', {
   group = _kitty_au,
-  callback = add_padding,
+  callback = function()
+    pcall(add_padding)
+  end,
   once = true,
 })
 
 vim.api.nvim_create_autocmd('VimLeavePre', {
   group = _kitty_au,
-  callback = reset_config,
+  callback = function()
+    pcall(reset_config)
+  end,
   once = true,
 })
