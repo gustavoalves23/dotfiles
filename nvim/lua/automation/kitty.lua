@@ -37,7 +37,9 @@ vim.api.nvim_create_user_command('Reset', reset_config, {})
 vim.api.nvim_create_autocmd('VimEnter', {
   group = _kitty_au,
   callback = function()
-    pcall(add_padding)
+    vim.schedule(function()
+      pcall(add_padding)
+    end)
   end,
   once = true,
 })
@@ -45,7 +47,9 @@ vim.api.nvim_create_autocmd('VimEnter', {
 vim.api.nvim_create_autocmd('VimLeavePre', {
   group = _kitty_au,
   callback = function()
-    pcall(reset_config)
+    vim.schedule(function()
+      pcall(reset_config)
+    end)
   end,
   once = true,
 })
