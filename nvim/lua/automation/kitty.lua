@@ -16,7 +16,7 @@ local function reset_config()
   for _, tab in pairs(config[1].tabs) do
     for _, window in pairs(tab.windows) do
       for _, process in pairs(window.foreground_processes) do
-        if process.cmdline[1] == 'nvim' then
+        if process.cmdline[1] == 'nvim' or process.cmdline[1] == 'sudoedit' then
           windows_running_vim = windows_running_vim + 1
         end
       end
