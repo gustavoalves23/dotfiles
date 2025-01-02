@@ -88,7 +88,7 @@
     :transition "slideleft"
     (eventbox
       :onclick "playerctl --player=spotify play-pause"
-      :onrightclick "hyprctl dispatch focuswindow spotify"
+      :onrightclick "hyprctl dispatch focuswindow class:spotify"
       :onscroll 'playerctl --player=spotify volume 0.10$( [ {} = "up" ] && echo + || echo -)'
       :cursor "pointer"
       (box
