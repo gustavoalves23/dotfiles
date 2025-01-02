@@ -31,7 +31,7 @@ input type:keyboard {
     repeat_rate 30
     xkb_layout us
     xkb_variant intl
-    xkb_options caps:escape
+    xkb_options caps:none
 }
 
 seat seat0 xcursor_theme macOS 20
