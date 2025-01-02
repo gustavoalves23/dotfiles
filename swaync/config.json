@@ -78,6 +78,10 @@
         {
           "label": "",
           "command": "reboot"
+        },
+        {
+          "label": "",
+          "command": "poweroff"
         }
       ]
     }

@@ -72,19 +72,6 @@
   )
 )
 
-(defwidget power []
-  (eventbox
-    :onclick "poweroff"
-    :cursor "pointer"
-    (box
-      :class "field power"
-      (label
-        :text " "
-      )
-    )
-  )
-)
-
 (deflisten not :initial "{}" "swaync-client -s")
 (defwidget notifications []
   (eventbox
@@ -172,7 +159,6 @@
     (audio)
     (time)
     (notifications)
-    (power)
   )
 )
 
