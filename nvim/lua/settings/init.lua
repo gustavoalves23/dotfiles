@@ -147,3 +147,6 @@ if vim.lsp.inlay_hint then
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
   end, { desc = '[I]nlay [H]int' })
 end
+
+-- Disable command history bind
+vim.api.nvim_set_keymap('n', 'q:', '<nop>', { noremap = true, silent = true })
