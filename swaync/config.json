@@ -35,6 +35,12 @@
       "urgency": "Normal"
     }
   },
+  "notification-visibility": {
+    "flameshot": {
+      "body": "grim's screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments",
+      "state": "ignored"
+    }
+  },
   "widgets": [
     "inhibitors",
     "title",
