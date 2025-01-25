@@ -113,13 +113,13 @@ local is_personal_computer = pc_device_kind == 'personal_computer'
 return {
   Sed = Sed,
   debounce = debounce,
-  is_workstation = is_workstation,
   get_table_keys = get_table_keys,
-  get_attached_lsps = get_attached_lsps,
+  is_workstation = is_workstation,
   get_linters_by_ft = get_linters_by_ft,
-  get_formatters_by_ft = get_formatters_by_ft,
-  show_macro_recording = show_macro_recording,
+  get_attached_lsps = get_attached_lsps,
   is_personal_computer = is_personal_computer,
+  show_macro_recording = show_macro_recording,
+  get_formatters_by_ft = get_formatters_by_ft,
   slow_format_filetypes = slow_format_filetypes,
   sort_lines_by_character_count = sort_lines_by_character_count,
 }
