@@ -80,7 +80,7 @@
     (box
       :class "field notifications ${not.count > 0 ? "active" : ""}"
       (label
-        :text "${not.dnd ? "󰂛" : (not.count > 0 ? "󱅫" : "󰂚")}${not.count > 0 ? "  ${not.count}" : ""}"
+        :text "${not.dnd ? "󰂛" : (not.count > 0 ? "󱅫" : "")}${not.count > 0 ? "  ${not.count}" : ""}"
       )
     )
   )
