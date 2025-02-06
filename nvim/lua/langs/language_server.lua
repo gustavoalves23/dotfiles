@@ -1,3 +1,5 @@
+---@diagnostic disable: missing-fields
+
 local langs_utils = require 'langs.utils'
 local langs = require 'langs'
 
@@ -43,6 +45,8 @@ mason_lspconfig.setup_handlers {
       settings = (servers[server_name] or {}).settings,
       filetypes = (servers[server_name] or {}).filetypes,
       init_options = (servers[server_name] or {}).init_options,
+      on_init = (servers[server_name] or {}).on_init,
+      handlers = (servers[server_name] or {}).handlers,
     }
   end,
 }
