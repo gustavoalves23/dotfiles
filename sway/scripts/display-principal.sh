@@ -20,7 +20,9 @@ elif [[ -z "$edp_active" && -n "$dp_active" ]]; then
     swaymsg output DP-1 disable
     swaymsg output eDP-1 enable
 else
-    notify-send "No known outputs are active."
+    notify-send "No known outputs are active. Resetting"
+    swaymsg output DP-1 enable
+    swaymsg output eDP-1 enable
 fi
 
 pkill gammastep && sleep 1 && gammastep -O 3000k;
