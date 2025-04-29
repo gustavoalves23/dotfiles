@@ -9,7 +9,8 @@ return {
         'vim',
         'bash',
         'html',
-        'styled',
+        'json',
+        'toml',
       },
       servers = {
         cssls = {

@@ -2,12 +2,8 @@ return {
   'folke/snacks.nvim',
   init = function()
     local snacks = require 'snacks'
-    vim.api.nvim_create_user_command('OpenOnBrowser', function()
+    vim.api.nvim_create_user_command('OpenInBrowser', function()
       snacks.gitbrowse()
-    end, {})
-
-    vim.api.nvim_create_user_command('Lg', function()
-      snacks.lazygit()
     end, {})
 
     vim.api.nvim_create_user_command('ZenMode', function()
