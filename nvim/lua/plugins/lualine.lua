@@ -39,16 +39,16 @@ return {
         {
           'filename',
           path = 1,
-          fmt = function(content)
-            if #content > 30 then
-              local parts = vim.fn.split(content, '/')
-              if #parts < 3 then
-                return content
-              end
-              return parts[1] .. '/…/' .. parts[#parts - 1] .. '/' .. parts[#parts]
-            end
-            return content
-          end,
+          -- fmt = function(content)
+          --   if #content > 30 then
+          --     local parts = vim.fn.split(content, '/')
+          --     if #parts < 3 then
+          --       return content
+          --     end
+          --     return parts[1] .. '/…/' .. parts[#parts - 1] .. '/' .. parts[#parts]
+          --   end
+          --   return content
+          -- end,
         },
       },
     },

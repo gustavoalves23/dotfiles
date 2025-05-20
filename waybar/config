@@ -22,8 +22,8 @@
     "scroll-step": 5,
     "format": "{icon}  {volume}%",
     "format-muted": "󰝟 muted",
-    "on-click": "pavucontrol",
-    "on-click-right": "pactl set-sink-mute $(pactl get-default-sink) toggle",
+    "on-click-right": "pavucontrol",
+    "on-click": "pactl set-sink-mute $(pactl get-default-sink) toggle",
     "format-icons": {
       "default": [
         "",
