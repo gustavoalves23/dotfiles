@@ -12,6 +12,7 @@
     "sway/workspaces"
   ],
   "modules-right": [
+    "custom/notification",
     "pulseaudio",
     "clock",
     "battery",
@@ -67,6 +68,13 @@
     "interval": 20,
     "format": "  {}%",
     "max-length": 10
+  },
+  "custom/notification": {
+    "exec": "bash ~/.config/waybar/scripts/notification_mako.sh",
+    "on-click": "makoctl mode -t dnd; pkill -RTMIN+1 waybar",
+    "return-type": "json",
+    "interval": 1,
+    "signal": 1,
   },
   "custom/power": {
     "format": " ",

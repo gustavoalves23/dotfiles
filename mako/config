@@ -10,7 +10,7 @@ background-color=#ff0000
 on-notify=exec echo "test"
 invisible=1
 
-[mode=not_disturb]
+[mode=dnd]
 background-color=#ff0000
 on-notify=exec echo "test"
 invisible=1

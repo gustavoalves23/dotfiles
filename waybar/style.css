@@ -352,3 +352,21 @@ window#waybar.hidden {
 	color: #161320;
 	background: #ABE9B3;
 }
+
+#custom-notification {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	padding-right: 16px;
+	color: #ABE9B3;
+	background: #1A1826;
+	transition: all .3s;
+}
+
+#custom-notification.disabled {
+	background: #F28FAD;
+	color: #161320;
+	padding-right: 10px;
+}
