@@ -3,6 +3,7 @@ return {
   event = 'VeryLazy',
   opts = {
     notify = false,
+    sort = { 'alphanum', 'local', 'order', 'group', 'mod' },
   },
   config = function(_, opts)
     local wk = require 'which-key'
