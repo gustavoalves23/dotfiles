@@ -59,6 +59,9 @@ bindsym $mod+c split h
 # split in vertical orientation
 bindsym $mod+v split v
 
+# toggle window opacity
+bindsym $mod+Shift+t exec --no-startup-id /home/gmiyazaki/.config/sway/scripts/toggle_opacity.sh
+
 # enter fullscreen mode for the focused container
 bindsym $mod+space layout toggle tabbed split
 
@@ -187,4 +190,4 @@ exec --no-startup-id wl-clip-persist --clipboard regular &
 #Clipboard manager
 exec --no-startup-id copyq --start-server &
 for_window [app_id="copyq"] floating enable, resize set 500 800, move position 100 5
-
+for_window [class="vlc"] sticky enable
