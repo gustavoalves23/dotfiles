@@ -1,13 +1,78 @@
+local langs = require 'langs'
+
 return {
-  'hrsh7th/nvim-cmp',
+  'saghen/blink.cmp',
+  event = 'VimEnter',
+  version = '1.*',
   dependencies = {
+    'bydlw98/blink-cmp-env',
     {
       'L3MON4D3/LuaSnip',
+      version = 'v2.*',
       build = 'make install_jsregexp',
+      config = function()
+        local luasnip = require 'luasnip'
+        luasnip.config.setup {}
+
+        vim.keymap.set('i', '<C-k>', function()
+          if luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          end
+        end)
+
+        for _, lang in pairs(langs) do
+          if lang.snippets then
+            local extends = lang.snippets.extends
+            local custom = lang.snippets.custom
+            local filetypes = lang.filetypes
+            if extends then
+              for _, extended_lang in pairs(filetypes) do
+                luasnip.filetype_extend(extended_lang, extends)
+              end
+            end
+
+            if custom then
+              for _, extended_lang in pairs(filetypes) do
+                local s = luasnip.snippet
+                local t = luasnip.text_node
+                local i = luasnip.insert_node
+
+                luasnip.add_snippets(extended_lang, custom(s, t, i))
+              end
+            end
+          end
+        end
+      end,
+      dependencies = {
+        {
+          'rafamadriz/friendly-snippets',
+          config = function()
+            require('luasnip.loaders.from_vscode').lazy_load()
+          end,
+        },
+      },
     },
-    'saadparwaiz1/cmp_luasnip',
-    'hrsh7th/cmp-nvim-lsp',
-    'rafamadriz/friendly-snippets',
-    'hrsh7th/cmp-path',
+  },
+  opts = {
+    keymap = {
+      preset = 'default',
+      ['<CR>'] = { 'accept', 'fallback' },
+      ['<C-d>'] = { 'scroll_documentation_up', 'fallback' },
+      ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
+    },
+    appearance = {
+      use_nvim_cmp_as_default = true,
+      nerd_font_variant = 'mono',
+    },
+    completion = {
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 200,
+      },
+    },
+    snippets = { preset = 'luasnip' },
+    sources = {
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
+    },
   },
 }
