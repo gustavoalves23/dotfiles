@@ -4,7 +4,6 @@ local langs_utils = require 'langs.utils'
 local langs = require 'langs'
 
 require('mason').setup()
-require('mason-lspconfig').setup()
 
 local servers = {}
 local server_names = {}
@@ -23,39 +22,27 @@ for _, lang in pairs(langs) do
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
--- capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
+capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
 
-local mason_lspconfig = require 'mason-lspconfig'
-
-mason_lspconfig.setup {
+require('mason-lspconfig').setup {
   ensure_installed = server_names,
 }
 
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = vim.tbl_deep_extend('keep', capabilities, (servers[server_name] or {}).capabilities or {}),
-      on_attach = function(client, bufnr)
-        langs_utils.on_attach(client, bufnr)
-        if (servers[server_name] or {}).on_attach then
-          servers[server_name].on_attach(client, bufnr)
-        end
-      end,
-      settings = (servers[server_name] or {}).settings,
-      filetypes = (servers[server_name] or {}).filetypes,
-      init_options = (servers[server_name] or {}).init_options,
-      on_init = (servers[server_name] or {}).on_init,
-      handlers = (servers[server_name] or {}).handlers,
-    }
-  end,
-}
+for _, server_name in pairs(server_names) do
+  local server_config = servers[server_name] or {}
 
--- require('lspconfig').omnisharp.setup {
---   cmd = { '/opt/OmniSharp/OmniSharp.Stdio.Driver/net6.0/OmniSharp' },
---   capabilities = capabilities,
---   on_attach = langs_utils.on_attach,
---   handlers = {
---     ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' }),
---   },
--- }
+  require('lspconfig')[server_name].setup {
+    capabilities = vim.tbl_deep_extend('keep', capabilities, server_config.capabilities or {}),
+    on_attach = function(client, bufnr)
+      langs_utils.on_attach(client, bufnr)
+      if server_config.on_attach then
+        server_config.on_attach(client, bufnr)
+      end
+    end,
+    settings = server_config.settings,
+    filetypes = server_config.filetypes,
+    init_options = server_config.init_options,
+    on_init = server_config.on_init,
+    handlers = server_config.handlers,
+  }
+end
