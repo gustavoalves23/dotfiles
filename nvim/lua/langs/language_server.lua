@@ -26,6 +26,7 @@ capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
 
 require('mason-lspconfig').setup {
   ensure_installed = server_names,
+  automatic_enable = false,
 }
 
 for _, server_name in pairs(server_names) do
