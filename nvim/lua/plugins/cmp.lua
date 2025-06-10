@@ -5,7 +5,6 @@ return {
   event = 'VimEnter',
   version = '1.*',
   dependencies = {
-    'bydlw98/blink-cmp-env',
     {
       'L3MON4D3/LuaSnip',
       version = 'v2.*',
@@ -61,14 +60,15 @@ return {
       ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
     },
     appearance = {
-      use_nvim_cmp_as_default = true,
       nerd_font_variant = 'mono',
     },
     completion = {
+      keyword = { range = 'prefix' },
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 200,
       },
+      accept = { auto_brackets = { enabled = false } },
     },
     snippets = { preset = 'luasnip' },
     sources = {

@@ -2,6 +2,7 @@
 
 local langs_utils = require 'langs.utils'
 local langs = require 'langs'
+local utils = require 'utils'
 
 require('mason').setup()
 
@@ -24,26 +25,22 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
 
-require('mason-lspconfig').setup {
-  ensure_installed = server_names,
-  automatic_enable = false,
-}
-
 for _, server_name in pairs(server_names) do
   local server_config = servers[server_name] or {}
 
-  require('lspconfig')[server_name].setup {
+  local default_on_attach = vim.lsp.config[server_name].on_attach
+
+  vim.lsp.config(server_name, {
     capabilities = vim.tbl_deep_extend('keep', capabilities, server_config.capabilities or {}),
-    on_attach = function(client, bufnr)
-      langs_utils.on_attach(client, bufnr)
-      if server_config.on_attach then
-        server_config.on_attach(client, bufnr)
-      end
-    end,
+    on_attach = utils.compose(default_on_attach, langs_utils.on_attach, server_config.on_attach),
     settings = server_config.settings,
     filetypes = server_config.filetypes,
     init_options = server_config.init_options,
     on_init = server_config.on_init,
     handlers = server_config.handlers,
-  }
+  })
 end
+
+require('mason-lspconfig').setup {
+  ensure_installed = server_names,
+}
