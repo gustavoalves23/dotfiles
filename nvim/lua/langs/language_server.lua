@@ -2,7 +2,6 @@
 
 local langs_utils = require 'langs.utils'
 local langs = require 'langs'
-local utils = require 'utils'
 
 require('mason').setup()
 
@@ -32,7 +31,17 @@ for _, server_name in pairs(server_names) do
 
   vim.lsp.config(server_name, {
     capabilities = vim.tbl_deep_extend('keep', capabilities, server_config.capabilities or {}),
-    on_attach = utils.compose(default_on_attach, langs_utils.on_attach, server_config.on_attach),
+    on_attach = function(client, bufnr)
+      if default_on_attach then
+        default_on_attach(client, bufnr)
+      end
+
+      langs_utils.on_attach(client, bufnr)
+
+      if server_config.on_attach then
+        server_config.on_attach(client, bufnr)
+      end
+    end,
     settings = server_config.settings,
     filetypes = server_config.filetypes,
     init_options = server_config.init_options,

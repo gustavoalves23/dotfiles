@@ -105,15 +105,6 @@ local function get_formatters_by_ft(langs)
   return formatters_by_ft, filetypes_global
 end
 
-local compose = function(...)
-  local fns = { ... }
-  return function(...)
-    for _, fn in ipairs(fns) do
-      fn(...)
-    end
-  end
-end
-
 local pc_device_kind = vim.fn.getenv 'PC_DEVICE_KIND' or 'personal_computer'
 
 local is_workstation = pc_device_kind == 'workstation'
@@ -121,7 +112,6 @@ local is_personal_computer = pc_device_kind == 'personal_computer'
 
 return {
   Sed = Sed,
-  compose = compose,
   debounce = debounce,
   is_workstation = is_workstation,
   get_table_keys = get_table_keys,
