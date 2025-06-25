@@ -20,6 +20,7 @@ return {
         },
         somesass_ls = {},
         html = {},
+        jsonls = {},
       },
     },
   },

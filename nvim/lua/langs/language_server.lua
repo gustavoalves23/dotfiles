@@ -27,7 +27,7 @@ capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
 for _, server_name in pairs(server_names) do
   local server_config = servers[server_name] or {}
 
-  local default_on_attach = vim.lsp.config[server_name].on_attach
+  local default_on_attach = (vim.lsp.config[server_name] or {}).on_attach
 
   vim.lsp.config(server_name, {
     capabilities = vim.tbl_deep_extend('keep', capabilities, server_config.capabilities or {}),
