@@ -10,9 +10,9 @@ return {
       },
       servers = {
         cssmodules_ls = {
-          on_attach = function(client)
-            client.server_capabilities.definitionProvider = false
-          end,
+          capabilities = {
+            definitionProvider = false,
+          },
         },
         tailwindcss = {},
       },
