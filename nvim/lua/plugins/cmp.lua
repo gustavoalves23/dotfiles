@@ -69,6 +69,9 @@ return {
         auto_show_delay_ms = 200,
       },
       accept = { auto_brackets = { enabled = false } },
+      trigger = {
+        show_on_insert_on_trigger_character = false,
+      }
     },
     snippets = { preset = 'luasnip' },
     sources = {

@@ -66,7 +66,7 @@ run_cmd() {
 		elif [[ $1 == '--reboot' ]]; then
 			systemctl reboot
 		elif [[ $1 == '--hibernate' ]]; then
-			sleep 2 && xset dpms force off
+			sleep 2 && ~/.local/bin/dpms
 		elif [[ $1 == '--suspend' ]]; then
 			mpc -q pause
 			amixer set Master mute
