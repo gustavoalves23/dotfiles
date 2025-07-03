@@ -23,6 +23,13 @@ return {
       },
       custom = function(s, t, i)
         return {
+          s('cssmx', {
+            t 'className={clsx(S.',
+            i(1),
+            t ',',
+            i(2),
+            t ')}',
+          }),
           s('cssm', {
             t 'className={S.',
             i(1),

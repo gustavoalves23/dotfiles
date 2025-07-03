@@ -11,6 +11,8 @@ return {
         'html',
         'json',
         'toml',
+        'css',
+        'scss'
       },
       servers = {
         cssls = {
