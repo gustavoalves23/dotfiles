@@ -31,13 +31,13 @@ bindsym $mod+Shift+d move workspace to output next
 
 bindcode $mod+40 exec "rofi -show drun -theme ~/.config/rofi/style1.rasi"
 
-input type:keyboard {
-    repeat_delay 250
-    repeat_rate 30
-    xkb_layout us
-    xkb_variant intl
-    xkb_options ctrl:nocaps
-}
+# input type:keyboard {
+#     repeat_delay 250
+#     repeat_rate 30
+#     xkb_layout us
+#     xkb_variant intl
+#     xkb_options ctrl:nocaps
+# }
 
 #emoji menu
 bindsym $mod+period exec "rofimoji &"
@@ -172,29 +172,29 @@ default_floating_border pixel 1
 gaps inner 8
 
 #Monitors
-output DP-1 pos 0 0 res 3440x1440
-output eDP-1 disable
+# output DP-1 pos 0 0 res 3440x1440
+# output eDP-1 disable
 
-bar {
-position top
-
-status_command while /home/gmiyazaki/.config/sway/scripts/data.sh; do sleep 0.5; done
-}
+# bar {
+# position top
+#
+# status_command while /home/gmiyazaki/.config/sway/scripts/data.sh; do sleep 0.5; done
+# }
 
 #Connect to internet
 exec --no-startup-id export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus; nmcli device connect eno2 &
 
 # #Wallpaper
-exec_always --no-startup-id swaybg -i ~/Pictures/Wallpapers/5.jpg &
+# exec_always --no-startup-id swaybg -i ~/Pictures/Wallpapers/5.jpg &
 
 # #Redshift
-exec --no-startup-id redshift-gtk &
+# exec --no-startup-id redshift-gtk &
 
 #Notification daemon
-exec --no-startup-id mako &
+# exec --no-startup-id mako &
 
 #Clipboard persistence
-exec_always --no-startup-id wl-clip-persist --clipboard both &
+# exec_always --no-startup-id wl-clip-persist --clipboard both &
 #
 # #Clipboard manager
 # exec --no-startup-id clipit &
