@@ -111,6 +111,8 @@
 
 (defvar temperature_threshold 80)
 
+(deflisten disk_speed :initial "{}" "sh ~/.config/eww/scripts/get-disk-usage.sh")
+
 (defwidget left []
   (box
     :space-evenly false
@@ -145,6 +147,14 @@
         :class "tray"
         :spacing 8
         :icon-size 20
+      )
+    )
+    (revealer
+      :reveal "${disk_speed.read > 10000 || disk_speed.write > 10000}"
+      :transition "slideleft"
+      (label
+        :class "field disk-speed"
+        :text " ${round(disk_speed.write / 1000,0)}MB/s  ${round(disk_speed.read / 1000, 0)}MB/s"
       )
     )
   )

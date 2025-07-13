@@ -93,7 +93,7 @@ $color-yellow-light: #FAE3B0;
     border: 3px solid #FFFFFF;
 
     &.occupied {
-      border-color: $color-green-light;
+      border-color: $color-blue-light;
     }
 
     .workspace-entry {
@@ -147,4 +147,8 @@ $color-yellow-light: #FAE3B0;
       padding: unset;
     }
   }
+}
+
+.field.disk-speed {
+  color: $color-yellow-light;
 }
