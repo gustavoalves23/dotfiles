@@ -188,5 +188,9 @@ exec --no-startup-id wl-clip-persist --clipboard regular &
 
 #Clipboard manager
 exec --no-startup-id copyq --start-server &
+
+#KDE Connect indicator
+exec --no-startup-id kdeconnect-indicator &
+
 for_window [app_id="copyq"] floating enable, resize set 500 800, move position 100 5
 for_window [class="vlc"] sticky enable
