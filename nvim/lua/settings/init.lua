@@ -45,6 +45,7 @@ vim.api.nvim_set_hl(0, 'FlashCursor', { foreground = '#ffffff', background = '#0
 
 vim.api.nvim_set_hl(0, 'NormalFloat', { background = '#222436' }) -- Popup window bg
 vim.api.nvim_set_hl(0, 'FloatBorder', { foreground = '#4ED1BA', background = '#222436' }) -- Popup window border - Related to Noice/NUI
+vim.api.nvim_set_hl(0, 'DiagnosticUnnecessary', { foreground = '#7A88A1' })
 
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
