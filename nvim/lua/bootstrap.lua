@@ -2,8 +2,7 @@ vim.g.mapleader = ' '
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
----@diagnostic disable-next-line: undefined-field
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system {
     'git',
     'clone',
@@ -14,7 +13,6 @@ if not vim.loop.fs_stat(lazypath) then
   }
 end
 
----@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 local langs = require 'langs'

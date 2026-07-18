@@ -6,16 +6,20 @@ local langs = require 'langs'
 require('mason').setup()
 
 local servers = {}
+-- Plain lspconfig server names, used for `vim.lsp.config`/`vim.lsp.enable`.
 local server_names = {}
+-- Names optionally suffixed with `@version`, used only for mason's `ensure_installed`.
+local ensure_installed = {}
 
 for _, lang in pairs(langs) do
   if lang.language and lang.language.servers then
     for server_name, server_config in pairs(lang.language.servers) do
       servers[server_name] = server_config
+      table.insert(server_names, server_name)
       if server_config.version then
-        table.insert(server_names, server_name .. '@' .. server_config.version)
+        table.insert(ensure_installed, server_name .. '@' .. server_config.version)
       else
-        table.insert(server_names, server_name)
+        table.insert(ensure_installed, server_name)
       end
     end
   end
@@ -51,5 +55,9 @@ for _, server_name in pairs(server_names) do
 end
 
 require('mason-lspconfig').setup {
-  ensure_installed = server_names,
+  ensure_installed = ensure_installed,
+  -- We enable servers explicitly below, so disable mason-lspconfig's automatic enabling.
+  automatic_enable = false,
 }
+
+vim.lsp.enable(server_names)

@@ -75,7 +75,7 @@
 (deflisten not :initial "{}" "swaync-client -s")
 (defwidget notifications []
   (eventbox
-    :onclick "swaync-client -t"
+    :onclick "swaync-client -t -sw"
     :cursor "pointer"
     (box
       :class "field notifications ${not.count > 0 ? "active" : ""}"
@@ -147,14 +147,6 @@
         :class "tray"
         :spacing 8
         :icon-size 20
-      )
-    )
-    (revealer
-      :reveal "${disk_speed.read > 10000 || disk_speed.write > 10000}"
-      :transition "slideleft"
-      (label
-        :class "field disk-speed"
-        :text " ${round(disk_speed.write / 1000,0)}MB/s  ${round(disk_speed.read / 1000, 0)}MB/s"
       )
     )
   )

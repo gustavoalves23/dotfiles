@@ -115,14 +115,9 @@ vim.api.nvim_set_keymap('n', '<C-w>v', '<C-w>s', { noremap = true, silent = true
 --enable cursorline
 vim.opt.cursorline = true
 
---copy and paste to and from the star register
--- vim.api.nvim_set_keymap('v', '<leader>y', '"+y', { noremap = true, silent = true, desc = '[Y]ank from star register' })
--- vim.api.nvim_set_keymap('n', '<leader>p', '"+p', { noremap = true, silent = true, desc = '[P]aste to star register' })
-
 --reorder lines by character count
 vim.api.nvim_create_user_command('SortLinesByCharacterCount', utils.sort_lines_by_character_count, { range = true })
 
---hightlight lines and colums on pair programming
 do
   (function()
     local is_enabled = false
