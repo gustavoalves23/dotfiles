@@ -12,7 +12,8 @@ return {
         'json',
         'toml',
         'css',
-        'scss'
+        'scss',
+        'yaml'
       },
       servers = {
         cssls = {
@@ -23,6 +24,7 @@ return {
         somesass_ls = {},
         html = {},
         jsonls = {},
+        yamlls = {}
       },
     },
   },

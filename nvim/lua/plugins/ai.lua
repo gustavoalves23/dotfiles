@@ -1,6 +1,6 @@
 local utils = require 'utils'
 
-return {
+return { {
   'zbirenbaum/copilot.lua',
   event = 'VeryLazy',
   opts = {
@@ -27,4 +27,42 @@ return {
       end
     end)
   end,
+},
+  {
+    'olimorris/codecompanion.nvim',
+    cmd = {
+      'CodeCompanion',
+      'CodeCompanionChat',
+      'CodeCompanionCmd',
+      'CodeCompanionActions',
+    },
+    keys = {
+      { '<leader>cc', '<cmd>CodeCompanionChat Toggle<cr>', mode = { 'n', 'v' }, desc = 'CodeCompanion chat toggle' },
+    },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+    },
+    opts = {
+      interactions = {
+        chat = {
+          adapter = {
+            name = 'copilot',
+            model = 'gpt-4.1',
+          },
+        },
+        inline = {
+          adapter = 'copilot',
+        },
+        cmd = {
+          adapter = 'copilot',
+        },
+      },
+      display = {
+        action_palette = {
+          provider = 'snacks',
+        },
+      },
+    },
+  },
 }
