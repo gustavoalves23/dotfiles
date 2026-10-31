@@ -9,10 +9,13 @@ if _is_kitty then
   require 'automation.kitty'
 end
 
---Set filetype to groovy for jenkinsfiles
+--Set custom filetypes
 vim.filetype.add {
   filename = {
     ['Jenkinsfile'] = 'groovy',
+  },
+  extension = {
+    vcl = 'vcl',
   },
 }
 

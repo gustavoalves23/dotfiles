@@ -72,7 +72,7 @@
   )
 )
 
-(deflisten not :initial "{}" "swaync-client -s")
+(deflisten not :initial "{}" "~/.config/eww/scripts/swaync.sh")
 (defwidget notifications []
   (eventbox
     :onclick "swaync-client -t -sw"
@@ -86,32 +86,10 @@
   )
 )
 
-(deflisten spotify_info :initial "..." "~/.config/eww/scripts/get-music-status.sh")
-
-
-(defwidget spotify []
-  (revealer
-    :reveal "${spotify_info != "" && (spotify_info.status == "Playing" || spotify_info.status == "Paused")}"
-    :transition "slideleft"
-    (eventbox
-      :onclick "playerctl --player=spotify play-pause"
-      :onrightclick "hyprctl dispatch focuswindow class:spotify"
-      :onscroll 'playerctl --player=spotify volume 0.10$( [ {} = "up" ] && echo + || echo -)'
-      :cursor "pointer"
-      (box
-        :class "field music"
-        :style "background: linear-gradient(90deg, #6E67E5 ${spotify_info.progress_percentage}%, #161320 ${spotify_info.progress_percentage}%)"
-        (label
-          :text "${spotify_info.status == "Playing" ? "": ""}  ${spotify_info.artist} - ${spotify_info.title}"
-        )
-      )
-    )
-  )
-)
-
 (defvar temperature_threshold 80)
 
 (deflisten disk_speed :initial "{}" "sh ~/.config/eww/scripts/get-disk-usage.sh")
+(defpoll vpn_status :interval 2 :initial "{\"text\":\"󰅛 VPN\", \"class\":\"disconnected\"}" "bash ~/.config/eww/scripts/vpn-anyconnect-status.sh")
 
 (defwidget left []
   (box
@@ -126,6 +104,10 @@
         :text "  ${special_workspace.windows}"
       )
     )
+    (label
+      :class "field vpn ${vpn_status.class}"
+      :text "${vpn_status.text}"
+    )
     (box
       :spacing 8
       (label
@@ -133,8 +115,8 @@
         :text "  ${round( EWW_CPU.avg , 0)}%"
       )
       (label
-        :class "field temp ${EWW_TEMPS.K10TEMP_TCCD1 < temperature_threshold ? "" : "critical"}"
-        :text "${EWW_TEMPS.K10TEMP_TCCD1 < temperature_threshold ? "" : ""} ${round(EWW_TEMPS.K10TEMP_TCCD1, 0)}°C"
+        :class "field temp ${EWW_TEMPS.CORETEMP_PACKAGE_ID_0 < temperature_threshold ? "" : "critical"}"
+        :text "${EWW_TEMPS.CORETEMP_PACKAGE_ID_0 < temperature_threshold ? "" : ""} ${round(EWW_TEMPS.CORETEMP_PACKAGE_ID_0, 0)}°C"
       )
       (label
         :class "field ram"
@@ -157,7 +139,6 @@
     :space-evenly false
     :spacing 8
     :halign "end"
-    (spotify)
     (audio)
     (time)
     (notifications)
@@ -173,7 +154,7 @@
 )
 
 (defwindow bar
-  :monitor "DP-2"
+  :monitor "DP-1"
   :windowtype "dock"
   :geometry (geometry :x "0%"
                       :y "10px"

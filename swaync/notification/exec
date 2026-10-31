@@ -1,2 +1,7 @@
 #!/usr/bin/bash
-paplay ~/.config/swaync/notification/common.wav --volume 60000
+
+dnd_status=$(swaync-client -D)
+
+if [ "$dnd_status" = "false" ]; then
+    paplay ~/.config/swaync/notification/common.wav --volume 60000
+fi

@@ -12,11 +12,10 @@
     "sway/workspaces"
   ],
   "modules-right": [
-    "custom/notification",
     "pulseaudio",
     "clock",
     "battery",
-    "custom/power"
+    "custom/notification"
   ],
   "pulseaudio": {
     "tooltip": false,
@@ -56,7 +55,8 @@
     "spacing": 10
   },
   "clock": {
-    "format": "{:󰥔 %H:%M %p|  %d/%m/%Y}",
+    "format": "󰥔 {0:%H:%M:%S} |  {0:%d/%m/%Y}",
+    "interval": 1,
     "tooltip": false
   },
   "cpu": {
@@ -68,13 +68,6 @@
     "interval": 20,
     "format": "  {}%",
     "max-length": 10
-  },
-  "custom/notification": {
-    "exec": "bash ~/.config/waybar/scripts/notification_mako.sh",
-    "on-click": "makoctl mode -t dnd; pkill -RTMIN+1 waybar",
-    "return-type": "json",
-    "interval": 1,
-    "signal": 1,
   },
   "custom/power": {
     "format": " ",
@@ -96,8 +89,16 @@
   "temperature": {
     "format": " {}°C",
     "critical-threshold": 85,
-    "thermal-zone": 8,
+    "thermal-zone": 7,
     "format-critical": " {}°C",
     "max-length": 10
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb | ~/.config/waybar/scripts/swaync.js",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw"
   }
 }

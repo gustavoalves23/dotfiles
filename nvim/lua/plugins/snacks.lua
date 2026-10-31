@@ -51,6 +51,10 @@ return {
       snacks.lazygit()
     end, {})
 
+    vim.api.nvim_create_user_command('NotificationHistory', function()
+      snacks.notifier.show_history()
+    end, {})
+
     vim.keymap.set('n', '[[', function()
       snacks.words.jump(-vim.v.count1)
     end, { noremap = true, silent = true, desc = 'Previous symbol match' })

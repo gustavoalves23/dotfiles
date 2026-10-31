@@ -1,33 +1,34 @@
 local utils = require 'utils'
 
-return { {
-  'zbirenbaum/copilot.lua',
-  event = 'VeryLazy',
-  opts = {
-    suggestion = { enabled = true, auto_trigger = true },
-    panel = {
-      enabled = false,
+return {
+  {
+    'zbirenbaum/copilot.lua',
+    event = 'VeryLazy',
+    opts = {
+      suggestion = { enabled = true, auto_trigger = true },
+      panel = {
+        enabled = false,
+      },
+      filetypes = {
+        rust = false,
+      },
+      copilot_node_command = utils.is_workstation and 'node_no_ssl' or 'node',
     },
-    filetypes = {
-      rust = false,
-    },
-    copilot_node_command = utils.is_workstation and 'node_no_ssl' or 'node',
+    config = function(_, opts)
+      local copilot = require 'copilot'
+      copilot.setup(opts)
+
+      local suggestion = require 'copilot.suggestion'
+
+      vim.keymap.set('i', '<C-j>', function()
+        if suggestion.is_visible() then
+          suggestion.accept()
+        else
+          suggestion.next()
+        end
+      end)
+    end,
   },
-  config = function(_, opts)
-    local copilot = require 'copilot'
-    copilot.setup(opts)
-
-    local suggestion = require 'copilot.suggestion'
-
-    vim.keymap.set('i', '<C-j>', function()
-      if suggestion.is_visible() then
-        suggestion.accept()
-      else
-        suggestion.next()
-      end
-    end)
-  end,
-},
   {
     'olimorris/codecompanion.nvim',
     cmd = {
@@ -35,6 +36,7 @@ return { {
       'CodeCompanionChat',
       'CodeCompanionCmd',
       'CodeCompanionActions',
+      'CodeCompanionCLI'
     },
     keys = {
       { '<leader>cc', '<cmd>CodeCompanionChat Toggle<cr>', mode = { 'n', 'v' }, desc = 'CodeCompanion chat toggle' },
@@ -48,7 +50,7 @@ return { {
         chat = {
           adapter = {
             name = 'copilot',
-            model = 'gpt-4.1',
+            model = 'uol-inc/glm_5/glm-5.2'
           },
         },
         inline = {

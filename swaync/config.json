@@ -31,8 +31,7 @@
   "script-fail-notify": true,
   "scripts": {
     "sound": {
-      "exec": "/home/gmiyazaki/.config/swaync/notification/exec",
-      "urgency": "Normal"
+      "exec": "/home/gmiyazaki/.config/swaync/notification/exec"
     }
   },
   "notification-visibility": {

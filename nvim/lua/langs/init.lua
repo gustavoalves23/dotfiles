@@ -13,5 +13,6 @@ return vim.tbl_extend(
   require 'langs.configs.generic',
   require 'langs.configs.javascript',
   require 'langs.configs.handlebars',
+  require 'langs.configs.vcl',
   require 'langs.configs.nginx'
 )
