@@ -1,7 +1,6 @@
 return vim.tbl_extend(
   'force',
   {},
-  require 'langs.configs.go',
   require 'langs.configs.sql',
   require 'langs.configs.lua',
   require 'langs.configs.rust',

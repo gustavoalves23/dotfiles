@@ -1,11 +1,15 @@
-#!/bin/bash
+#!/bin/sh
 
-declare -A env_vars
+socket=""
+window_id=""
 
 while IFS='=' read -r key value; do
-    if [[ $key == "ALACRITTY_SOCKET" || $key == "ALACRITTY_WINDOW_ID" ]]; then
-        env_vars[$key]=$value
-    fi
-done < <(tmux showenv)
+    case "$key" in
+        ALACRITTY_SOCKET) socket=$value ;;
+        ALACRITTY_WINDOW_ID) window_id=$value ;;
+    esac
+done <<EOF
+$(tmux showenv)
+EOF
 
-echo "{\"alacritty_socket\": \"${env_vars[ALACRITTY_SOCKET]}\", \"alacritty_window_id\": \"${env_vars[ALACRITTY_WINDOW_ID]}\"}"
+printf '{"alacritty_socket": "%s", "alacritty_window_id": "%s"}\n' "$socket" "$window_id"
