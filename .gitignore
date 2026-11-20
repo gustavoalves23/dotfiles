@@ -3,3 +3,5 @@ hypr/os.conf
 zed/.tmp*
 
 eww/eww.yuck
+
+.DS_Store

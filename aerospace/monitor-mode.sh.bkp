@@ -1,0 +1,62 @@
+#!/bin/bash
+# Mirrors sway's display-principal.sh using Crisp CLI (crispctl)
+# Both active -> External only
+# Only Built-in active -> External only
+# Only External active -> Built-in only
+
+CRISP=/opt/homebrew/bin/crispctl
+BD=/opt/homebrew/bin/betterdisplaycli
+
+# Built-in display (eDP-1) and External display (LC34G55T = DP-1) stable UUIDs
+BUILTIN_UUID="37D8832A-2D66-02CA-B9F7-8F30A301B230"
+EXT_UUID="C0AC6507-2E1E-4166-A373-BABF2B3586AB"
+EXT_NAME="LC34G55T"
+EXT_CONN_MODE="bpc:8+range:full+encoding:rgb"
+
+# Ensure Crisp is running
+if ! pgrep -x "Crisp" >/dev/null 2>&1; then
+    open -a "/Users/gmiyazaki/Applications/Crisp.app"
+    sleep 1
+fi
+
+set_ext_color_mode() {
+    if [[ -x "$BD" ]]; then
+        if ! pgrep -x "BetterDisplay" >/dev/null 2>&1; then
+            open -a "BetterDisplay" 2>/dev/null
+            sleep 1
+        fi
+        local current_mode
+        current_mode=$("$BD" get --originalName="$EXT_NAME" --connectionMode 2>/dev/null)
+        if [[ "$current_mode" != *"8bit"* || "$current_mode" != *"RGB Full"* ]]; then
+            "$BD" set --originalName="$EXT_NAME" --connectionMode="$EXT_CONN_MODE" >/dev/null 2>&1
+        fi
+    fi
+}
+
+displays_json=$($CRISP display list 2>/dev/null)
+builtin_state=$(echo "$displays_json" | /usr/bin/jq -r --arg u "$BUILTIN_UUID" '.displays[] | select(.uuid == $u) | .connected' 2>/dev/null)
+ext_state=$(echo "$displays_json" | /usr/bin/jq -r --arg u "$EXT_UUID" '.displays[] | select(.uuid == $u) | .connected' 2>/dev/null)
+
+if [[ "$builtin_state" == "true" && "$ext_state" == "true" ]]; then
+    # Both Built-in and External are active -> disable Built-in, keep External
+    $CRISP display connect "$EXT_UUID" >/dev/null
+    $CRISP display disconnect "$BUILTIN_UUID" >/dev/null
+    # set_ext_color_mode
+    osascript -e 'display notification "External display only (LC34G55T)" with title "AeroSpace"'
+elif [[ "$builtin_state" == "true" && "$ext_state" == "false" ]]; then
+    # Only Built-in is active -> enable External and disable Built-in
+    $CRISP display connect "$EXT_UUID" >/dev/null
+    $CRISP display disconnect "$BUILTIN_UUID" >/dev/null
+    # set_ext_color_mode
+    osascript -e 'display notification "External display only (LC34G55T)" with title "AeroSpace"'
+elif [[ "$builtin_state" == "false" && "$ext_state" == "true" ]]; then
+    # Only External is active -> enable Built-in and disable External
+    $CRISP display connect "$BUILTIN_UUID" >/dev/null
+    $CRISP display disconnect "$EXT_UUID" >/dev/null
+    osascript -e 'display notification "Built-in display only" with title "AeroSpace"'
+else
+    osascript -e 'display notification "No known outputs are active. Resetting" with title "AeroSpace"'
+    $CRISP display connect "$EXT_UUID" >/dev/null
+    $CRISP display connect "$BUILTIN_UUID" >/dev/null
+    # set_ext_color_mode
+fi

@@ -3,7 +3,42 @@
 local langs_utils = require 'langs.utils'
 local langs = require 'langs'
 
-require('mason').setup()
+require('mason').setup {
+  registries = {
+    'github:mason-org/mason-registry',
+    'github:Crashdummyy/mason-registry',
+  },
+}
+
+local mason_packages = {}
+for _, lang in pairs(langs) do
+  vim.list_extend(mason_packages, lang.mason_packages or {})
+end
+
+local function install_missing_mason_packages()
+  local registry = require 'mason-registry'
+  for _, name in ipairs(mason_packages) do
+    local ok, pkg = pcall(registry.get_package, name)
+    if ok and not pkg:is_installed() and not pkg:is_installing() then
+      pkg:install()
+    end
+  end
+end
+
+local function missing_mason_packages()
+  local registry = require 'mason-registry'
+  for _, name in ipairs(mason_packages) do
+    local ok, pkg = pcall(registry.get_package, name)
+    if not ok or not pkg:is_installed() then
+      return true
+    end
+  end
+  return false
+end
+
+if missing_mason_packages() then
+  require('mason-registry').refresh(install_missing_mason_packages)
+end
 
 local servers = {}
 -- Plain lspconfig server names, used for `vim.lsp.config`/`vim.lsp.enable`.
@@ -31,14 +66,21 @@ require('mason-lspconfig').setup {
   automatic_enable = false,
 }
 
--- Configuring servers requires blink.cmp's capabilities, which pulls in blink,
--- LuaSnip and friendly-snippets. Defer it until a buffer has a filetype that an
--- LSP server handles (e.g. opening a directory with oil never needs it).
 local server_filetypes = {}
 for _, server_name in pairs(server_names) do
   local fts = servers[server_name].filetypes or (vim.lsp.config[server_name] or {}).filetypes or {}
   for _, ft in pairs(fts) do
     server_filetypes[ft] = true
+  end
+end
+
+local lsp_hooks = {}
+for _, lang in pairs(langs) do
+  if lang.lsp_hook then
+    table.insert(lsp_hooks, lang.lsp_hook)
+    for _, ft in pairs(lang.lsp_hook.filetypes) do
+      server_filetypes[ft] = true
+    end
   end
 end
 
@@ -73,6 +115,10 @@ local function setup_servers()
   end
 
   vim.lsp.enable(server_names)
+
+  for _, hook in ipairs(lsp_hooks) do
+    hook.setup()
+  end
 end
 
 local function is_server_filetype(ft)
@@ -88,8 +134,6 @@ local function setup_once()
   setup_servers()
 end
 
--- Must be registered before vim.lsp.enable's own FileType autocmd (created in
--- setup_servers) so capabilities are in place for the first buffer.
 vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('LazyLspSetup', { clear = true }),
   callback = function(args)
@@ -100,7 +144,6 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
--- Buffers whose filetype was already set before this file ran.
 for _, buf in ipairs(vim.api.nvim_list_bufs()) do
   if vim.api.nvim_buf_is_loaded(buf) and is_server_filetype(vim.bo[buf].filetype) then
     setup_once()

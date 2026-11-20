@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# Counts panes of the current tmux session running nvim, excluding the pane that
-# contains the pid given as $1 (the caller). Uses a single ps snapshot.
 self_pid=${1:-0}
 session_name=$(tmux display-message -p '#S')
 pane_pids=$(tmux list-panes -s -t "$session_name" -F '#{pane_pid}' | tr '\n' ' ')

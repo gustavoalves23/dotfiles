@@ -1,6 +1,7 @@
 
 [window]
 opacity = 0.90
+option_as_alt = "OnlyLeft"
 
 [window.padding]
 x = 16
@@ -29,3 +30,9 @@ import = ["/Users/gmiyazaki/.config/alacritty/themes/tokyo-night.toml"]
 [terminal.shell]
 program = "/bin/zsh"
 
+
+[keyboard]
+bindings = [
+  { key = "Left", mods = "Alt", chars = "\u001bb" },
+  { key = "Right", mods = "Alt", chars = "\u001bf" },
+]

@@ -3,9 +3,21 @@ return {
     filetypes = { 'cs' },
     language = {
       syntax = { 'c_sharp' },
-      servers = {
-        omnisharp = {},
-      },
+    },
+    mason_packages = { 'roslyn' },
+    extra_lib = { 'seblyng/roslyn.nvim', lazy = true },
+    lsp_hook = {
+      filetypes = { 'cs' },
+      setup = function()
+        vim.lsp.config('roslyn', {
+          capabilities = require('blink.cmp').get_lsp_capabilities(),
+          on_attach = function(client, bufnr)
+            require('langs.utils').on_attach(client, bufnr)
+          end,
+        })
+        require('lazy').load { plugins = { 'roslyn.nvim' } }
+        require('roslyn').setup {}
+      end,
     },
     debuggers = {
       {
